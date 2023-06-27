@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Postwomen.EditCard"
+			 xmlns:local="clr-namespace:Postwomen"
+			 Title="Edit Card">
+
+	<ScrollView>
+		<VerticalStackLayout Padding="15">
+			<Label Text="{Binding SelectedCard.Id}" IsVisible="{Binding IsNewCard}" FontSize="Title" HorizontalTextAlignment="End"/>
+			
+			<Label Text="(Fields with * are required.)" FontSize="14" Opacity=".5" Margin="10" HorizontalTextAlignment="Center"/>
+			
+			<Label Text="*Card Name:" FontSize="Subtitle"/>
+			<Entry Text="{Binding SelectedCard.Name}" Placeholder="Please enter name for your card"/>
+			
+			<Label Text="*Remote URL:" FontSize="Subtitle"/>
+			<Entry Text="{Binding SelectedCard.Name}" Placeholder="Please enter URL for your card"/>
+			
+			<Label Text="Configure Port:" FontSize="Subtitle"/>
+			<Entry Text="{Binding SelectedCard.Port}" Placeholder="Set port for your card. Default is 80"/>
+			
+			<Label Text="Description:" FontSize="Subtitle"/>
+			<Editor Text="{Binding SelectedCard.Description}" Placeholder="You can add a description for your card" HeightRequest="100"/>
+
+			<HorizontalStackLayout Spacing="10">
+				<Switch x:Name="advancedSwitch" IsToggled="False"/>
+				<Label Text="" FontSize="17" VerticalTextAlignment="Center">
+					<Label.Triggers>
+						<DataTrigger TargetType="Label" Binding="{Binding Source={x:Reference advancedSwitch}, Path=IsToggled}" Value="true">
+							<Setter Property="Text" Value="Advanced Settings Enabled" />
+							<Setter Property="FontAttributes" Value="Bold"/>
+						</DataTrigger>
+						<DataTrigger TargetType="Label" Binding="{Binding Source={x:Reference advancedSwitch}, Path=IsToggled}" Value="false">
+							<Setter Property="Text" Value="Advanced Settings Disabled" />
+							<Setter Property="FontAttributes" Value="None"/>
+						</DataTrigger>
+					</Label.Triggers>
+				</Label>
+			</HorizontalStackLayout>
+
+			<Frame>
+				<VerticalStackLayout>
+
+					<HorizontalStackLayout Spacing="10">
+						<Label Text="Call Type:" FontSize="Subtitle" VerticalTextAlignment="Center"  FontAttributes="Bold"/>
+						<RadioButton GroupName="methods" Content="GET" IsChecked="true"/>
+						<RadioButton GroupName="methods" Content="POST"/>
+					</HorizontalStackLayout>
+					<BoxView HeightRequest="1" Color="Black" Margin="0,5,0,10" Opacity=".5"/>
+
+					<Label FontSize="Subtitle" Text="Set headers:" FontAttributes="Bold"/>
+					<Editor Placeholder="Empty" Text="Content-Type: application/json" HeightRequest="150"/>
+
+					<Label FontSize="Subtitle" Text="Set body:"  FontAttributes="Bold"/>
+					<Editor Placeholder="Empty" Text="" HeightRequest="150"/>
+
+					<HorizontalStackLayout Spacing="10">
+						<Switch x:Name="successSwitch" IsToggled="False"/>
+						<Label Text="Alert me if response is:" FontSize="Subtitle" VerticalTextAlignment="Center"  FontAttributes="Bold"/>
+					</HorizontalStackLayout>
+					<Editor Placeholder="Empty"  HeightRequest="150"/>
+						
+				</VerticalStackLayout>
+				<Frame.Triggers>
+					<DataTrigger TargetType="Frame" Binding="{Binding Source={x:Reference advancedSwitch}, Path=IsToggled}" Value="true">
+						<Setter Property="IsVisible" Value="True"/>
+					</DataTrigger>
+					<DataTrigger TargetType="Frame" Binding="{Binding Source={x:Reference advancedSwitch}, Path=IsToggled}" Value="false">
+						<Setter Property="IsVisible" Value="False"/>
+					</DataTrigger>
+				</Frame.Triggers>
+			</Frame>
+
+			<Button Text="Save" Margin="10" FontSize="15" Command="{Binding SaveCommand}" CommandParameter=""/>
+
+		</VerticalStackLayout>
+	</ScrollView>
+
+</ContentPage>
