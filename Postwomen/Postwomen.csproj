@@ -31,48 +31,13 @@
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net7.0-android|AnyCPU'">
-	  <ApplicationTitle>Postwomen</ApplicationTitle>
-	  <ApplicationId>com.sarsyazilim.postwomen</ApplicationId>
+	  <EmbedAssembliesIntoApk>True</EmbedAssembliesIntoApk>
 	</PropertyGroup>
 
-	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net7.0-ios|AnyCPU'">
-	  <ApplicationTitle>Postwomen</ApplicationTitle>
-	  <ApplicationId>com.sarsyazilim.postwomen</ApplicationId>
-	</PropertyGroup>
-
-	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net7.0-maccatalyst|AnyCPU'">
-	  <ApplicationTitle>Postwomen</ApplicationTitle>
-	  <ApplicationId>com.sarsyazilim.postwomen</ApplicationId>
-	</PropertyGroup>
-
-	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net7.0-windows10.0.19041.0|AnyCPU'">
-	  <ApplicationTitle>Postwomen</ApplicationTitle>
-	  <ApplicationId>com.sarsyazilim.postwomen</ApplicationId>
-	</PropertyGroup>
-
-	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net7.0-android|AnyCPU'">
-	  <ApplicationTitle>Postwomen</ApplicationTitle>
-	  <ApplicationId>com.sarsyazilim.postwomen</ApplicationId>
-	</PropertyGroup>
-
-	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net7.0-ios|AnyCPU'">
-	  <ApplicationTitle>Postwomen</ApplicationTitle>
-	  <ApplicationId>com.sarsyazilim.postwomen</ApplicationId>
-	</PropertyGroup>
-
-	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net7.0-maccatalyst|AnyCPU'">
-	  <ApplicationTitle>Postwomen</ApplicationTitle>
-	  <ApplicationId>com.sarsyazilim.postwomen</ApplicationId>
-	</PropertyGroup>
-
-	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net7.0-windows10.0.19041.0|AnyCPU'">
-	  <ApplicationTitle>Postwomen</ApplicationTitle>
-	  <ApplicationId>com.sarsyazilim.postwomen</ApplicationId>
-	</PropertyGroup>
 
 	<ItemGroup>
 		<!-- App Icon -->
-		<MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\postwomen512_square.png" Color="#fff" ForegroundScale="0.7"/>
+		<MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\postwomen512_square.png" Color="#fff" ForegroundScale="0.7" />
 
 		<!-- Splash Screen -->
 		<MauiSplashScreen Include="Resources\Splash\women.png" Color="#fff" BaseSize="128,128" />
@@ -91,25 +56,15 @@
 	<ItemGroup>
 		<PackageReference Include="CommunityToolkit.Maui" Version="5.2.0" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="7.0.0" />
-		<PackageReference Include="Refit" Version="6.3.2" />
-		<PackageReference Include="Refit.HttpClientFactory" Version="6.3.2" />
-		<PackageReference Include="SQLite" Version="3.13.0" />
+		<PackageReference Include="Refit" Version="7.0.0" />
+		<PackageReference Include="Refit.HttpClientFactory" Version="7.0.0" />
 		<PackageReference Include="sqlite-net-pcl" Version="1.8.116" />
+		<PackageReference Include="SQLitePCLRaw.bundle_green" Version="2.1.5" />
+		<PackageReference Include="SQLitePCLRaw.provider.dynamic_cdecl" Version="2.1.5" />
 		<PackageReference Include="System.Linq" Version="4.3.0" />
 		<PackageReference Include="System.Linq.Expressions" Version="4.3.0" />
 		<PackageReference Include="System.Linq.Queryable" Version="4.3.0" />
 	</ItemGroup>
 
-	<ItemGroup>
-	  <Compile Update="EditCard.xaml.cs">
-	    <DependentUpon>EditCard.xaml</DependentUpon>
-	  </Compile>
-	</ItemGroup>
-
-	<ItemGroup>
-	  <MauiXaml Update="EditCard.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	</ItemGroup>
 
 </Project>

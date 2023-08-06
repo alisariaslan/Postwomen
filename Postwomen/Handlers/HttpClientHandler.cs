@@ -1,6 +1,6 @@
 ﻿using System.Net.Http.Headers;
 
-namespace Postwomen;
+namespace Postwomen.Handlers;
 
 public class HttpLoggingHandler : DelegatingHandler
 {

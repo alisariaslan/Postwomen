@@ -1,0 +1,130 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="Postwomen.Views.MainPage" xmlns:vm="clr-namespace:Postwomen.ViewModels" xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit">
+
+	<ContentPage.Behaviors>
+		<toolkit:StatusBarBehavior StatusBarColor="{StaticResource Primary}" StatusBarStyle="LightContent" />
+	</ContentPage.Behaviors>
+
+	<Shell.TitleView>
+		<Grid ColumnDefinitions="Auto,*">
+			<HorizontalStackLayout Grid.Column="0" VerticalOptions="Center" Spacing="10">
+				<Image Source="womenn.png" WidthRequest="50" HeightRequest="50" Aspect="AspectFill" Opacity=".8" />
+				<VerticalStackLayout>
+					<Label Text="Postwomen" TextColor="White" FontSize="Title" FontAttributes="Bold" />
+					<Label TextColor="White" FontSize="Subtitle" FontAttributes="Bold">
+						<Label.Triggers>
+							<DataTrigger TargetType="Label" Binding="{Binding IsRefreshing}" Value="true">
+								<Setter Property="Text" Value="Refreshing..." />
+							</DataTrigger>
+							<DataTrigger TargetType="Label" Binding="{Binding IsRefreshing}" Value="false">
+								<Setter Property="Text" Value="Ready to Call" />
+							</DataTrigger>
+						</Label.Triggers>
+					</Label>
+				</VerticalStackLayout>
+				<!--<ActivityIndicator x:Name="indicator1" IsRunning="{Binding IsRefreshing}" IsVisible="{Binding IsRefreshing}" WidthRequest="25" HeightRequest="25" Color="White"/>-->
+			</HorizontalStackLayout>
+			<HorizontalStackLayout Grid.Column="1" HorizontalOptions="End" VerticalOptions="Center" Margin="0,0,15,0" Spacing="15">
+				<ImageButton Source="addnew.png" IsVisible="{Binding HasData}" Command="{Binding CreateNewCardCommand}" WidthRequest="25" HeightRequest="25" VerticalOptions="Center" />
+
+
+				<ImageButton Source="info.png" WidthRequest="25" HeightRequest="25" VerticalOptions="Center" />
+				<ImageButton Source="reset.png" Command="{Binding ResetDBCommand}" WidthRequest="25" HeightRequest="25" VerticalOptions="Center" />
+				<ImageButton Source="settings.png" WidthRequest="25" HeightRequest="25" VerticalOptions="Center" />
+			</HorizontalStackLayout>
+		</Grid>
+	</Shell.TitleView>
+
+	<Grid>
+
+		<ListView ItemsSource="{Binding ServerCards}" HasUnevenRows="True" IsRefreshing="{Binding IsRefreshing}" IsPullToRefreshEnabled="True" RefreshCommand="{Binding RefreshListCommand}" SelectedItem="{Binding SelectedCard}" SelectionMode="Single" ItemSelected="ListView_ItemSelected">
+			<ListView.ItemTemplate>
+				<DataTemplate>
+					<ViewCell>
+						<Grid BackgroundColor="White">
+							<Frame Margin="10" Padding="10">
+								<Grid>
+									<VerticalStackLayout Spacing="10" Padding="0,0,100,0">
+
+										<Label Text="{Binding Name}" FontSize="16" FontAttributes="Bold" />
+										<Label Text="{Binding Url}" FontSize="12" FontAttributes="Italic" TextColor="DarkBlue" />
+										<Label Text="{Binding Description}" IsVisible="{Binding HasDescription}" FontSize="14" />
+
+										<HorizontalStackLayout>
+											<CheckBox x:Name="checkBox1" HeightRequest="20" HorizontalOptions="Start" IsChecked="{Binding AutoCheckEnabled}" />
+											<Label FontSize="14" VerticalTextAlignment="Center">
+												<Label.Triggers>
+													<DataTrigger TargetType="Label" Binding="{Binding Source={x:Reference checkBox1}, Path=IsChecked}" Value="true">
+														<Setter Property="Text" Value="Time scheduled checks enabled" />
+														<Setter Property="FontAttributes" Value="Bold" />
+													</DataTrigger>
+													<DataTrigger TargetType="Label" Binding="{Binding Source={x:Reference checkBox1}, Path=IsChecked}" Value="false">
+														<Setter Property="Text" Value="Time scheduled checks disabled" />
+														<Setter Property="FontAttributes" Value="None" />
+													</DataTrigger>
+												</Label.Triggers>
+											</Label>
+
+										</HorizontalStackLayout>
+
+										<HorizontalStackLayout>
+											<CheckBox x:Name="checkBox2" HeightRequest="20" HorizontalOptions="Start" IsChecked="{Binding NotificationEnabled}" />
+											<Label FontSize="14" VerticalTextAlignment="Center" Text="Send notifications on changes enabled">
+												<Label.Triggers>
+													<DataTrigger TargetType="Label" Binding="{Binding Source={x:Reference checkBox2}, Path=IsChecked}" Value="true">
+														<Setter Property="Text" Value="Send notifications on changes enabled" />
+														<Setter Property="FontAttributes" Value="Bold" />
+													</DataTrigger>
+													<DataTrigger TargetType="Label" Binding="{Binding Source={x:Reference checkBox2}, Path=IsChecked}" Value="false">
+														<Setter Property="Text" Value="Send notifications on changes disabled" />
+														<Setter Property="FontAttributes" Value="None" />
+													</DataTrigger>
+												</Label.Triggers>
+											</Label>
+										</HorizontalStackLayout>
+
+										<Grid>
+											<Frame BackgroundColor="Black" Opacity=".5" WidthRequest="185" HorizontalOptions="Start" />
+											<HorizontalStackLayout Spacing="10" Margin="10,0,10,0">
+												<ImageButton Source="browser.png" WidthRequest="25" HeightRequest="25" VerticalOptions="Center" Command="{Binding Source={RelativeSource AncestorType={x:Type vm:MainViewModel}}, Path=GoToWebCommand}" CommandParameter="{Binding Url}" />
+												<ImageButton Source="copy.png" WidthRequest="25" HeightRequest="25" VerticalOptions="Center" Command="{Binding Source={RelativeSource AncestorType={x:Type vm:MainViewModel}}, Path=CopyCardCommand}" CommandParameter="{Binding Id}" />
+												<ImageButton Source="wrench.png" WidthRequest="25" HeightRequest="25" VerticalOptions="Center" Command="{Binding Source={RelativeSource AncestorType={x:Type vm:MainViewModel}}, Path=EditCardCommand}" CommandParameter="{Binding Id}" />
+												<ImageButton Source="delete.png" WidthRequest="25" HeightRequest="25" VerticalOptions="Center" Command="{Binding Source={RelativeSource AncestorType={x:Type vm:MainViewModel}}, Path=DeleteCardCommand}" CommandParameter="{Binding Id}" />
+												<ImageButton Source="retry.png" WidthRequest="25" HeightRequest="25" VerticalOptions="Center" />
+											</HorizontalStackLayout>
+										</Grid>
+
+									</VerticalStackLayout>
+
+									<Label Text="{Binding Port}" FontSize="20" HorizontalOptions="End" VerticalOptions="Start" />
+									<Label Text="{Binding Id}" FontSize="14" HorizontalOptions="End" VerticalOptions="End" />
+
+									<Grid WidthRequest="45" HeightRequest="45" HorizontalOptions="End">
+										<Ellipse Fill="{Binding StateColor}" Opacity=".8" />
+										<Label Text="502" FontSize="14" TextColor="White" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+									</Grid>
+
+								</Grid>
+							</Frame>
+						</Grid>
+					</ViewCell>
+				</DataTemplate>
+			</ListView.ItemTemplate>
+		</ListView>
+
+		<Frame IsVisible="{Binding HasDataReversed}" WidthRequest="150" HeightRequest="150" CornerRadius="75" Padding="20">
+			<Label FontSize="14" HorizontalTextAlignment="Center" VerticalTextAlignment="Center">
+				<Label.FormattedText>
+					<FormattedString>
+						<Span Text="No server card found." />
+						<Span Text="Click to create new one" TextColor="Black" FontAttributes="Bold" />
+					</FormattedString>
+				</Label.FormattedText>
+			</Label>
+			<Frame.GestureRecognizers>
+				<TapGestureRecognizer Command="{Binding CreateNewCardCommand}" CommandParameter="-1" />
+			</Frame.GestureRecognizers>
+		</Frame>
+
+	</Grid>
+</ContentPage>

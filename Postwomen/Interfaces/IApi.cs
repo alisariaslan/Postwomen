@@ -2,7 +2,7 @@
 using Refit;
 using System.ComponentModel.DataAnnotations;
 
-namespace Postwomen;
+namespace Postwomen.Interfaces;
 
 public interface ICollection
 {
