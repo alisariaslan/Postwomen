@@ -18,6 +18,9 @@ public class PostwomenDatabase
 			return;
 
 		sQLiteAsyncConnection = new SQLiteAsyncConnection(Constants.DatabasePath, Constants.Flags);
+#if DEBUG
+		//await DropTableAsync< ServerModel>();
+#endif
 		await sQLiteAsyncConnection.CreateTableAsync<ServerModel>();
 	}
 
@@ -30,7 +33,7 @@ public class PostwomenDatabase
 			await Init();
 			return result;
 		}
-		else 
+		else
 			return 0;
 	}
 
@@ -73,4 +76,5 @@ public class PostwomenDatabase
 		else
 			return await UpdateItemAsync(item);
 	}
+
 }

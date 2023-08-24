@@ -28,21 +28,22 @@
 				<ImageButton Source="addnew.png" IsVisible="{Binding HasData}" Command="{Binding CreateNewCardCommand}" WidthRequest="25" HeightRequest="25" VerticalOptions="Center" />
 
 
-				<ImageButton Source="info.png" WidthRequest="25" HeightRequest="25" VerticalOptions="Center" />
+				<!--<ImageButton Source="info.png" WidthRequest="25" HeightRequest="25" VerticalOptions="Center" />-->
 				<ImageButton Source="reset.png" Command="{Binding ResetDBCommand}" WidthRequest="25" HeightRequest="25" VerticalOptions="Center" />
-				<ImageButton Source="settings.png" WidthRequest="25" HeightRequest="25" VerticalOptions="Center" />
+				<!--<ImageButton Source="settings.png" WidthRequest="25" HeightRequest="25" VerticalOptions="Center" />-->
 			</HorizontalStackLayout>
 		</Grid>
 	</Shell.TitleView>
 
 	<Grid>
 
-		<ListView ItemsSource="{Binding ServerCards}" HasUnevenRows="True" IsRefreshing="{Binding IsRefreshing}" IsPullToRefreshEnabled="True" RefreshCommand="{Binding RefreshListCommand}" SelectedItem="{Binding SelectedCard}" SelectionMode="Single" ItemSelected="ListView_ItemSelected">
+		<ListView ItemsSource="{Binding ServerCards}"  HasUnevenRows="True" IsRefreshing="{Binding IsRefreshing}" IsPullToRefreshEnabled="True" RefreshCommand="{Binding RefreshListCommand}" SelectedItem="{Binding SelectedCard}" SelectionMode="Single" ItemSelected="ListView_ItemSelected">
 			<ListView.ItemTemplate>
 				<DataTemplate>
 					<ViewCell>
 						<Grid BackgroundColor="White">
-							<Frame Margin="10" Padding="10">
+							<Frame Margin="8" Padding="8" HasShadow="False" CornerRadius="8">
+			
 								<Grid>
 									<VerticalStackLayout Spacing="10" Padding="0,0,100,0">
 
@@ -51,7 +52,11 @@
 										<Label Text="{Binding Description}" IsVisible="{Binding HasDescription}" FontSize="14" />
 
 										<HorizontalStackLayout>
-											<CheckBox x:Name="checkBox1" HeightRequest="20" HorizontalOptions="Start" IsChecked="{Binding AutoCheckEnabled}" />
+											<CheckBox x:Name="checkBox1" HeightRequest="20" HorizontalOptions="Start" IsChecked="{Binding IsAutoCheckEnabled}">
+												<CheckBox.Behaviors>
+													<toolkit:EventToCommandBehavior EventName="CheckedChanged" Command="{Binding SaveCardCommand}" CommandParameter="{Binding Id}" />
+												</CheckBox.Behaviors>
+											</CheckBox>
 											<Label FontSize="14" VerticalTextAlignment="Center">
 												<Label.Triggers>
 													<DataTrigger TargetType="Label" Binding="{Binding Source={x:Reference checkBox1}, Path=IsChecked}" Value="true">
@@ -68,7 +73,11 @@
 										</HorizontalStackLayout>
 
 										<HorizontalStackLayout>
-											<CheckBox x:Name="checkBox2" HeightRequest="20" HorizontalOptions="Start" IsChecked="{Binding NotificationEnabled}" />
+											<CheckBox x:Name="checkBox2" HeightRequest="20" HorizontalOptions="Start" IsChecked="{Binding IsSendNotificationsOnChangesEnabled}">
+												<CheckBox.Behaviors>
+													<toolkit:EventToCommandBehavior EventName="CheckedChanged" Command="{Binding SaveCardCommand}" CommandParameter="{Binding Id}" />
+												</CheckBox.Behaviors>
+											</CheckBox>
 											<Label FontSize="14" VerticalTextAlignment="Center" Text="Send notifications on changes enabled">
 												<Label.Triggers>
 													<DataTrigger TargetType="Label" Binding="{Binding Source={x:Reference checkBox2}, Path=IsChecked}" Value="true">
@@ -100,8 +109,8 @@
 									<Label Text="{Binding Id}" FontSize="14" HorizontalOptions="End" VerticalOptions="End" />
 
 									<Grid WidthRequest="45" HeightRequest="45" HorizontalOptions="End">
-										<Ellipse Fill="{Binding StateColor}" Opacity=".8" />
-										<Label Text="502" FontSize="14" TextColor="White" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+										<Ellipse Fill="Red" Opacity=".8" />
+										<Label Text="{Binding StateCode,FallbackValue=502}" FontSize="14" TextColor="White" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
 									</Grid>
 
 								</Grid>
@@ -113,6 +122,7 @@
 		</ListView>
 
 		<Frame IsVisible="{Binding HasDataReversed}" WidthRequest="150" HeightRequest="150" CornerRadius="75" Padding="20">
+			
 			<Label FontSize="14" HorizontalTextAlignment="Center" VerticalTextAlignment="Center">
 				<Label.FormattedText>
 					<FormattedString>
