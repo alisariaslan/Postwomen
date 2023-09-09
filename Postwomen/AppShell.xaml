@@ -3,8 +3,8 @@
 
 	<ShellContent Title="Postwomen" ContentTemplate="{DataTemplate local:MainPage}" Route="mainpage" />
 
-
 	<ShellContent Title="Edit card" ContentTemplate="{DataTemplate local:EditCard}" Route="editcard" />
 
-
+	<ShellContent Title="Settings" ContentTemplate="{DataTemplate local:SettingsView}" Route="settings" />
+	
 </Shell>

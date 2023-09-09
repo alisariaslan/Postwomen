@@ -6,3 +6,9 @@ public enum BasicOperations
 	SUCCESS
 }
 
+public enum CheckStates
+{
+	UNREACHABLE,
+	OK
+}
+

@@ -13,6 +13,19 @@ public partial class EditCard : ContentPage
 
 	private bool IsNewCard_ { get; set; }
 	public bool IsNewCard { get { return IsNewCard_; } set { IsNewCard_ = value; OnPropertyChanged(nameof(IsNewCard)); } }
+
+	private string RBSelectionValue_ { get; set; }
+	public string RBSelectionValue
+	{
+		get { return RBSelectionValue_; }
+		set
+		{
+			RBSelectionValue_ = value;
+			OnPropertyChanged(nameof(RBSelectionValue));
+			SelectedCard.TypeOfCall = Convert.ToInt32(value);
+		}
+	}
+
 	public bool IsCopy { get; set; }
 	public Command SaveCommand { get; set; }
 	private ServerModel SelectedCard_ { get; set; }
@@ -71,6 +84,11 @@ public partial class EditCard : ContentPage
 			radiobutton_http.IsChecked = true;
 		else
 			radiobutton_custom.IsChecked = true;
+
+		if (SelectedCard.IsAdvancedSettingsEnabled)
+			advancedSwitch.IsToggled = true;
+
+		RBSelectionValue = SelectedCard.TypeOfCall.ToString();
 	}
 
 	private async void SaveCard()
@@ -94,5 +112,9 @@ public partial class EditCard : ContentPage
 
 	}
 
+	private void advancedSwitch_Toggled(object sender, ToggledEventArgs e)
+	{
+		SelectedCard.IsAdvancedSettingsEnabled = advancedSwitch.IsToggled;
+	}
 }
 

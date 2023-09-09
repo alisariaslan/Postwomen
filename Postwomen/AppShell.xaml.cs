@@ -9,5 +9,6 @@ public partial class AppShell : Shell
 		InitializeComponent();
 		Routing.RegisterRoute("mainpage", type: typeof(MainPage));
 		Routing.RegisterRoute("editcard", type: typeof(EditCard));
+		Routing.RegisterRoute("settings", type: typeof(SettingsView));
 	}
 }

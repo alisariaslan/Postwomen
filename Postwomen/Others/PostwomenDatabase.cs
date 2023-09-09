@@ -18,8 +18,8 @@ public class PostwomenDatabase
 			return;
 
 		sQLiteAsyncConnection = new SQLiteAsyncConnection(Constants.DatabasePath, Constants.Flags);
-#if DEBUG
-		//await DropTableAsync< ServerModel>();
+#if DEBUG && false
+		await DropTableAsync< ServerModel>();
 #endif
 		await sQLiteAsyncConnection.CreateTableAsync<ServerModel>();
 	}
@@ -30,7 +30,6 @@ public class PostwomenDatabase
 		if (typeof(T) == typeof(ServerModel))
 		{
 			var result = await sQLiteAsyncConnection.DropTableAsync<ServerModel>();
-			await Init();
 			return result;
 		}
 		else

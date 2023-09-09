@@ -1,8 +1,6 @@
 ﻿using Postwomen.Enums;
 using Postwomen.Models;
 using Postwomen.Others;
-using Postwomen.Views;
-using SQLite;
 using System.Collections.ObjectModel;
 
 namespace Postwomen.ViewModels;
@@ -20,11 +18,11 @@ public class MainViewModel : BaseViewModel
 	public Command GoToWebCommand { get; set; }
 	public Command CopyCardCommand { get; set; }
 	public Command DeleteCardCommand { get; set; }
+	public Command SettingsCommand { get; set; }
 	private bool IsRefreshing_ { get; set; }
 	public bool IsRefreshing { get => IsRefreshing_; set { IsRefreshing_ = value; OnPropertyChanged(nameof(IsRefreshing)); } }
 	private ServerModel SelectedCard_ { get; set; }
 	public ServerModel SelectedCard { get { return SelectedCard_; } set { SelectedCard_ = value; } }
-	public MainPage MainPage { get; set; }
 
 	public MainViewModel(PostwomenDatabase postwomenDatabase)
 	{
@@ -37,6 +35,7 @@ public class MainViewModel : BaseViewModel
 		CreateNewCardCommand = new Command<string>(execute: CreateNewCardFunc);
 		GoToWebCommand = new Command<string>(execute: GoToWebFunc);
 		ResetDBCommand = new Command<string>(execute: ResetDB);
+		SettingsCommand = new Command(GoToSettingsFunc);
 		RefreshList("");
 	}
 
@@ -50,8 +49,11 @@ public class MainViewModel : BaseViewModel
 		{
 			var result = await MyPostwomenDatabase.DropTableAsync<ServerModel>();
 			await App.Current.MainPage.DisplayAlert("Operation Result", ((BasicOperations)result).ToString(), "Ok");
-			await App.Current.MainPage.DisplayAlert("Warning!", "Please restart the application!", "Ok");
-			Application.Current.Quit();
+			if (result == (int)BasicOperations.SUCCESS)
+			{
+				await App.Current.MainPage.DisplayAlert("Warning!", "Please restart the application!", "Ok");
+				Application.Current.Quit();
+			}
 		}
 		catch (Exception e)
 		{
@@ -62,23 +64,35 @@ public class MainViewModel : BaseViewModel
 
 	private async void RefreshList(string param)
 	{
-		ServerCards = new ObservableCollection<ServerModel>();
-		OnPropertyChanged(nameof(ServerCards));
-		IsRefreshing = true;
-		await Task.Delay(1000);
+		await Task.Delay(100);
 		var items = await MyPostwomenDatabase.GetItemsAsync();
+		ServerCards.Clear();
 		foreach (var item in items)
 			ServerCards.Add(item);
-		IsRefreshing = false;
 		OnPropertyChanged(nameof(ServerCards));
 		OnPropertyChanged(nameof(HasData));
 		OnPropertyChanged(nameof(HasDataReversed));
+		IsRefreshing = false;
+	}
+
+	public async void RefreshListFromService(string param)
+	{
+		var items = await MyPostwomenDatabase.GetItemsAsync();
+		ServerCards.Clear();
+		foreach (var item in items)
+			ServerCards.Add(item);
+		OnPropertyChanged(nameof(ServerCards));
+	}
+
+	private async void GoToSettingsFunc()
+	{
+		await Shell.Current.GoToAsync($"settings");
 	}
 
 	private async void GoToWebFunc(string param)
 	{
 		Console.WriteLine("LOG PARAMETER: " + param);
-		bool yes = await MainPage.DisplayAlert("Open Browser", $"Do you wanna go to {param} ?", "Yes", "No");
+		bool yes = await App.Current.MainPage.DisplayAlert("Open Browser", $"Do you wanna go to {param} ?", "Yes", "No");
 		if (yes)
 		{
 			try
@@ -88,7 +102,7 @@ public class MainViewModel : BaseViewModel
 			}
 			catch (Exception ex)
 			{
-				await MainPage.DisplayAlert("Error", "Maybe no internet browser avaible on this device. Ex: " + ex, "Ok");
+				await App.Current.MainPage.DisplayAlert("Error", "Maybe no internet browser avaible on this device. Ex: " + ex, "Ok");
 			}
 		}
 	}
@@ -131,7 +145,7 @@ public class MainViewModel : BaseViewModel
 
 	private async void DeleteCardFunc(int param)
 	{
-		bool result = await MainPage.DisplayAlert("Deleting card", "Do you really want to delete this item?", "Yes", "No");
+		bool result = await App.Current.MainPage.DisplayAlert("Deleting card", "Do you really want to delete this item?", "Yes", "No");
 		if (result is false)
 			return;
 		SelectedCard = await MyPostwomenDatabase.GetItemAsync(param);

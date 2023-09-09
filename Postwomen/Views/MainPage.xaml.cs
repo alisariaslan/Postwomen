@@ -6,16 +6,10 @@ namespace Postwomen.Views;
 public partial class MainPage : ContentPage
 {
 
-	public MainPage()
+	public MainPage(IServiceProvider services)
 	{
 		InitializeComponent();
-		this.BindingContext = MauiProgram.MyServiceProvider.GetRequiredService<MainViewModel>();
-		(this.BindingContext as MainViewModel).MainPage = this;
-	}
-
-	private void ListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
-	{
-		(sender as ListView).SelectedItem = null;
+		this.BindingContext = services.GetRequiredService<MainViewModel>();
 	}
 }
 

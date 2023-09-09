@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Maui;
 using Microsoft.Extensions.Logging;
+using Plugin.LocalNotification;
 using Postwomen.Handlers;
 using Postwomen.Interfaces;
 using Postwomen.Others;
@@ -11,13 +12,14 @@ namespace Postwomen;
 
 public static class MauiProgram
 {
-	public static ServiceProvider MyServiceProvider { get; private set; }
+
 	public static MauiApp CreateMauiApp()
 	{
 		var builder = MauiApp.CreateBuilder();
 		builder
 			.UseMauiApp<App>()
 			.UseMauiCommunityToolkit()
+			.UseLocalNotification()
 			.ConfigureFonts(fonts =>
 			{
 				fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
@@ -29,12 +31,10 @@ public static class MauiProgram
 #if DEBUG
 		builder.Logging.AddDebug();
 #endif
-
 		builder.Services.AddSingleton<PostwomenDatabase>();
+		builder.Services.AddSingleton<MainPage>();
 		builder.Services.AddSingleton<MainViewModel>();
 		builder.Services.AddTransient<EditCard>();
-
-		MyServiceProvider = builder.Services.BuildServiceProvider();
 
 		return builder.Build();
 	}

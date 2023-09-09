@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="Postwomen.Views.SettingsView" xmlns:local="clr-namespace:Postwomen.Views" Title="Settings">
+
+	<Shell.TitleView>
+		<Grid ColumnDefinitions="Auto">
+
+			<Label Text="Settings" FontSize="20" FontAttributes="Bold" VerticalTextAlignment="Center" TextColor="White">
+				<Label.Shadow>
+					<Shadow Brush="Black" Opacity=".5" />
+				</Label.Shadow>
+			</Label>
+
+			<Grid.Background>
+				<LinearGradientBrush EndPoint="1,0">
+					<GradientStop Color="#FFDC40" Offset="0.1" />
+					<GradientStop Color="#A97D32" Offset="1.0" />
+				</LinearGradientBrush>
+			</Grid.Background>
+			
+			
+		</Grid>
+	</Shell.TitleView>
+
+	<Grid>
+		<Image x:Name="backgroundImage" Source="white_background_vertical" Opacity=".5" Aspect="AspectFill" HorizontalOptions="Start" />
+
+		<ScrollView>
+			<VerticalStackLayout Padding="15" Spacing="10">
+				
+				
+				
+				<Label FontSize="20" HorizontalTextAlignment="Center">
+					<Label.Triggers>
+						<DataTrigger TargetType="Label" Binding="{Binding IsServiceRunning}" Value="True">
+							<Setter Property="Text" Value="Notification service is running." />
+						</DataTrigger>
+						<DataTrigger TargetType="Label" Binding="{Binding IsServiceRunning}" Value="False">
+							<Setter Property="Text" Value="Notification service is disabled." />
+						</DataTrigger>
+					</Label.Triggers>
+				</Label>
+
+				<Grid ColumnDefinitions="*,*">
+					<Button Grid.Column="0" Text="Start Service" Command="{Binding StartServiceCommand}" Padding="10" Margin="5">
+						<Button.Triggers>
+							<DataTrigger TargetType="Button" Binding="{Binding IsServiceRunning}" Value="True">
+								<Setter Property="IsEnabled" Value="False" />
+							</DataTrigger>
+							<DataTrigger TargetType="Button" Binding="{Binding IsServiceRunning}" Value="False">
+								<Setter Property="IsEnabled" Value="True" />
+							</DataTrigger>
+						</Button.Triggers>
+					</Button>
+					<Button Grid.Column="1" Text="Stop Service" Command="{Binding StopServiceCommand}" Padding="10" Margin="5">
+						<Button.Triggers>
+							<DataTrigger TargetType="Button" Binding="{Binding IsServiceRunning}" Value="True">
+								<Setter Property="IsEnabled" Value="True" />
+							</DataTrigger>
+							<DataTrigger TargetType="Button" Binding="{Binding IsServiceRunning}" Value="False">
+								<Setter Property="IsEnabled" Value="False" />
+							</DataTrigger>
+						</Button.Triggers>
+					</Button>
+				</Grid>
+
+			</VerticalStackLayout>
+
+		</ScrollView>
+	</Grid>
+	
+</ContentPage>

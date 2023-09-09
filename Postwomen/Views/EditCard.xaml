@@ -1,101 +1,139 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="Postwomen.Views.EditCard" xmlns:local="clr-namespace:Postwomen.Views" Title="Edit Card">
 
-	<ScrollView>
-		<VerticalStackLayout Padding="15" Spacing="10">
-			<!--<Label Text="{Binding SelectedCard.Id}" IsVisible="{Binding IsNewCard}" FontSize="Title" HorizontalTextAlignment="End"/>-->
+	<Shell.TitleView>
+		<Grid ColumnDefinitions="Auto">
 
-			<Label Text="(Fields with * are required.)" FontSize="14" Opacity=".5" Margin="10" HorizontalTextAlignment="Center" />
+			<Label Text="Edit Card" FontSize="20" FontAttributes="Bold" VerticalTextAlignment="Center" TextColor="White">
+				<Label.Shadow>
+					<Shadow Brush="Black" Opacity=".5" />
+				</Label.Shadow>
+			</Label>
 
-			<VerticalStackLayout Spacing="0">
-				<Label Text="*Card Name:" FontSize="Subtitle" />
-				<Entry Text="{Binding SelectedCard.Name}" Placeholder="Please enter name for your card" />
-			</VerticalStackLayout>
+			<Grid.Background>
+				<LinearGradientBrush EndPoint="1,0">
+					<GradientStop Color="#FFDC40" Offset="0.1" />
+					<GradientStop Color="#A97D32" Offset="1.0" />
+				</LinearGradientBrush>
+			</Grid.Background>
 
-			<VerticalStackLayout Spacing="0">
-				<Label Text="*Remote URL:" FontSize="Subtitle" />
-				<Entry Text="{Binding SelectedCard.Url}" Placeholder="Please enter URL for your card" />
-			</VerticalStackLayout>
+		</Grid>
+	</Shell.TitleView>
 
-			<HorizontalStackLayout Spacing="10" RadioButtonGroup.GroupName="protocols">
-				<Label Text="Protocol:" FontSize="Subtitle" VerticalTextAlignment="Center" FontAttributes="Bold" />
-				<RadioButton x:Name="radiobutton_http" GroupName="protocols" Content="Http"  />
-				<RadioButton x:Name="radiobutton_https" GroupName="protocols" Content="Https" IsChecked="True"/>
-				<RadioButton x:Name="radiobutton_custom" GroupName="protocols" Content="Custom" />
-			</HorizontalStackLayout>
+	<Grid>
+		<Image x:Name="backgroundImage" Source="white_background_vertical" Opacity=".5" Aspect="AspectFill" HorizontalOptions="Start" />
 
-			<VerticalStackLayout Spacing="0">
-				<Label Text="Configure Port:" FontSize="Subtitle" />
-				<Entry Text="{Binding SelectedCard.Port}" Placeholder="Set port for your card. Default is 443">
-					<Entry.Triggers>
-						<DataTrigger TargetType="Entry" Binding="{Binding Source={x:Reference radiobutton_http}, Path=IsChecked}" Value="true">
-							<Setter Property="Text" Value="80" />
-						</DataTrigger>
-						<DataTrigger TargetType="Entry" Binding="{Binding Source={x:Reference radiobutton_https}, Path=IsChecked}" Value="true">
-							<Setter Property="Text" Value="443" />
-						</DataTrigger>
-					</Entry.Triggers>
-				</Entry>
-			</VerticalStackLayout>
+		<ScrollView>
+			<VerticalStackLayout Padding="15" Spacing="10">
+				<!--<Label Text="{Binding SelectedCard.Id}" IsVisible="{Binding IsNewCard}" FontSize="Title" HorizontalTextAlignment="End"/>-->
 
-			<VerticalStackLayout Spacing="0">
-				<Label Text="Description:" FontSize="Subtitle" />
-				<Editor Text="{Binding SelectedCard.Description}" Placeholder="You can add a description for your card" HeightRequest="100" />
-			</VerticalStackLayout>
-			
-			<HorizontalStackLayout Spacing="10">
-				<Switch x:Name="advancedSwitch" IsToggled="False" />
-				<Label Text="" FontSize="17" VerticalTextAlignment="Center">
-					<Label.Triggers>
-						<DataTrigger TargetType="Label" Binding="{Binding Source={x:Reference advancedSwitch}, Path=IsToggled}" Value="true">
-							<Setter Property="Text" Value="Advanced Settings Enabled" />
-							<Setter Property="FontAttributes" Value="Bold" />
-						</DataTrigger>
-						<DataTrigger TargetType="Label" Binding="{Binding Source={x:Reference advancedSwitch}, Path=IsToggled}" Value="false">
-							<Setter Property="Text" Value="Advanced Settings Disabled" />
-							<Setter Property="FontAttributes" Value="None" />
-						</DataTrigger>
-					</Label.Triggers>
-				</Label>
-			</HorizontalStackLayout>
+				<Label Text="(Fields with * are required.)" FontSize="14" Opacity=".5" Margin="10" HorizontalTextAlignment="Center" />
 
-			<Frame>
-				<VerticalStackLayout>
-
-					<HorizontalStackLayout Spacing="10">
-						<Label Text="Call Type:" FontSize="Subtitle" VerticalTextAlignment="Center" FontAttributes="Bold" />
-						<RadioButton GroupName="methods" Content="GET" IsChecked="true" />
-						<RadioButton GroupName="methods" Content="POST" />
-					</HorizontalStackLayout>
-					<BoxView HeightRequest="1" Color="Black" Margin="0,5,0,10" Opacity=".5" />
-
-					<Label FontSize="Subtitle" Text="Set headers:" FontAttributes="Bold" />
-					<Editor Placeholder="Empty" Text="Content-Type: application/json" HeightRequest="150" />
-
-					<Label FontSize="Subtitle" Text="Set body:" FontAttributes="Bold" />
-					<Editor Placeholder="Empty" Text="" HeightRequest="150" />
-
-					<HorizontalStackLayout Spacing="10">
-						<Switch x:Name="successSwitch" IsToggled="False" />
-						<Label Text="Alert me if response is:" FontSize="Subtitle" VerticalTextAlignment="Center" FontAttributes="Bold" />
-					</HorizontalStackLayout>
-					<Editor Placeholder="Empty" HeightRequest="150" />
-
+				<VerticalStackLayout Spacing="0">
+					<Label Text="*Card Name:" FontSize="Subtitle" />
+					<Entry Text="{Binding SelectedCard.Name}" Placeholder="Please enter name for your card" />
 				</VerticalStackLayout>
-				<Frame.Triggers>
-					<DataTrigger TargetType="Frame" Binding="{Binding Source={x:Reference advancedSwitch}, Path=IsToggled}" Value="true">
-						<Setter Property="IsVisible" Value="True" />
-					</DataTrigger>
-					<DataTrigger TargetType="Frame" Binding="{Binding Source={x:Reference advancedSwitch}, Path=IsToggled}" Value="false">
-						<Setter Property="IsVisible" Value="False" />
-					</DataTrigger>
-				</Frame.Triggers>
-			</Frame>
 
-			<Button Text="Save" Margin="10" FontSize="15" Command="{Binding SaveCommand}" CommandParameter="" />
+				<VerticalStackLayout Spacing="0">
+					<Label Text="*Remote URL/IP:" FontSize="Subtitle" />
+					<Entry Text="{Binding SelectedCard.Url}" Placeholder="Please enter URL for your card" />
+				</VerticalStackLayout>
 
-		</VerticalStackLayout>
-		
-	</ScrollView>
+				<VerticalStackLayout Spacing="0">
+					<Label Text="Description:" FontSize="Subtitle" />
+					<Editor Text="{Binding SelectedCard.Description}" Placeholder="You can add a description for your card" HeightRequest="100" />
+				</VerticalStackLayout>
+
+				<HorizontalStackLayout Spacing="10">
+					<Switch x:Name="advancedSwitch" IsToggled="{Binding ServerCard.IsAdvancedSettingsEnabled}" Toggled="advancedSwitch_Toggled" />
+					<Label Text="" FontSize="17" VerticalTextAlignment="Center">
+						<Label.Triggers>
+							<DataTrigger TargetType="Label" Binding="{Binding Source={x:Reference advancedSwitch}, Path=IsToggled}" Value="true">
+								<Setter Property="Text" Value="Advanced Settings Enabled" />
+								<Setter Property="FontAttributes" Value="Bold" />
+							</DataTrigger>
+							<DataTrigger TargetType="Label" Binding="{Binding Source={x:Reference advancedSwitch}, Path=IsToggled}" Value="false">
+								<Setter Property="Text" Value="Advanced Settings Disabled" />
+								<Setter Property="FontAttributes" Value="None" />
+							</DataTrigger>
+						</Label.Triggers>
+					</Label>
+				</HorizontalStackLayout>
+
+				<Frame>
+					<VerticalStackLayout>
+
+						<HorizontalStackLayout Spacing="10" RadioButtonGroup.GroupName="methods" RadioButtonGroup.SelectedValue="{Binding RBSelectionValue}">
+							<Label Text="Call Type:" FontSize="Subtitle" VerticalTextAlignment="Center" FontAttributes="Bold" />
+							<RadioButton x:Name="rb_ping" GroupName="methods" Content="Ping" IsChecked="True" Value="1" />
+							<RadioButton GroupName="methods" Content="GET" Value="2" />
+							<RadioButton GroupName="methods" Content="POST" Value="3" />
+						</HorizontalStackLayout>
+
+						<Frame>
+							<VerticalStackLayout>
+
+								<HorizontalStackLayout Spacing="10" RadioButtonGroup.GroupName="protocols">
+									<Label Text="Protocol:" FontSize="Subtitle" VerticalTextAlignment="Center" FontAttributes="Bold" />
+									<RadioButton x:Name="radiobutton_http" GroupName="protocols" Content="Http" />
+									<RadioButton x:Name="radiobutton_https" GroupName="protocols" Content="Https" IsChecked="True" />
+									<RadioButton x:Name="radiobutton_custom" GroupName="protocols" Content="Custom" />
+								</HorizontalStackLayout>
+
+								<HorizontalStackLayout Spacing="5">
+									<Label Text="Port:" FontSize="Subtitle" FontAttributes="Bold" VerticalTextAlignment="Center" />
+									<Entry Text="{Binding SelectedCard.Port}" Placeholder="Set port for your card. Default is 443" WidthRequest="50">
+										<Entry.Triggers>
+											<DataTrigger TargetType="Entry" Binding="{Binding Source={x:Reference radiobutton_http}, Path=IsChecked}" Value="true">
+												<Setter Property="Text" Value="80" />
+											</DataTrigger>
+											<DataTrigger TargetType="Entry" Binding="{Binding Source={x:Reference radiobutton_https}, Path=IsChecked}" Value="true">
+												<Setter Property="Text" Value="443" />
+											</DataTrigger>
+										</Entry.Triggers>
+									</Entry>
+								</HorizontalStackLayout>
+
+								<Label FontSize="Subtitle" Text="Set headers:" FontAttributes="Bold" />
+								<Editor Placeholder="Empty" Text="Content-Type: application/json" HeightRequest="150" />
+
+								<Label FontSize="Subtitle" Text="Set body:" FontAttributes="Bold" />
+								<Editor Placeholder="Empty" Text="" HeightRequest="150" />
+
+								<HorizontalStackLayout Spacing="10">
+									<Switch x:Name="successSwitch" IsToggled="False" />
+									<Label Text="Alert me if response is:" FontSize="Subtitle" VerticalTextAlignment="Center" FontAttributes="Bold" />
+								</HorizontalStackLayout>
+								<Editor Placeholder="Empty" HeightRequest="150" />
+
+							</VerticalStackLayout>
+
+							<Frame.Triggers>
+								<DataTrigger TargetType="Frame" Binding="{Binding Source={x:Reference rb_ping}, Path=IsChecked}" Value="True">
+									<Setter Property="IsVisible" Value="False" />
+								</DataTrigger>
+								<DataTrigger TargetType="Frame" Binding="{Binding Source={x:Reference rb_ping}, Path=IsChecked}" Value="False">
+									<Setter Property="IsVisible" Value="True" />
+								</DataTrigger>
+							</Frame.Triggers>
+						</Frame>
+
+					</VerticalStackLayout>
+
+					<Frame.Triggers>
+						<DataTrigger TargetType="Frame" Binding="{Binding Source={x:Reference advancedSwitch}, Path=IsToggled}" Value="true">
+							<Setter Property="IsVisible" Value="True" />
+						</DataTrigger>
+						<DataTrigger TargetType="Frame" Binding="{Binding Source={x:Reference advancedSwitch}, Path=IsToggled}" Value="false">
+							<Setter Property="IsVisible" Value="False" />
+						</DataTrigger>
+					</Frame.Triggers>
+				</Frame>
+
+				<Button Text="Save" Margin="10" FontSize="15" Command="{Binding SaveCommand}" CommandParameter="" />
+
+			</VerticalStackLayout>
+		</ScrollView>
+	</Grid>
 
 </ContentPage>
