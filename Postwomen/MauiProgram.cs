@@ -30,7 +30,8 @@ public static class MauiProgram
 #if DEBUG
 		builder.Logging.AddDebug();
 #endif
-		builder.Services.AddSingleton<PostwomenDatabase>();
+        builder.Services.AddSingleton<IMessenger, WeakReferenceMessenger>();
+        builder.Services.AddSingleton<PostwomenDatabase>();
 		builder.Services.AddSingleton<MainPage>();
 		builder.Services.AddSingleton<MainViewModel>();
 
@@ -41,7 +42,6 @@ public static class MauiProgram
         builder.Services.AddTransient<SettingsViewModel>();
 
 
-        builder.Services.AddSingleton<IMessenger, WeakReferenceMessenger>();
         builder.Services.AddTransient<ServiceTestPage>();
 
         return builder.Build();

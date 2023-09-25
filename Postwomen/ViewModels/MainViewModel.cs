@@ -1,4 +1,5 @@
-﻿using Postwomen.Models;
+﻿using CommunityToolkit.Mvvm.Messaging;
+using Postwomen.Models;
 using Postwomen.Others;
 using Postwomen.Resources.Strings;
 using System.Collections.ObjectModel;
@@ -22,7 +23,7 @@ public class MainViewModel : BaseViewModel
     private bool IsRefreshing_ { get; set; }
     public bool IsRefreshing { get => IsRefreshing_; set { IsRefreshing_ = value; OnPropertyChanged(nameof(IsRefreshing)); } }
     public ItemsLayout ItemsLayout { get; set; }
-    public MainViewModel(IServiceProvider serviceProvider, PostwomenDatabase postwomenDatabase)
+    public MainViewModel(IServiceProvider serviceProvider, PostwomenDatabase postwomenDatabase, IMessenger messenger)
     {
         ItemsLayout = new LinearItemsLayout(ItemsLayoutOrientation.Vertical) { ItemSpacing = 1 };
         DeviceDisplay.MainDisplayInfoChanged += OnOriantationChanged;
@@ -37,6 +38,7 @@ public class MainViewModel : BaseViewModel
         SettingsCommand = new Command(GoToSettingsFunc);
         LogsCommand = new Command(GoToLogsFunc);
         RefreshList("");
+        messenger.Send(new MessageData("start", true));
     }
 
     private void OnOriantationChanged(object sender, DisplayInfoChangedEventArgs e)

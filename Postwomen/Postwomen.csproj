@@ -86,4 +86,6 @@
 	  </MauiXaml>
 	</ItemGroup>
 
+	<ProjectExtensions><VisualStudio><UserProperties XamarinHotReloadGenericExceptionInfoBarPostwomenHideInfoBar="True" /></VisualStudio></ProjectExtensions>
+
 </Project>

@@ -5,6 +5,7 @@ using Android.Content.PM;
 using Android.OS;
 using AndroidX.Core.App;
 using AndroidX.Core.Content;
+using Java.Lang;
 using Postwomen.Enums;
 using Postwomen.Models;
 using Postwomen.Others;
@@ -16,7 +17,6 @@ namespace Postwomen.Platforms.Android;
 [Service]
 public class MyNotificationService : Service
 {
-    int myId = (new object()).GetHashCode();
     private int badgeNumber;
     private NotificationCompat.Builder notification;
     private PostwomenDatabase pwDatabase;
@@ -26,7 +26,14 @@ public class MyNotificationService : Service
 
     public override IBinder OnBind(Intent intent)
     {
+
         return null;
+    }
+
+    public override bool OnUnbind(Intent intent)
+    {
+
+        return base.OnUnbind(intent);
     }
 
     public static void RequestNotifPerm()
@@ -39,14 +46,14 @@ public class MyNotificationService : Service
     {
         var notif_intent = new Intent(this, typeof(MainActivity));
         var pend_intent = PendingIntent.GetActivity(this, 0, notif_intent, PendingIntentFlags.Mutable);
-        notification = new NotificationCompat.Builder(this, MainApplication.ChannelName)
-            .SetSmallIcon(Resource.Drawable.postwomen_circle_notification)
-            .SetContentIntent(pend_intent);
-        badgeNumber++;
-        notification.SetNumber(badgeNumber);
-        notification.SetContentTitle(AppResources.serversarenotreachable);
         pwDatabase = new PostwomenDatabase();
         var cycle = Preferences.Get("CheckCycleValue", 600);
+        notification = new NotificationCompat.Builder(this, MainApplication.ChannelName)
+                .SetSmallIcon(Resource.Drawable.postwomen_circle_notification)
+                .SetContentIntent(pend_intent)
+                .SetContentTitle(AppResources.serversarenotreachable)
+                .SetChannelId(MainApplication.ChannelName)
+                .SetAutoCancel(true);
         timer = new Timer(Timer_Elapsed, null, 0, cycle * 1000);
         new Task(async () => { await Task.Delay(3000); isEnterable = true; }).Start();
         return StartCommandResult.Sticky;
@@ -86,15 +93,18 @@ public class MyNotificationService : Service
                     {
                         item.LastCheck = DateTime.Now;
                         await pwDatabase.SaveServerCardAsync(item);
-                        notificationBody += result + "\n";
+                        if (notificationBody.Equals(string.Empty))
+                            notificationBody += result;
+                        else notificationBody += "\n" + result;
                     }
                 }
             }
         }
-        if(notificationBody != string.Empty)
+        if (notificationBody != string.Empty)
         {
-            notification.SetContentText(notificationBody);
-            StartForeground(myId, notification.Build());
+            notification.SetContentText(notificationBody)
+            .SetNumber(badgeNumber++);
+            StartForeground(101010, notification.Build());
         }
         var cycle = Preferences.Get("CheckCycleValue", 600);
         timer.Change(0, cycle * 1000);

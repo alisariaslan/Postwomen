@@ -56,7 +56,7 @@
 			<CollectionView.ItemTemplate>
 				<DataTemplate>
 					<Grid>
-						<Border Margin="8" StrokeShape="RoundRectangle 8,8,8,8" Stroke="Black" MaximumWidthRequest="330" HorizontalOptions="Center" >
+						<Border Margin="8" StrokeShape="RoundRectangle 8,8,8,8" Stroke="Black" HorizontalOptions="Center" >
 							<Border.Shadow>
 								<Shadow Brush="Black" Opacity=".5" />
 							</Border.Shadow>

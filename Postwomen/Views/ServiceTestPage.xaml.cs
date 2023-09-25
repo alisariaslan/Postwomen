@@ -7,7 +7,7 @@ public partial class ServiceTestPage : ContentPage
 {
     private readonly IMessenger _messenger;
 
-    public ServiceTestPage(IServiceProvider serviceProvider, IMessenger messenger)
+    public ServiceTestPage(IMessenger messenger)
 	{
 		InitializeComponent();
         this.BindingContext = this;
