@@ -1,6 +1,6 @@
 ﻿using CommunityToolkit.Maui;
+using CommunityToolkit.Mvvm.Messaging;
 using Microsoft.Extensions.Logging;
-using Plugin.LocalNotification;
 using Postwomen.Handlers;
 using Postwomen.Interfaces;
 using Postwomen.Others;
@@ -19,7 +19,6 @@ public static class MauiProgram
 		builder
 			.UseMauiApp<App>()
 			.UseMauiCommunityToolkit()
-			.UseLocalNotification()
 			.ConfigureFonts(fonts =>
 			{
 				fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
@@ -34,8 +33,17 @@ public static class MauiProgram
 		builder.Services.AddSingleton<PostwomenDatabase>();
 		builder.Services.AddSingleton<MainPage>();
 		builder.Services.AddSingleton<MainViewModel>();
-		builder.Services.AddTransient<EditCard>();
 
-		return builder.Build();
+		builder.Services.AddTransient<EditCardPage>();
+        builder.Services.AddTransient<LogsPage>();
+
+        builder.Services.AddTransient<SettingsPage>();
+        builder.Services.AddTransient<SettingsViewModel>();
+
+
+        builder.Services.AddSingleton<IMessenger, WeakReferenceMessenger>();
+        builder.Services.AddTransient<ServiceTestPage>();
+
+        return builder.Build();
 	}
 }

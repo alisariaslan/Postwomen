@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns:strings="clr-namespace:Postwomen.Resources.Strings" xmlns="http://schemas.microsoft.com/dotnet/2021/maui" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="Postwomen.Views.ServiceTestPage" xmlns:local="clr-namespace:Postwomen.Views" Title="Settings">
+
+	<ScrollView>
+		<VerticalStackLayout Padding="15" Spacing="10">
+
+			<Button x:Name="btn_start" Text="start service" Clicked="btn_start_Clicked" />
+
+			<Button x:Name="btn_stop" Text="stop service" Clicked="btn_stop_Clicked" />
+
+			<Button x:Name="btn_check"  Text="check service" Clicked="btn_check_Clicked" />
+
+			<Button x:Name="btn_enable" Text="enable service autostart" Clicked="btn_enable_Clicked" />
+
+			<Button x:Name="btn_disable" Text="disable service autostart" Clicked="btn_disable_Clicked" />
+		</VerticalStackLayout>
+
+	</ScrollView>
+
+</ContentPage>

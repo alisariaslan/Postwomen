@@ -2,9 +2,10 @@
 
 namespace Postwomen.ViewModels
 {
-	public class BaseViewModel : INotifyPropertyChanged
-	{
-		public event PropertyChangedEventHandler PropertyChanged;
+    public class BaseViewModel : INotifyPropertyChanged
+    {
+        public event PropertyChangedEventHandler PropertyChanged;
+
 		protected void OnPropertyChanged(string name)
 		{
 			Console.WriteLine($"[App] Property changed {name}");

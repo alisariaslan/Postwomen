@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns:strings="clr-namespace:Postwomen.Resources.Strings" xmlns="http://schemas.microsoft.com/dotnet/2021/maui" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="Postwomen.Views.SettingsPage" xmlns:local="clr-namespace:Postwomen.Views" Title="Settings">
+
+	<Shell.TitleView>
+		<Grid ColumnDefinitions="Auto">
+
+			<Label Text="{x:Static strings:AppResources.settings}" FontSize="20" FontAttributes="Bold" VerticalTextAlignment="Center" TextColor="White">
+				<Label.Shadow>
+					<Shadow Brush="Black" Opacity=".5" />
+				</Label.Shadow>
+			</Label>
+
+			<Grid.Background>
+				<LinearGradientBrush EndPoint="1,0">
+					<GradientStop Color="{AppThemeBinding Light={StaticResource Gradi1}, Dark={StaticResource Gray950}}" Offset="0.1" />
+					<GradientStop Color="{AppThemeBinding Light={StaticResource Gradi2}, Dark={StaticResource Gray950}}" Offset="1.0" />
+				</LinearGradientBrush>
+			</Grid.Background>
+			
+			
+		</Grid>
+	</Shell.TitleView>
+
+	<Grid>
+		<Image x:Name="backgroundImage" Source="white_background_vertical" IsVisible="{AppThemeBinding Light=True, Dark=False}" Aspect="Center" />
+		<ScrollView>
+			<VerticalStackLayout Padding="15" Spacing="10">
+
+				<Label Text="{x:Static strings:AppResources.selectedlanguage}" FontSize="20" HorizontalTextAlignment="Center" />
+
+				<Grid ColumnDefinitions="*,*">
+					<Button Grid.Column="0" Text="English" Command="{Binding SelectLanguageCommand}" CommandParameter="0" Padding="10" Margin="5" WidthRequest="180" HorizontalOptions="End">
+						<Button.Triggers>
+							<DataTrigger TargetType="Button" Binding="{Binding SelectedLangValue}" Value="0">
+								<Setter Property="IsEnabled" Value="False" />
+							</DataTrigger>
+							<DataTrigger TargetType="Button" Binding="{Binding SelectedLangValue}" Value="1">
+								<Setter Property="IsEnabled" Value="True" />
+							</DataTrigger>
+						</Button.Triggers>
+					</Button>
+					<Button Grid.Column="1" Text="Türkçe" Command="{Binding SelectLanguageCommand}" CommandParameter="1" Padding="10" Margin="5" WidthRequest="180" HorizontalOptions="Start">
+						<Button.Triggers>
+							<DataTrigger TargetType="Button" Binding="{Binding SelectedLangValue}" Value="0">
+								<Setter Property="IsEnabled" Value="True" />
+							</DataTrigger>
+							<DataTrigger TargetType="Button" Binding="{Binding SelectedLangValue}" Value="1">
+								<Setter Property="IsEnabled" Value="False" />
+							</DataTrigger>
+						</Button.Triggers>
+					</Button>
+				</Grid>
+
+				<Border Padding="30" Stroke="Gray" StrokeShape="RoundRectangle 16" HorizontalOptions="Center">
+					<HorizontalStackLayout>
+						<CheckBox x:Name="checkbox_darkmode" HeightRequest="20" HorizontalOptions="Start" IsChecked="{Binding DarkMode}" CheckedChanged="checkbox_darkmode_CheckedChanged" />
+						<Label Text="{x:Static strings:AppResources.darkstyle}" FontSize="18" VerticalTextAlignment="Center" />
+					</HorizontalStackLayout>
+				</Border>
+
+				<Label Text="{x:Static strings:AppResources.avaibleactions}" FontSize="20" HorizontalTextAlignment="Center" />
+				<Button WidthRequest="200" Text="{x:Static strings:AppResources.resetdatabase}" Command="{Binding ResetDBCommand}" Padding="10" Margin="5" />
+				<Label Text="{x:Static strings:AppResources.checkcycle}" FontSize="20" HorizontalTextAlignment="Center" />
+				<Entry WidthRequest="170" Placeholder="{x:Static strings:AppResources.defaultis600sec}" Text="{Binding CheckCycleValue}" FontSize="20" HorizontalOptions="Center" HorizontalTextAlignment="Center" />
+				<Label Text="{x:Static strings:AppResources.maxlogcount}" FontSize="20" HorizontalTextAlignment="Center" />
+				<Entry WidthRequest="170" Placeholder="{x:Static strings:AppResources.defaultis5000}" Text="{Binding MaxLogCount}" FontSize="20" HorizontalOptions="Center" HorizontalTextAlignment="Center" />
+
+
+
+			</VerticalStackLayout>
+
+		</ScrollView>
+	</Grid>
+	
+</ContentPage>

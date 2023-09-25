@@ -1,0 +1,309 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="advancedsettingsdisabled" xml:space="preserve">
+    <value>Advanced Settings Disabled</value>
+  </data>
+  <data name="advancedsettingsenabled" xml:space="preserve">
+    <value>Advanced Settings Enabled</value>
+  </data>
+  <data name="alertmeifresponseis" xml:space="preserve">
+    <value>Alert me if response is:</value>
+  </data>
+  <data name="appclosing" xml:space="preserve">
+    <value>Application closing... Please restart after exit.</value>
+  </data>
+  <data name="avaibleactions" xml:space="preserve">
+    <value>Avaible Actions</value>
+  </data>
+  <data name="calltype" xml:space="preserve">
+    <value>Call Type:</value>
+  </data>
+  <data name="cardname" xml:space="preserve">
+    <value>*Card Name</value>
+  </data>
+  <data name="checkcycle" xml:space="preserve">
+    <value>Check Cycle (as seconds)</value>
+  </data>
+  <data name="clicktocreatenewone" xml:space="preserve">
+    <value>Click to create new one</value>
+  </data>
+  <data name="copycard" xml:space="preserve">
+    <value>Copy Card</value>
+  </data>
+  <data name="darkstyle" xml:space="preserve">
+    <value>Dark Style</value>
+  </data>
+  <data name="dateandtime" xml:space="preserve">
+    <value>Date and time</value>
+  </data>
+  <data name="defaultis100sec" xml:space="preserve">
+    <value>Default is 100 sec</value>
+  </data>
+  <data name="defaultis5000" xml:space="preserve">
+    <value>Default is 5000</value>
+  </data>
+  <data name="defaultis600sec" xml:space="preserve">
+    <value>Default is 600 sec, min 30</value>
+  </data>
+  <data name="delayafternotification" xml:space="preserve">
+    <value>Delay After Notification:</value>
+  </data>
+  <data name="deletingcard" xml:space="preserve">
+    <value>Deleting card</value>
+  </data>
+  <data name="deletingcardask" xml:space="preserve">
+    <value>Do you really want to delete this card?</value>
+  </data>
+  <data name="description" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="editcard" xml:space="preserve">
+    <value>Edit Card</value>
+  </data>
+  <data name="empty" xml:space="preserve">
+    <value>Empty</value>
+  </data>
+  <data name="error" xml:space="preserve">
+    <value>Error</value>
+  </data>
+  <data name="fail" xml:space="preserve">
+    <value>Fail</value>
+  </data>
+  <data name="fieldsarerequired" xml:space="preserve">
+    <value>(Fields with * are required.)</value>
+  </data>
+  <data name="isnotreachable" xml:space="preserve">
+    <value>is not reachable!</value>
+  </data>
+  <data name="logs" xml:space="preserve">
+    <value>Logs</value>
+  </data>
+  <data name="maxlogcount" xml:space="preserve">
+    <value>Max Log Count</value>
+  </data>
+  <data name="maybenointernet" xml:space="preserve">
+    <value>Maybe no internet browser avaible on this device. Ex: </value>
+  </data>
+  <data name="newcard" xml:space="preserve">
+    <value>New Card</value>
+  </data>
+  <data name="no" xml:space="preserve">
+    <value>No</value>
+  </data>
+  <data name="noservercardfound" xml:space="preserve">
+    <value>No server card found.</value>
+  </data>
+  <data name="ok" xml:space="preserve">
+    <value>Ok</value>
+  </data>
+  <data name="openbrowser" xml:space="preserve">
+    <value>Open browser</value>
+  </data>
+  <data name="openbrowserask" xml:space="preserve">
+    <value>Do you wanna go to</value>
+  </data>
+  <data name="operationresult" xml:space="preserve">
+    <value>Operation Result</value>
+  </data>
+  <data name="pleaseenternameforcard" xml:space="preserve">
+    <value>Please enter name for your card</value>
+  </data>
+  <data name="pleaseenterurlforcard" xml:space="preserve">
+    <value>Please enter URL or IP for your card</value>
+  </data>
+  <data name="protocol" xml:space="preserve">
+    <value>Protocol:</value>
+  </data>
+  <data name="readytocall" xml:space="preserve">
+    <value>Ready to Call</value>
+  </data>
+  <data name="refreshing" xml:space="preserve">
+    <value>Refreshing...</value>
+  </data>
+  <data name="remoteurlorip" xml:space="preserve">
+    <value>*Remote URL/IP</value>
+  </data>
+  <data name="resetdatabase" xml:space="preserve">
+    <value>Reset Database</value>
+  </data>
+  <data name="resetdatabaseask" xml:space="preserve">
+    <value>Are you really want to reset your database?</value>
+  </data>
+  <data name="resetlogs" xml:space="preserve">
+    <value>Reset Logs</value>
+  </data>
+  <data name="resetlogsask" xml:space="preserve">
+    <value>Is card logs will be deleted?</value>
+  </data>
+  <data name="resetservercards" xml:space="preserve">
+    <value>Reset Server Cards</value>
+  </data>
+  <data name="resetservercardsask" xml:space="preserve">
+    <value>Is server cards will be deleted?</value>
+  </data>
+  <data name="save" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="selectedlanguage" xml:space="preserve">
+    <value>Selected Language</value>
+  </data>
+  <data name="sendnotifonchangesdisabled" xml:space="preserve">
+    <value>'Send notifications on changes' disabled</value>
+  </data>
+  <data name="sendnotifonchangesenabled" xml:space="preserve">
+    <value>'Send notifications on changes' enabled</value>
+  </data>
+  <data name="serversarenotreachable" xml:space="preserve">
+    <value>Servers are not reachable!</value>
+  </data>
+  <data name="setbody" xml:space="preserve">
+    <value>Set body:</value>
+  </data>
+  <data name="setheaders" xml:space="preserve">
+    <value>Set headers:</value>
+  </data>
+  <data name="setportforyourcard" xml:space="preserve">
+    <value>Set port for your card. Default is 443</value>
+  </data>
+  <data name="settings" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+  <data name="success" xml:space="preserve">
+    <value>Success</value>
+  </data>
+  <data name="timechecksdisabled" xml:space="preserve">
+    <value>'Time scheduled checks' disabled</value>
+  </data>
+  <data name="timechecksenabled" xml:space="preserve">
+    <value>'Time scheduled checks' enabled</value>
+  </data>
+  <data name="waiting" xml:space="preserve">
+    <value>Waiting</value>
+  </data>
+  <data name="warning" xml:space="preserve">
+    <value>Warning!</value>
+  </data>
+  <data name="yes" xml:space="preserve">
+    <value>Yes</value>
+  </data>
+  <data name="youcanadddescriptionforcard" xml:space="preserve">
+    <value>You can add a description for your card</value>
+  </data>
+</root>

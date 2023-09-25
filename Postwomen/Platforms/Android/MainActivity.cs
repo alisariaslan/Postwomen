@@ -1,9 +1,8 @@
-﻿using Android;
-using Android.App;
+﻿using Android.App;
 using Android.Content;
 using Android.Content.PM;
-using AndroidX.Core.App;
-using AndroidX.Core.Content;
+using Android.Widget;
+using CommunityToolkit.Mvvm.Messaging;
 using Postwomen.Platforms.Android;
 
 namespace Postwomen;
@@ -11,26 +10,37 @@ namespace Postwomen;
 [Activity(Theme = "@style/Maui.SplashTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation | ConfigChanges.UiMode | ConfigChanges.ScreenLayout | ConfigChanges.SmallestScreenSize | ConfigChanges.Density)]
 public class MainActivity : MauiAppCompatActivity
 {
-	private Intent ServiceIntent { get; set; }
-
+    public static Activity main_act;
 	public MainActivity()
 	{
-		AndroidServiceManager.MainActivity = this;
-	}
+        main_act = this;
+        var messenger = MauiApplication.Current.Services.GetService<IMessenger>();
+        messenger.Register<MessageData>(this, (recipient, message) =>
+        {
+            Toast.MakeText(this, message.ToString(), ToastLength.Short).Show();
+            if (message.Start)
+            {
+                StartService();
+            }
+            else
+            {
+                StopService();
+            }
+        });
+    }
 
 	public void StartService()
 	{
-		if (ContextCompat.CheckSelfPermission(this, Manifest.Permission.PostNotifications) != Permission.Granted)
-		{
-			ActivityCompat.RequestPermissions(this, new[] { Manifest.Permission.PostNotifications }, 0);
-		}
-		ServiceIntent = new Intent(this, typeof(MyBackgroundService));
-		ServiceIntent.PutExtra("inputExtra", "Background Service");
-		StartService(ServiceIntent);
-	}
+		var serviceIntent = new Intent(this, typeof(MyNotificationService));
+		serviceIntent.PutExtra("inputExtra", "Background Service");
+		StartService(serviceIntent);
+        Toast.MakeText(this, "Service is started.", ToastLength.Short).Show();
+    }
 
 	public void StopService()
 	{
-		StopService(ServiceIntent);
-	}
+		var serviceIntent = new Intent(this, typeof(MyNotificationService));
+		StopService(serviceIntent);
+        Toast.MakeText(this, "Service is stopped.", ToastLength.Short).Show();
+    }
 }

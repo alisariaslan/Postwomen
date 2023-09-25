@@ -1,6 +1,6 @@
 ﻿namespace Postwomen.Enums;
 
-public enum Protocols
+public enum ProtocolTypes
 {
 	HTTP,
 	HTTPS

@@ -5,75 +5,91 @@ namespace Postwomen.Others;
 
 public class PostwomenDatabase
 {
+    private SQLiteAsyncConnection sQLiteAsyncConnection;
 
-	private SQLiteAsyncConnection sQLiteAsyncConnection;
+    async Task Init()
+    {
+        if (sQLiteAsyncConnection is not null)
+            return;
 
-	public PostwomenDatabase()
-	{
-	}
+        sQLiteAsyncConnection = new SQLiteAsyncConnection(Constants.DatabasePath, Constants.Flags);
 
-	async Task Init()
-	{
-		if (sQLiteAsyncConnection is not null)
-			return;
+        await sQLiteAsyncConnection.CreateTableAsync<ServerModel>();
+        await sQLiteAsyncConnection.CreateTableAsync<LogModel>();
+    }
 
-		sQLiteAsyncConnection = new SQLiteAsyncConnection(Constants.DatabasePath, Constants.Flags);
-#if DEBUG && false
-		await DropTableAsync< ServerModel>();
-#endif
-		await sQLiteAsyncConnection.CreateTableAsync<ServerModel>();
-	}
+    public async Task<int> DropTableAsync<T>() where T : new()
+    {
+        await Init();
+        var result = await sQLiteAsyncConnection.DropTableAsync<T>();
+        return result;
+    }
 
-	public async Task<int> DropTableAsync<T>()
-	{
-		await Init();
-		if (typeof(T) == typeof(ServerModel))
-		{
-			var result = await sQLiteAsyncConnection.DropTableAsync<ServerModel>();
-			return result;
-		}
-		else
-			return 0;
-	}
+    public async Task<List<T>> GetItemsAsync<T>() where T : new()
+    {
+        await Init();
+        return await sQLiteAsyncConnection.Table<T>().ToListAsync();
+    }
 
-	public async Task<List<ServerModel>> GetItemsAsync()
-	{
-		await Init();
-		return await sQLiteAsyncConnection.Table<ServerModel>().ToListAsync();
-	}
+    public async Task<int> InsertItemAsync<T>(T item) where T : new()
+    {
+        await Init();
+        return await sQLiteAsyncConnection.InsertAsync(item);
+    }
 
-	public async Task<ServerModel> GetItemAsync(int id)
-	{
-		await Init();
-		return await sQLiteAsyncConnection.FindAsync<ServerModel>(id);
-	}
+    public async Task<int> UpdateItemAsync<T>(T item) where T : new()
+    {
+        await Init();
+        return await sQLiteAsyncConnection.UpdateAsync(item);
+    }
 
-	public async Task<int> InsertItemAsync(ServerModel item)
-	{
-		await Init();
-		return await sQLiteAsyncConnection.InsertAsync(item);
-	}
+    public async Task<int> DeleteItemAsync<T>(T item) where T : new()
+    {
+        await Init();
+        return await sQLiteAsyncConnection.DeleteAsync(item);
+    }
 
-	public async Task<int> UpdateItemAsync(ServerModel item)
-	{
-		await Init();
-		return await sQLiteAsyncConnection.UpdateAsync(item);
-	}
+    public async Task<ServerModel> GetServerCard(int id)
+    {
+        await Init();
+        return await sQLiteAsyncConnection.FindAsync<ServerModel>(id);
+    }
 
-	public async Task<int> DeleteItemAsync(ServerModel item)
-	{
-		await Init();
-		return await sQLiteAsyncConnection.DeleteAsync(item);
-	}
+    public async Task<int> SaveServerCardAsync(ServerModel item)
+    {
+        await Init();
+        var result = await sQLiteAsyncConnection.FindAsync<ServerModel>(item.Id);
+        if (result == null)
+            return await InsertItemAsync(item);
+        else
+            return await UpdateItemAsync(item);
+    }
 
-	public async Task<int> SaveItemAsync(ServerModel item)
-	{
-		await Init();
-		var result = await sQLiteAsyncConnection.FindAsync<ServerModel>(item.Id);
-		if (result == null)
-			return await InsertItemAsync(item);
-		else
-			return await UpdateItemAsync(item);
-	}
+    public async Task<int> SaveLogAsync(string desc)
+    {
+        var mlc = Convert.ToInt32(Preferences.Get("MaxLogCount", 5000));
+        var lc = Convert.ToInt32(Preferences.Get("LogCount", 5001));
 
+        if (lc > mlc)
+        {
+            int deletedCount = 0;
+            var logs = await GetItemsAsync<LogModel>();
+            lc = logs.Count;
+            foreach (var log in logs)
+            {
+                int result = await sQLiteAsyncConnection.DeleteAsync(log);
+                if (result > 0)
+                    deletedCount++;
+                if (logs.Count - deletedCount < mlc)
+                    break;
+            }
+            lc -= deletedCount;
+        }
+        lc += 1;
+        Preferences.Set("LogCount", lc);
+
+        await Init();
+        LogModel item = new LogModel() { Description = desc };
+        return await sQLiteAsyncConnection.InsertAsync(item);
+    }
 }

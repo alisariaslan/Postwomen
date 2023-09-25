@@ -1,4 +1,6 @@
-﻿using Postwomen.Others;
+﻿using Microsoft.VisualBasic;
+using Postwomen.Enums;
+using Postwomen.Others;
 using SQLite;
 
 namespace Postwomen.Models;
@@ -25,7 +27,7 @@ public class ServerModel
 
 	public bool IsAdvancedSettingsEnabled { get; set; }
 
-	public int TypeOfCall { get; set; } = 1;
+	public int TypeOfCall { get; set; }
 
 	public int Port { get; set; } = 443;
 
@@ -33,9 +35,11 @@ public class ServerModel
 
 	public bool IsSendNotificationsOnChangesEnabled { get; set; }
 
-	public bool IsSeperatedFromGeneralNotifications { get; set; }
+    public int DelayAfterNotification { get; set; } = 100;
 
-	public int CurrentState { get; set; }
+    public int CurrentState { get; set; } = 2;
+
+    public DateTime LastCheck { get; set; } = DateTime.Now.AddDays(-1);
 
 	[Ignore]
 	public Command SaveCardCommand { get; set; }
@@ -44,20 +48,15 @@ public class ServerModel
 	public bool HasDescription { get { if (Description == null || Description.Equals("")) return false; else return true; } }
 
 	[Ignore]
-	public string PortString
-	{
-		get
-		{
-			if (TypeOfCall == 1) return "Ping only";
-			else if (TypeOfCall == 2) return $"GET({Port})";
-			else if (TypeOfCall == 3) return $"POST({Port})";
-			else return "Unkown";
-		}
-	}
+	public string PortString { get { return ((RemoteCallTypes)TypeOfCall).ToString(); } }
 
 	private async void SaveCardFunc(int param)
 	{
-		var db = new PostwomenDatabase();
+#if ANDROID
+        if (IsSendNotificationsOnChangesEnabled)
+            Platforms.Android.MyNotificationService.RequestNotifPerm();
+#endif
+        var db = new PostwomenDatabase();
 		await db.UpdateItemAsync(this);
 	}
 }

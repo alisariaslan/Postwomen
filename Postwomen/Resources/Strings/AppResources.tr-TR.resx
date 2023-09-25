@@ -1,0 +1,309 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="advancedsettingsdisabled" xml:space="preserve">
+    <value>Gelişmiş ayarlar aktif değil</value>
+  </data>
+  <data name="advancedsettingsenabled" xml:space="preserve">
+    <value>Gelişmiş ayarlar aktif</value>
+  </data>
+  <data name="alertmeifresponseis" xml:space="preserve">
+    <value>Sonuç bu ise beni uyar:</value>
+  </data>
+  <data name="appclosing" xml:space="preserve">
+    <value>Uygulama kapanıyor... Kapandıktan sonra tekrar açın.</value>
+  </data>
+  <data name="avaibleactions" xml:space="preserve">
+    <value>Mevcut İşlemler</value>
+  </data>
+  <data name="calltype" xml:space="preserve">
+    <value>Çağrı Türü:</value>
+  </data>
+  <data name="cardname" xml:space="preserve">
+    <value>*Kart İsmi</value>
+  </data>
+  <data name="checkcycle" xml:space="preserve">
+    <value>Kontrol Döngüsü (saniye)</value>
+  </data>
+  <data name="clicktocreatenewone" xml:space="preserve">
+    <value>Yeni bir tane oluşturmak için tıklayın</value>
+  </data>
+  <data name="copycard" xml:space="preserve">
+    <value>Kartı Kopyala</value>
+  </data>
+  <data name="darkstyle" xml:space="preserve">
+    <value>Karanlık Stil</value>
+  </data>
+  <data name="dateandtime" xml:space="preserve">
+    <value>Tarih ve Saat</value>
+  </data>
+  <data name="defaultis100sec" xml:space="preserve">
+    <value>Normalde 100 sn</value>
+  </data>
+  <data name="defaultis5000" xml:space="preserve">
+    <value>Normalde 5000</value>
+  </data>
+  <data name="defaultis600sec" xml:space="preserve">
+    <value>Normalde 600 sn, min 30</value>
+  </data>
+  <data name="delayafternotification" xml:space="preserve">
+    <value>Bildirim sonrası gecikme:</value>
+  </data>
+  <data name="deletingcard" xml:space="preserve">
+    <value>Kart siliniyor</value>
+  </data>
+  <data name="deletingcardask" xml:space="preserve">
+    <value>Bu kartı gerçekten silmek istiyor musunuz?</value>
+  </data>
+  <data name="description" xml:space="preserve">
+    <value>Açıklama</value>
+  </data>
+  <data name="editcard" xml:space="preserve">
+    <value>Kartı Düzenle</value>
+  </data>
+  <data name="empty" xml:space="preserve">
+    <value>Boş</value>
+  </data>
+  <data name="error" xml:space="preserve">
+    <value>Hata</value>
+  </data>
+  <data name="fail" xml:space="preserve">
+    <value>Başarısız</value>
+  </data>
+  <data name="fieldsarerequired" xml:space="preserve">
+    <value>( * ile başlayan alanlar zorunludur.)</value>
+  </data>
+  <data name="isnotreachable" xml:space="preserve">
+    <value>erişilebilir değil!</value>
+  </data>
+  <data name="logs" xml:space="preserve">
+    <value>Loglar</value>
+  </data>
+  <data name="maxlogcount" xml:space="preserve">
+    <value>Maks Log Sayısı</value>
+  </data>
+  <data name="maybenointernet" xml:space="preserve">
+    <value>Cihazınızda internet tarayıcısı yüklü olmayabilir. Ex: </value>
+  </data>
+  <data name="newcard" xml:space="preserve">
+    <value>Yeni Kart</value>
+  </data>
+  <data name="no" xml:space="preserve">
+    <value>Hayır</value>
+  </data>
+  <data name="noservercardfound" xml:space="preserve">
+    <value>Hiç sunucu kartı bulunamadı.</value>
+  </data>
+  <data name="ok" xml:space="preserve">
+    <value>Tamam</value>
+  </data>
+  <data name="openbrowser" xml:space="preserve">
+    <value>Tarayıcıdan aç</value>
+  </data>
+  <data name="openbrowserask" xml:space="preserve">
+    <value>Şu adrese gitmek istiyor musunuz</value>
+  </data>
+  <data name="operationresult" xml:space="preserve">
+    <value>İşlem Sonucu</value>
+  </data>
+  <data name="pleaseenternameforcard" xml:space="preserve">
+    <value>Kartınız için isim girin</value>
+  </data>
+  <data name="pleaseenterurlforcard" xml:space="preserve">
+    <value>Kartınız için URL veya IP girin</value>
+  </data>
+  <data name="protocol" xml:space="preserve">
+    <value>Protokol:</value>
+  </data>
+  <data name="readytocall" xml:space="preserve">
+    <value>Çağırmaya hazır</value>
+  </data>
+  <data name="refreshing" xml:space="preserve">
+    <value>Yenileniyor...</value>
+  </data>
+  <data name="remoteurlorip" xml:space="preserve">
+    <value>*Uzak Url/Ip</value>
+  </data>
+  <data name="resetdatabase" xml:space="preserve">
+    <value>Veritabanını Sıfırla</value>
+  </data>
+  <data name="resetdatabaseask" xml:space="preserve">
+    <value>Veritabanını sıfırlamak istediğinizden gerçekten emin misiniz?</value>
+  </data>
+  <data name="resetlogs" xml:space="preserve">
+    <value>Logları Sıfırla</value>
+  </data>
+  <data name="resetlogsask" xml:space="preserve">
+    <value>Tüm loglar silinsin mi?</value>
+  </data>
+  <data name="resetservercards" xml:space="preserve">
+    <value>Sunucu Kartlarını Sıfırla</value>
+  </data>
+  <data name="resetservercardsask" xml:space="preserve">
+    <value>Tüm sunucu kartları silinsin mi?</value>
+  </data>
+  <data name="save" xml:space="preserve">
+    <value>Kaydet</value>
+  </data>
+  <data name="selectedlanguage" xml:space="preserve">
+    <value>Seçili Dil</value>
+  </data>
+  <data name="sendnotifonchangesdisabled" xml:space="preserve">
+    <value>'Değişiklik olduğunda bildirim gönder' pasif</value>
+  </data>
+  <data name="sendnotifonchangesenabled" xml:space="preserve">
+    <value>'Değişiklik olduğunda bildirim gönder' aktif</value>
+  </data>
+  <data name="serversarenotreachable" xml:space="preserve">
+    <value>Sunucular yanıt vermiyor!</value>
+  </data>
+  <data name="setbody" xml:space="preserve">
+    <value>Gövdeyi girin:</value>
+  </data>
+  <data name="setheaders" xml:space="preserve">
+    <value>Başlıkları girin:</value>
+  </data>
+  <data name="setportforyourcard" xml:space="preserve">
+    <value>Kartınız için port girin. Normalde 443</value>
+  </data>
+  <data name="settings" xml:space="preserve">
+    <value>Ayarlar</value>
+  </data>
+  <data name="success" xml:space="preserve">
+    <value>Başarılı</value>
+  </data>
+  <data name="timechecksdisabled" xml:space="preserve">
+    <value>'Zaman ayarlı kontrol' pasif</value>
+  </data>
+  <data name="timechecksenabled" xml:space="preserve">
+    <value>'Zaman ayarlı kontrol' aktif</value>
+  </data>
+  <data name="waiting" xml:space="preserve">
+    <value>Bekliyor</value>
+  </data>
+  <data name="warning" xml:space="preserve">
+    <value>Uyarı!</value>
+  </data>
+  <data name="yes" xml:space="preserve">
+    <value>Evet</value>
+  </data>
+  <data name="youcanadddescriptionforcard" xml:space="preserve">
+    <value>Kartınız için açıklama girebilirsiniz</value>
+  </data>
+</root>
