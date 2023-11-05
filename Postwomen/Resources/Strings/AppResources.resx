@@ -306,4 +306,10 @@
   <data name="youcanadddescriptionforcard" xml:space="preserve">
     <value>You can add a description for your card</value>
   </data>
+  <data name="youmustspecifyanameforyourcard" xml:space="preserve">
+    <value>You must specify a name for your card!</value>
+  </data>
+  <data name="youmustspecifyanurloripforyourcard" xml:space="preserve">
+    <value>You must specify an Url or IP for your card!</value>
+  </data>
 </root>

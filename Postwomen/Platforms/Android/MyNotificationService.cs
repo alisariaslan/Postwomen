@@ -3,14 +3,14 @@ using Android.App;
 using Android.Content;
 using Android.Content.PM;
 using Android.OS;
+using Android.Widget;
 using AndroidX.Core.App;
 using AndroidX.Core.Content;
-using Java.Lang;
+using CommunityToolkit.Mvvm.Messaging;
 using Postwomen.Enums;
 using Postwomen.Models;
 using Postwomen.Others;
 using Postwomen.Resources.Strings;
-using System.Net.NetworkInformation;
 
 namespace Postwomen.Platforms.Android;
 
@@ -18,7 +18,6 @@ namespace Postwomen.Platforms.Android;
 public class MyNotificationService : Service
 {
     private int badgeNumber;
-    private NotificationCompat.Builder notification;
     private PostwomenDatabase pwDatabase;
     private Timer timer { get; set; }
     private bool isEnterable = false;
@@ -42,31 +41,41 @@ public class MyNotificationService : Service
             ActivityCompat.RequestPermissions(MainActivity.main_act, new[] { Manifest.Permission.PostNotifications }, 0);
     }
 
+    private NotificationCompat.Builder CreateNewNotification(PendingIntent pendingIntent)
+    {
+        return new NotificationCompat.Builder(this, MainApplication.ChannelName)
+              .SetSmallIcon(Resource.Drawable.postwomen_circle_notification)
+              .SetContentIntent(pendingIntent)
+              .SetContentTitle(AppResources.serversarenotreachable)
+              .SetChannelId(MainApplication.ChannelName)
+              .SetAutoCancel(true)
+              .SetOngoing(false);
+    }
+
     public override StartCommandResult OnStartCommand(Intent intent, StartCommandFlags flags, int startId)
     {
+        var startedFrom = intent.GetStringExtra("startedFrom");
+        Toast.MakeText(this, "Service is started from " + startedFrom, ToastLength.Long).Show();
         var notif_intent = new Intent(this, typeof(MainActivity));
-        var pend_intent = PendingIntent.GetActivity(this, 0, notif_intent, PendingIntentFlags.Mutable);
+        var i = (int)Build.VERSION.SdkInt;
+        PendingIntentFlags pendingIntentFlags = PendingIntentFlags.Immutable;
+        if ((int)Build.VERSION.SdkInt < 31)
+            pendingIntentFlags = PendingIntentFlags.CancelCurrent;
+        var pend_intent = PendingIntent.GetActivity(this, 0, notif_intent, pendingIntentFlags);
         pwDatabase = new PostwomenDatabase();
         var cycle = Preferences.Get("CheckCycleValue", 600);
-        notification = new NotificationCompat.Builder(this, MainApplication.ChannelName)
-                .SetSmallIcon(Resource.Drawable.postwomen_circle_notification)
-                .SetContentIntent(pend_intent)
-                .SetContentTitle(AppResources.serversarenotreachable)
-                .SetChannelId(MainApplication.ChannelName)
-                .SetAutoCancel(true);
-        timer = new Timer(Timer_Elapsed, null, 0, cycle * 1000);
+        timer = new Timer(Timer_Elapsed, pend_intent, 0, cycle * 1000);
         new Task(async () => { await Task.Delay(3000); isEnterable = true; }).Start();
         return StartCommandResult.Sticky;
     }
 
-    private async void Timer_Elapsed(object state)
+    private async void Timer_Elapsed(object param)
     {
         isTimerActive = true;
         if (isEnterable is false)
             return;
 
         isEnterable = false;
-        Ping myPing = new Ping();
         var dbItems = await pwDatabase.GetItemsAsync<ServerModel>();
         string notificationBody = string.Empty;
         foreach (var item in dbItems)
@@ -102,16 +111,21 @@ public class MyNotificationService : Service
         }
         if (notificationBody != string.Empty)
         {
-            notification.SetContentText(notificationBody)
-            .SetNumber(badgeNumber++);
-            StartForeground(101010, notification.Build());
+            using (NotificationCompat.Builder notifBuilder = CreateNewNotification((PendingIntent)param))
+            {
+                notifBuilder.SetContentText(notificationBody).SetNumber(badgeNumber++);
+                StartForeground(101010, notifBuilder.Build());
+                notifBuilder.Dispose();
+            }
         }
+        var messenger = MauiApplication.Current?.Services?.GetService<IMessenger>();
+        messenger?.Send(new MessageData("service", false));
         var cycle = Preferences.Get("CheckCycleValue", 600);
         timer.Change(0, cycle * 1000);
         new Task(async () => { await Task.Delay(3000); isEnterable = true; }).Start();
     }
 
-    private async Task<bool> CheckPing(string url)
+    public static async Task<bool> CheckPing(string url)
     {
         using (System.Diagnostics.Process process = new System.Diagnostics.Process())
         {

@@ -306,4 +306,10 @@
   <data name="youcanadddescriptionforcard" xml:space="preserve">
     <value>Kartınız için açıklama girebilirsiniz</value>
   </data>
+  <data name="youmustspecifyanameforyourcard" xml:space="preserve">
+    <value>Kartınıza bir isim vermek zorundasınız!</value>
+  </data>
+  <data name="youmustspecifyanurloripforyourcard" xml:space="preserve">
+    <value>Kartınıza bir Url veya Ip adresi tanımlamak zorundasınız!</value>
+  </data>
 </root>

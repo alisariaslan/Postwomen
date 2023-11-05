@@ -1,4 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.Messaging;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using Postwomen.Enums;
 using Postwomen.Models;
 using Postwomen.Others;
 using Postwomen.Resources.Strings;
@@ -13,6 +16,7 @@ public class MainViewModel : BaseViewModel
     public bool HasData { get { if (ServerCards.Count > 0) return true; else return false; } }
     public bool HasDataReversed { get { if (ServerCards.Count > 0) return false; else return true; } }
     public Command RefreshCommand { get; set; }
+    public Command RefreshCardCommand { get; set; }
     public Command LogsCommand { get; set; }
     public Command CreateNewCardCommand { get; set; }
     public Command EditCardCommand { get; set; }
@@ -30,6 +34,7 @@ public class MainViewModel : BaseViewModel
         MyPostwomenDatabase = postwomenDatabase;
         ServerCards = new ObservableCollection<ServerModel>();
         RefreshCommand = new Command<string>(execute: RefreshList);
+        RefreshCardCommand = new Command<int>(execute: RefreshCard);
         EditCardCommand = new Command<int>(execute: EditCardFunc);
         CopyCardCommand = new Command<int>(execute: CopyCardFunc);
         DeleteCardCommand = new Command<int>(execute: DeleteCardFunc);
@@ -37,8 +42,13 @@ public class MainViewModel : BaseViewModel
         GoToWebCommand = new Command<string>(execute: GoToWebFunc);
         SettingsCommand = new Command(GoToSettingsFunc);
         LogsCommand = new Command(GoToLogsFunc);
-        RefreshList("");
-        messenger.Send(new MessageData("start", true));
+        RefreshList("clear");
+        messenger?.Register<MessageData>(this, (recipient, message) =>
+        {
+            if (message.Message.Equals("service"))
+                RefreshList("compare");
+        });
+        messenger?.Send(new MessageData("user", true));
     }
 
     private void OnOriantationChanged(object sender, DisplayInfoChangedEventArgs e)
@@ -58,26 +68,66 @@ public class MainViewModel : BaseViewModel
         OnPropertyChanged(nameof(ItemsLayout));
     }
 
+    private bool AreJsonStringsEqual(string json1, string json2)
+    {
+        return JToken.Parse(json1).ToString() == JToken.Parse(json2).ToString();
+    }
+    private async void RefreshCard(int param)
+    {
+        var existingItem = ServerCards.FirstOrDefault(card => card.Id == param);
+        bool result = false;
+#if ANDROID
+        result = await Platforms.Android.MyNotificationService.CheckPing(existingItem.Url);
+#endif
+        if (result is false)
+        {
+            existingItem.CurrentState = (int)CheckStates.UNREACHABLE;
+            existingItem.LastCheck = DateTime.Now;
+            await MyPostwomenDatabase.SaveServerCardAsync(existingItem);
+        }
+        RefreshList("compare");
+    }
     private async void RefreshList(string param)
     {
         await Task.Delay(100);
         var items = await MyPostwomenDatabase.GetItemsAsync<ServerModel>();
-        ServerCards.Clear();
-        foreach (var item in items)
-            ServerCards.Add(item);
-        OnPropertyChanged(nameof(ServerCards));
+        if (param.Equals("compare"))
+        {
+            int index = 0;
+            foreach (var newItem in items)
+            {
+                var existingItem = ServerCards.FirstOrDefault(card => card.Id == newItem.Id);
+                if (existingItem != null)
+                {
+                    var existingItemJson = JsonConvert.SerializeObject(existingItem);
+                    var newItemJson = JsonConvert.SerializeObject(newItem);
+                    if (AreJsonStringsEqual(existingItemJson, newItemJson))
+                    {
+                        index++;
+                        continue;
+                    }
+                    else
+                    {
+                        ServerCards[index] = JsonConvert.DeserializeObject<ServerModel>(newItemJson);
+                    }
+                }
+                else
+                {
+                    ServerCards.Add(newItem);
+                }
+                index++;
+            }
+        }
+        else if (param.Equals("clear"))
+        {
+            ServerCards.Clear();
+            foreach (var item in items)
+                ServerCards.Add(item);
+        }
+        else throw new NotImplementedException("RefreshList parameter is NULL!");
         OnPropertyChanged(nameof(HasData));
         OnPropertyChanged(nameof(HasDataReversed));
         IsRefreshing = false;
-    }
-    public async void RefreshListFromService(string param)
-    {
-        ServerCards.Clear();
-        ServerCards = new ObservableCollection<ServerModel>();
-        var items = await MyPostwomenDatabase.GetItemsAsync<ServerModel>();
-        foreach (var item in items)
-            ServerCards.Add(item);
-        OnPropertyChanged(nameof(ServerCards));
     }
     private async void GoToSettingsFunc()
     {
@@ -85,10 +135,7 @@ public class MainViewModel : BaseViewModel
     }
     private async void GoToLogsFunc()
     {
-        //await Shell.Current.GoToAsync($"LogsPage");
-#if DEBUG
-        await Shell.Current.GoToAsync($"ServiceTestPage");
-#endif
+        await Shell.Current.GoToAsync($"LogsPage");
     }
     private async void GoToWebFunc(string param)
     {
@@ -110,7 +157,7 @@ public class MainViewModel : BaseViewModel
     private async void CreateNewCardFunc(string param)
     {
         Console.WriteLine("LOG PARAMETER: " + param);
-        var backAction = new Action(() => RefreshList(""));
+        var backAction = new Action(() => RefreshList("compare"));
         var navigationParameters = new Dictionary<string, object> {
             { "BackAction", backAction },
             { "SelectedCard", null },
@@ -121,7 +168,7 @@ public class MainViewModel : BaseViewModel
     {
         var card = await MyPostwomenDatabase.GetServerCard(param);
         Console.WriteLine("LOG PARAMETER: " + param);
-        var backAction = new Action(() => RefreshList(""));
+        var backAction = new Action(() => RefreshList("compare"));
         var navigationParameters = new Dictionary<string, object> {
             {"BackAction", backAction},
             {"SelectedCard", card},
@@ -133,7 +180,7 @@ public class MainViewModel : BaseViewModel
     {
         var card = await MyPostwomenDatabase.GetServerCard(param);
         Console.WriteLine("LOG PARAMETER: " + param);
-        var backAction = new Action(() => RefreshList(""));
+        var backAction = new Action(() => RefreshList("compare"));
         var navigationParameters = new Dictionary<string, object> {
             {"BackAction", backAction},
             {"SelectedCard", card},
@@ -149,6 +196,6 @@ public class MainViewModel : BaseViewModel
 
         var card = await MyPostwomenDatabase.GetServerCard(param);
         await MyPostwomenDatabase.DeleteItemAsync(card);
-        RefreshList(string.Empty);
+        RefreshList("clear");
     }
 }

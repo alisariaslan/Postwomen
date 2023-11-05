@@ -32,7 +32,7 @@
 				<!--<ActivityIndicator x:Name="indicator1" IsRunning="{Binding IsRefreshing}" IsVisible="{Binding IsRefreshing}" WidthRequest="25" HeightRequest="25" Color="White"/>-->
 			</HorizontalStackLayout>
 			<HorizontalStackLayout Grid.Column="1" HorizontalOptions="End" VerticalOptions="Center" Margin="0,0,15,0" Spacing="15">
-				<ImageButton Source="refresh.png" Clicked="ImageButton_Clicked" IsVisible="True" Command="{Binding RefreshCommand}" WidthRequest="25" HeightRequest="25" VerticalOptions="Center" />
+				<ImageButton Source="refresh.png" Clicked="ImageButton_Clicked" IsVisible="True" Command="{Binding RefreshCommand}" CommandParameter="compare" WidthRequest="25" HeightRequest="25" VerticalOptions="Center" />
 				<ImageButton Source="addnew.png" IsVisible="{Binding HasData}" Command="{Binding CreateNewCardCommand}" WidthRequest="25" HeightRequest="25" VerticalOptions="Center" />
 				<ImageButton Source="logs.png" Command="{Binding LogsCommand}" WidthRequest="25" HeightRequest="25" VerticalOptions="Center" />
 				<ImageButton Source="settings.png" Command="{Binding SettingsCommand}" WidthRequest="25" HeightRequest="25" VerticalOptions="Center" />
@@ -112,12 +112,13 @@
 										</Label>
 									</HorizontalStackLayout>
 									<Grid ColumnDefinitions=".8*,.2*">
-										<Border Grid.Column="0" StrokeShape="RoundRectangle 6" Stroke="Black" BackgroundColor="Black" WidthRequest="160" HorizontalOptions="Start" Padding="2" Margin="3,0,0,3">
+										<Border Grid.Column="0" StrokeShape="RoundRectangle 6" Stroke="Black" BackgroundColor="Black" WidthRequest="180" HorizontalOptions="Start" Padding="2" Margin="3,0,0,3">
 											<HorizontalStackLayout Spacing="10" HorizontalOptions="Center">
 												<ImageButton Source="browser.png" WidthRequest="25" HeightRequest="25" VerticalOptions="Center" Command="{Binding Source={RelativeSource AncestorType={x:Type vm:MainViewModel}}, Path=GoToWebCommand}" CommandParameter="{Binding Url}" />
 												<ImageButton Source="copy.png" WidthRequest="25" HeightRequest="25" VerticalOptions="Center" Command="{Binding Source={RelativeSource AncestorType={x:Type vm:MainViewModel}}, Path=CopyCardCommand}" CommandParameter="{Binding Id}" />
 												<ImageButton Source="wrench.png" WidthRequest="25" HeightRequest="25" VerticalOptions="Center" Command="{Binding Source={RelativeSource AncestorType={x:Type vm:MainViewModel}}, Path=EditCardCommand}" CommandParameter="{Binding Id}" />
 												<ImageButton Source="delete.png" WidthRequest="25" HeightRequest="25" VerticalOptions="Center" Command="{Binding Source={RelativeSource AncestorType={x:Type vm:MainViewModel}}, Path=DeleteCardCommand}" CommandParameter="{Binding Id}" />
+												<ImageButton Source="refresh.png" Clicked="ImageButton_Clicked" WidthRequest="25" HeightRequest="25" VerticalOptions="Center" Command="{Binding Source={RelativeSource AncestorType={x:Type vm:MainViewModel}}, Path=RefreshCardCommand}" CommandParameter="{Binding Id}" />
 											</HorizontalStackLayout>
 										</Border>
 										<Label Grid.Column="1" Text="{Binding Id}" FontSize="14" HorizontalTextAlignment="End" VerticalTextAlignment="Center" Margin="0,0,10,0" />

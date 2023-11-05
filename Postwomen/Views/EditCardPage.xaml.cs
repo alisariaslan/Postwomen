@@ -59,7 +59,7 @@ public partial class EditCardPage : ContentPage
 
     private void InitCard()
     {
-        if(CardState == 0 && SelectedCard == null)
+        if (CardState == 0 && SelectedCard == null)
         {
             Title = AppResources.newcard;
             SelectedCard_ = new ServerModel();
@@ -71,7 +71,7 @@ public partial class EditCardPage : ContentPage
             Title = AppResources.editcard;
         OnPropertyChanged(nameof(Title));
 
-        if(SelectedCard.IsAdvancedSettingsEnabled)
+        if (SelectedCard.IsAdvancedSettingsEnabled)
             advancedSwitch.IsToggled = true;
 
         RBSelectionValue = SelectedCard.TypeOfCall.ToString();
@@ -88,6 +88,10 @@ public partial class EditCardPage : ContentPage
         {
             if (CardState == 1)
                 SelectedCard.Id = 0;
+            if (string.IsNullOrEmpty(SelectedCard.Name.Trim()))
+                throw new Exception(AppResources.youmustspecifyanameforyourcard);
+                       if (string.IsNullOrEmpty(SelectedCard.Url.Trim()))
+                throw new Exception(AppResources.youmustspecifyanurloripforyourcard);
             await MyPostwomenDatabase.SaveServerCardAsync(SelectedCard);
             await Shell.Current.Navigation.PopModalAsync();
             BackAction.Invoke();

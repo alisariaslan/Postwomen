@@ -22,7 +22,7 @@ namespace Postwomen.Resources.Strings {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class AppResources {
+    public class AppResources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
@@ -36,7 +36,7 @@ namespace Postwomen.Resources.Strings {
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
+        public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Postwomen.Resources.Strings.AppResources", typeof(AppResources).Assembly);
@@ -51,7 +51,7 @@ namespace Postwomen.Resources.Strings {
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
+        public static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -63,7 +63,7 @@ namespace Postwomen.Resources.Strings {
         /// <summary>
         ///   Looks up a localized string similar to Advanced Settings Disabled.
         /// </summary>
-        internal static string advancedsettingsdisabled {
+        public static string advancedsettingsdisabled {
             get {
                 return ResourceManager.GetString("advancedsettingsdisabled", resourceCulture);
             }
@@ -72,7 +72,7 @@ namespace Postwomen.Resources.Strings {
         /// <summary>
         ///   Looks up a localized string similar to Advanced Settings Enabled.
         /// </summary>
-        internal static string advancedsettingsenabled {
+        public static string advancedsettingsenabled {
             get {
                 return ResourceManager.GetString("advancedsettingsenabled", resourceCulture);
             }
@@ -81,7 +81,7 @@ namespace Postwomen.Resources.Strings {
         /// <summary>
         ///   Looks up a localized string similar to Alert me if response is:.
         /// </summary>
-        internal static string alertmeifresponseis {
+        public static string alertmeifresponseis {
             get {
                 return ResourceManager.GetString("alertmeifresponseis", resourceCulture);
             }
@@ -90,7 +90,7 @@ namespace Postwomen.Resources.Strings {
         /// <summary>
         ///   Looks up a localized string similar to Application closing... Please restart after exit..
         /// </summary>
-        internal static string appclosing {
+        public static string appclosing {
             get {
                 return ResourceManager.GetString("appclosing", resourceCulture);
             }
@@ -99,7 +99,7 @@ namespace Postwomen.Resources.Strings {
         /// <summary>
         ///   Looks up a localized string similar to Avaible Actions.
         /// </summary>
-        internal static string avaibleactions {
+        public static string avaibleactions {
             get {
                 return ResourceManager.GetString("avaibleactions", resourceCulture);
             }
@@ -108,7 +108,7 @@ namespace Postwomen.Resources.Strings {
         /// <summary>
         ///   Looks up a localized string similar to Call Type:.
         /// </summary>
-        internal static string calltype {
+        public static string calltype {
             get {
                 return ResourceManager.GetString("calltype", resourceCulture);
             }
@@ -117,7 +117,7 @@ namespace Postwomen.Resources.Strings {
         /// <summary>
         ///   Looks up a localized string similar to *Card Name.
         /// </summary>
-        internal static string cardname {
+        public static string cardname {
             get {
                 return ResourceManager.GetString("cardname", resourceCulture);
             }
@@ -126,7 +126,7 @@ namespace Postwomen.Resources.Strings {
         /// <summary>
         ///   Looks up a localized string similar to Check Cycle (as seconds).
         /// </summary>
-        internal static string checkcycle {
+        public static string checkcycle {
             get {
                 return ResourceManager.GetString("checkcycle", resourceCulture);
             }
@@ -135,7 +135,7 @@ namespace Postwomen.Resources.Strings {
         /// <summary>
         ///   Looks up a localized string similar to Click to create new one.
         /// </summary>
-        internal static string clicktocreatenewone {
+        public static string clicktocreatenewone {
             get {
                 return ResourceManager.GetString("clicktocreatenewone", resourceCulture);
             }
@@ -144,7 +144,7 @@ namespace Postwomen.Resources.Strings {
         /// <summary>
         ///   Looks up a localized string similar to Copy Card.
         /// </summary>
-        internal static string copycard {
+        public static string copycard {
             get {
                 return ResourceManager.GetString("copycard", resourceCulture);
             }
@@ -153,7 +153,7 @@ namespace Postwomen.Resources.Strings {
         /// <summary>
         ///   Looks up a localized string similar to Dark Style.
         /// </summary>
-        internal static string darkstyle {
+        public static string darkstyle {
             get {
                 return ResourceManager.GetString("darkstyle", resourceCulture);
             }
@@ -162,7 +162,7 @@ namespace Postwomen.Resources.Strings {
         /// <summary>
         ///   Looks up a localized string similar to Date and time.
         /// </summary>
-        internal static string dateandtime {
+        public static string dateandtime {
             get {
                 return ResourceManager.GetString("dateandtime", resourceCulture);
             }
@@ -171,7 +171,7 @@ namespace Postwomen.Resources.Strings {
         /// <summary>
         ///   Looks up a localized string similar to Default is 100 sec.
         /// </summary>
-        internal static string defaultis100sec {
+        public static string defaultis100sec {
             get {
                 return ResourceManager.GetString("defaultis100sec", resourceCulture);
             }
@@ -180,7 +180,7 @@ namespace Postwomen.Resources.Strings {
         /// <summary>
         ///   Looks up a localized string similar to Default is 5000.
         /// </summary>
-        internal static string defaultis5000 {
+        public static string defaultis5000 {
             get {
                 return ResourceManager.GetString("defaultis5000", resourceCulture);
             }
@@ -189,7 +189,7 @@ namespace Postwomen.Resources.Strings {
         /// <summary>
         ///   Looks up a localized string similar to Default is 600 sec, min 30.
         /// </summary>
-        internal static string defaultis600sec {
+        public static string defaultis600sec {
             get {
                 return ResourceManager.GetString("defaultis600sec", resourceCulture);
             }
@@ -198,7 +198,7 @@ namespace Postwomen.Resources.Strings {
         /// <summary>
         ///   Looks up a localized string similar to Delay After Notification:.
         /// </summary>
-        internal static string delayafternotification {
+        public static string delayafternotification {
             get {
                 return ResourceManager.GetString("delayafternotification", resourceCulture);
             }
@@ -207,7 +207,7 @@ namespace Postwomen.Resources.Strings {
         /// <summary>
         ///   Looks up a localized string similar to Deleting card.
         /// </summary>
-        internal static string deletingcard {
+        public static string deletingcard {
             get {
                 return ResourceManager.GetString("deletingcard", resourceCulture);
             }
@@ -216,7 +216,7 @@ namespace Postwomen.Resources.Strings {
         /// <summary>
         ///   Looks up a localized string similar to Do you really want to delete this card?.
         /// </summary>
-        internal static string deletingcardask {
+        public static string deletingcardask {
             get {
                 return ResourceManager.GetString("deletingcardask", resourceCulture);
             }
@@ -225,7 +225,7 @@ namespace Postwomen.Resources.Strings {
         /// <summary>
         ///   Looks up a localized string similar to Description.
         /// </summary>
-        internal static string description {
+        public static string description {
             get {
                 return ResourceManager.GetString("description", resourceCulture);
             }
@@ -234,7 +234,7 @@ namespace Postwomen.Resources.Strings {
         /// <summary>
         ///   Looks up a localized string similar to Edit Card.
         /// </summary>
-        internal static string editcard {
+        public static string editcard {
             get {
                 return ResourceManager.GetString("editcard", resourceCulture);
             }
@@ -243,7 +243,7 @@ namespace Postwomen.Resources.Strings {
         /// <summary>
         ///   Looks up a localized string similar to Empty.
         /// </summary>
-        internal static string empty {
+        public static string empty {
             get {
                 return ResourceManager.GetString("empty", resourceCulture);
             }
@@ -252,7 +252,7 @@ namespace Postwomen.Resources.Strings {
         /// <summary>
         ///   Looks up a localized string similar to Error.
         /// </summary>
-        internal static string error {
+        public static string error {
             get {
                 return ResourceManager.GetString("error", resourceCulture);
             }
@@ -261,7 +261,7 @@ namespace Postwomen.Resources.Strings {
         /// <summary>
         ///   Looks up a localized string similar to Fail.
         /// </summary>
-        internal static string fail {
+        public static string fail {
             get {
                 return ResourceManager.GetString("fail", resourceCulture);
             }
@@ -270,7 +270,7 @@ namespace Postwomen.Resources.Strings {
         /// <summary>
         ///   Looks up a localized string similar to (Fields with * are required.).
         /// </summary>
-        internal static string fieldsarerequired {
+        public static string fieldsarerequired {
             get {
                 return ResourceManager.GetString("fieldsarerequired", resourceCulture);
             }
@@ -279,7 +279,7 @@ namespace Postwomen.Resources.Strings {
         /// <summary>
         ///   Looks up a localized string similar to is not reachable!.
         /// </summary>
-        internal static string isnotreachable {
+        public static string isnotreachable {
             get {
                 return ResourceManager.GetString("isnotreachable", resourceCulture);
             }
@@ -288,7 +288,7 @@ namespace Postwomen.Resources.Strings {
         /// <summary>
         ///   Looks up a localized string similar to Logs.
         /// </summary>
-        internal static string logs {
+        public static string logs {
             get {
                 return ResourceManager.GetString("logs", resourceCulture);
             }
@@ -297,7 +297,7 @@ namespace Postwomen.Resources.Strings {
         /// <summary>
         ///   Looks up a localized string similar to Max Log Count.
         /// </summary>
-        internal static string maxlogcount {
+        public static string maxlogcount {
             get {
                 return ResourceManager.GetString("maxlogcount", resourceCulture);
             }
@@ -306,7 +306,7 @@ namespace Postwomen.Resources.Strings {
         /// <summary>
         ///   Looks up a localized string similar to Maybe no internet browser avaible on this device. Ex: .
         /// </summary>
-        internal static string maybenointernet {
+        public static string maybenointernet {
             get {
                 return ResourceManager.GetString("maybenointernet", resourceCulture);
             }
@@ -315,7 +315,7 @@ namespace Postwomen.Resources.Strings {
         /// <summary>
         ///   Looks up a localized string similar to New Card.
         /// </summary>
-        internal static string newcard {
+        public static string newcard {
             get {
                 return ResourceManager.GetString("newcard", resourceCulture);
             }
@@ -324,7 +324,7 @@ namespace Postwomen.Resources.Strings {
         /// <summary>
         ///   Looks up a localized string similar to No.
         /// </summary>
-        internal static string no {
+        public static string no {
             get {
                 return ResourceManager.GetString("no", resourceCulture);
             }
@@ -333,7 +333,7 @@ namespace Postwomen.Resources.Strings {
         /// <summary>
         ///   Looks up a localized string similar to No server card found..
         /// </summary>
-        internal static string noservercardfound {
+        public static string noservercardfound {
             get {
                 return ResourceManager.GetString("noservercardfound", resourceCulture);
             }
@@ -342,7 +342,7 @@ namespace Postwomen.Resources.Strings {
         /// <summary>
         ///   Looks up a localized string similar to Ok.
         /// </summary>
-        internal static string ok {
+        public static string ok {
             get {
                 return ResourceManager.GetString("ok", resourceCulture);
             }
@@ -351,7 +351,7 @@ namespace Postwomen.Resources.Strings {
         /// <summary>
         ///   Looks up a localized string similar to Open browser.
         /// </summary>
-        internal static string openbrowser {
+        public static string openbrowser {
             get {
                 return ResourceManager.GetString("openbrowser", resourceCulture);
             }
@@ -360,7 +360,7 @@ namespace Postwomen.Resources.Strings {
         /// <summary>
         ///   Looks up a localized string similar to Do you wanna go to.
         /// </summary>
-        internal static string openbrowserask {
+        public static string openbrowserask {
             get {
                 return ResourceManager.GetString("openbrowserask", resourceCulture);
             }
@@ -369,7 +369,7 @@ namespace Postwomen.Resources.Strings {
         /// <summary>
         ///   Looks up a localized string similar to Operation Result.
         /// </summary>
-        internal static string operationresult {
+        public static string operationresult {
             get {
                 return ResourceManager.GetString("operationresult", resourceCulture);
             }
@@ -378,7 +378,7 @@ namespace Postwomen.Resources.Strings {
         /// <summary>
         ///   Looks up a localized string similar to Please enter name for your card.
         /// </summary>
-        internal static string pleaseenternameforcard {
+        public static string pleaseenternameforcard {
             get {
                 return ResourceManager.GetString("pleaseenternameforcard", resourceCulture);
             }
@@ -387,7 +387,7 @@ namespace Postwomen.Resources.Strings {
         /// <summary>
         ///   Looks up a localized string similar to Please enter URL or IP for your card.
         /// </summary>
-        internal static string pleaseenterurlforcard {
+        public static string pleaseenterurlforcard {
             get {
                 return ResourceManager.GetString("pleaseenterurlforcard", resourceCulture);
             }
@@ -396,7 +396,7 @@ namespace Postwomen.Resources.Strings {
         /// <summary>
         ///   Looks up a localized string similar to Protocol:.
         /// </summary>
-        internal static string protocol {
+        public static string protocol {
             get {
                 return ResourceManager.GetString("protocol", resourceCulture);
             }
@@ -405,7 +405,7 @@ namespace Postwomen.Resources.Strings {
         /// <summary>
         ///   Looks up a localized string similar to Ready to Call.
         /// </summary>
-        internal static string readytocall {
+        public static string readytocall {
             get {
                 return ResourceManager.GetString("readytocall", resourceCulture);
             }
@@ -414,7 +414,7 @@ namespace Postwomen.Resources.Strings {
         /// <summary>
         ///   Looks up a localized string similar to Refreshing....
         /// </summary>
-        internal static string refreshing {
+        public static string refreshing {
             get {
                 return ResourceManager.GetString("refreshing", resourceCulture);
             }
@@ -423,7 +423,7 @@ namespace Postwomen.Resources.Strings {
         /// <summary>
         ///   Looks up a localized string similar to *Remote URL/IP.
         /// </summary>
-        internal static string remoteurlorip {
+        public static string remoteurlorip {
             get {
                 return ResourceManager.GetString("remoteurlorip", resourceCulture);
             }
@@ -432,7 +432,7 @@ namespace Postwomen.Resources.Strings {
         /// <summary>
         ///   Looks up a localized string similar to Reset Database.
         /// </summary>
-        internal static string resetdatabase {
+        public static string resetdatabase {
             get {
                 return ResourceManager.GetString("resetdatabase", resourceCulture);
             }
@@ -441,7 +441,7 @@ namespace Postwomen.Resources.Strings {
         /// <summary>
         ///   Looks up a localized string similar to Are you really want to reset your database?.
         /// </summary>
-        internal static string resetdatabaseask {
+        public static string resetdatabaseask {
             get {
                 return ResourceManager.GetString("resetdatabaseask", resourceCulture);
             }
@@ -450,7 +450,7 @@ namespace Postwomen.Resources.Strings {
         /// <summary>
         ///   Looks up a localized string similar to Reset Logs.
         /// </summary>
-        internal static string resetlogs {
+        public static string resetlogs {
             get {
                 return ResourceManager.GetString("resetlogs", resourceCulture);
             }
@@ -459,7 +459,7 @@ namespace Postwomen.Resources.Strings {
         /// <summary>
         ///   Looks up a localized string similar to Is card logs will be deleted?.
         /// </summary>
-        internal static string resetlogsask {
+        public static string resetlogsask {
             get {
                 return ResourceManager.GetString("resetlogsask", resourceCulture);
             }
@@ -468,7 +468,7 @@ namespace Postwomen.Resources.Strings {
         /// <summary>
         ///   Looks up a localized string similar to Reset Server Cards.
         /// </summary>
-        internal static string resetservercards {
+        public static string resetservercards {
             get {
                 return ResourceManager.GetString("resetservercards", resourceCulture);
             }
@@ -477,7 +477,7 @@ namespace Postwomen.Resources.Strings {
         /// <summary>
         ///   Looks up a localized string similar to Is server cards will be deleted?.
         /// </summary>
-        internal static string resetservercardsask {
+        public static string resetservercardsask {
             get {
                 return ResourceManager.GetString("resetservercardsask", resourceCulture);
             }
@@ -486,7 +486,7 @@ namespace Postwomen.Resources.Strings {
         /// <summary>
         ///   Looks up a localized string similar to Save.
         /// </summary>
-        internal static string save {
+        public static string save {
             get {
                 return ResourceManager.GetString("save", resourceCulture);
             }
@@ -495,7 +495,7 @@ namespace Postwomen.Resources.Strings {
         /// <summary>
         ///   Looks up a localized string similar to Selected Language.
         /// </summary>
-        internal static string selectedlanguage {
+        public static string selectedlanguage {
             get {
                 return ResourceManager.GetString("selectedlanguage", resourceCulture);
             }
@@ -504,7 +504,7 @@ namespace Postwomen.Resources.Strings {
         /// <summary>
         ///   Looks up a localized string similar to &apos;Send notifications on changes&apos; disabled.
         /// </summary>
-        internal static string sendnotifonchangesdisabled {
+        public static string sendnotifonchangesdisabled {
             get {
                 return ResourceManager.GetString("sendnotifonchangesdisabled", resourceCulture);
             }
@@ -513,7 +513,7 @@ namespace Postwomen.Resources.Strings {
         /// <summary>
         ///   Looks up a localized string similar to &apos;Send notifications on changes&apos; enabled.
         /// </summary>
-        internal static string sendnotifonchangesenabled {
+        public static string sendnotifonchangesenabled {
             get {
                 return ResourceManager.GetString("sendnotifonchangesenabled", resourceCulture);
             }
@@ -522,7 +522,7 @@ namespace Postwomen.Resources.Strings {
         /// <summary>
         ///   Looks up a localized string similar to Servers are not reachable!.
         /// </summary>
-        internal static string serversarenotreachable {
+        public static string serversarenotreachable {
             get {
                 return ResourceManager.GetString("serversarenotreachable", resourceCulture);
             }
@@ -531,7 +531,7 @@ namespace Postwomen.Resources.Strings {
         /// <summary>
         ///   Looks up a localized string similar to Set body:.
         /// </summary>
-        internal static string setbody {
+        public static string setbody {
             get {
                 return ResourceManager.GetString("setbody", resourceCulture);
             }
@@ -540,7 +540,7 @@ namespace Postwomen.Resources.Strings {
         /// <summary>
         ///   Looks up a localized string similar to Set headers:.
         /// </summary>
-        internal static string setheaders {
+        public static string setheaders {
             get {
                 return ResourceManager.GetString("setheaders", resourceCulture);
             }
@@ -549,7 +549,7 @@ namespace Postwomen.Resources.Strings {
         /// <summary>
         ///   Looks up a localized string similar to Set port for your card. Default is 443.
         /// </summary>
-        internal static string setportforyourcard {
+        public static string setportforyourcard {
             get {
                 return ResourceManager.GetString("setportforyourcard", resourceCulture);
             }
@@ -558,7 +558,7 @@ namespace Postwomen.Resources.Strings {
         /// <summary>
         ///   Looks up a localized string similar to Settings.
         /// </summary>
-        internal static string settings {
+        public static string settings {
             get {
                 return ResourceManager.GetString("settings", resourceCulture);
             }
@@ -567,7 +567,7 @@ namespace Postwomen.Resources.Strings {
         /// <summary>
         ///   Looks up a localized string similar to Success.
         /// </summary>
-        internal static string success {
+        public static string success {
             get {
                 return ResourceManager.GetString("success", resourceCulture);
             }
@@ -576,7 +576,7 @@ namespace Postwomen.Resources.Strings {
         /// <summary>
         ///   Looks up a localized string similar to &apos;Time scheduled checks&apos; disabled.
         /// </summary>
-        internal static string timechecksdisabled {
+        public static string timechecksdisabled {
             get {
                 return ResourceManager.GetString("timechecksdisabled", resourceCulture);
             }
@@ -585,7 +585,7 @@ namespace Postwomen.Resources.Strings {
         /// <summary>
         ///   Looks up a localized string similar to &apos;Time scheduled checks&apos; enabled.
         /// </summary>
-        internal static string timechecksenabled {
+        public static string timechecksenabled {
             get {
                 return ResourceManager.GetString("timechecksenabled", resourceCulture);
             }
@@ -594,7 +594,7 @@ namespace Postwomen.Resources.Strings {
         /// <summary>
         ///   Looks up a localized string similar to Waiting.
         /// </summary>
-        internal static string waiting {
+        public static string waiting {
             get {
                 return ResourceManager.GetString("waiting", resourceCulture);
             }
@@ -603,7 +603,7 @@ namespace Postwomen.Resources.Strings {
         /// <summary>
         ///   Looks up a localized string similar to Warning!.
         /// </summary>
-        internal static string warning {
+        public static string warning {
             get {
                 return ResourceManager.GetString("warning", resourceCulture);
             }
@@ -612,7 +612,7 @@ namespace Postwomen.Resources.Strings {
         /// <summary>
         ///   Looks up a localized string similar to Yes.
         /// </summary>
-        internal static string yes {
+        public static string yes {
             get {
                 return ResourceManager.GetString("yes", resourceCulture);
             }
@@ -621,9 +621,27 @@ namespace Postwomen.Resources.Strings {
         /// <summary>
         ///   Looks up a localized string similar to You can add a description for your card.
         /// </summary>
-        internal static string youcanadddescriptionforcard {
+        public static string youcanadddescriptionforcard {
             get {
                 return ResourceManager.GetString("youcanadddescriptionforcard", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You must specify a name for your card!.
+        /// </summary>
+        public static string youmustspecifyanameforyourcard {
+            get {
+                return ResourceManager.GetString("youmustspecifyanameforyourcard", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You must specify an Url or IP for your card!.
+        /// </summary>
+        public static string youmustspecifyanurloripforyourcard {
+            get {
+                return ResourceManager.GetString("youmustspecifyanurloripforyourcard", resourceCulture);
             }
         }
     }

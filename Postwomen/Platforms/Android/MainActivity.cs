@@ -7,40 +7,37 @@ using Postwomen.Platforms.Android;
 
 namespace Postwomen;
 
-[Activity(LaunchMode = LaunchMode.SingleInstance,Theme = "@style/Maui.SplashTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation | ConfigChanges.UiMode | ConfigChanges.ScreenLayout | ConfigChanges.SmallestScreenSize | ConfigChanges.Density)]
+[Activity(LaunchMode = LaunchMode.Multiple, Theme = "@style/Maui.SplashTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation | ConfigChanges.UiMode | ConfigChanges.ScreenLayout | ConfigChanges.SmallestScreenSize | ConfigChanges.Density)]
 public class MainActivity : MauiAppCompatActivity
 {
     public static Activity main_act;
-	public MainActivity()
-	{
+    public MainActivity()
+    {
         main_act = this;
-        var messenger = MauiApplication.Current.Services.GetService<IMessenger>();
-        messenger.Register<MessageData>(this, (recipient, message) =>
+        var messenger = MauiApplication.Current?.Services?.GetService<IMessenger>();
+        messenger?.Register<MessageData>(this, (recipient, message) =>
         {
-            Toast.MakeText(this, message.ToString(), ToastLength.Short).Show();
-            if (message.Start)
+            if (message.Message.Equals("user") || message.Message.Equals("boot"))
             {
-                StartService();
-            }
-            else
-            {
-                StopService();
+                if (message.Start)
+                    StartService(message.Message);
+                else
+                    StopService();
             }
         });
     }
 
-	public void StartService()
-	{
-		var serviceIntent = new Intent(this, typeof(MyNotificationService));
-		serviceIntent.PutExtra("inputExtra", "Background Service");
-		StartService(serviceIntent);
-        Toast.MakeText(this, "Service is started.", ToastLength.Short).Show();
+    public void StartService(string startedFrom)
+    {
+        var serviceIntent = new Intent(this, typeof(MyNotificationService));
+        serviceIntent.PutExtra("startedFrom", startedFrom);
+        StartService(serviceIntent);
     }
 
-	public void StopService()
-	{
-		var serviceIntent = new Intent(this, typeof(MyNotificationService));
-		StopService(serviceIntent);
-        Toast.MakeText(this, "Service is stopped.", ToastLength.Short).Show();
+    public void StopService()
+    {
+        var serviceIntent = new Intent(this, typeof(MyNotificationService));
+        StopService(serviceIntent);
+        Toast.MakeText(this, "Postwomen notification service is stopped.", ToastLength.Short).Show();
     }
 }
