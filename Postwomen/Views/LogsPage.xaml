@@ -1,16 +1,33 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns:strings="clr-namespace:Postwomen.Resources.Strings" xmlns="http://schemas.microsoft.com/dotnet/2021/maui" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="Postwomen.Views.LogsPage" xmlns:local="clr-namespace:Postwomen.Views" Title="Settings">
+<ContentPage xmlns:extensions="clr-namespace:Postwomen.Extensions" xmlns:strings="clr-namespace:Postwomen.Resources.Strings" xmlns="http://schemas.microsoft.com/dotnet/2021/maui" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="Postwomen.Views.LogsPage" xmlns:local="clr-namespace:Postwomen.Views" Title="Settings">
+
+	<ContentPage.Resources>
+		<Style TargetType="Grid">
+			<Setter Property="VisualStateManager.VisualStateGroups">
+				<VisualStateGroupList>
+					<VisualStateGroup x:Name="CommonStates">
+						<VisualState x:Name="Normal" />
+						<VisualState x:Name="Selected">
+							<VisualState.Setters>
+								<Setter Property="BackgroundColor" Value="LightGreen" />
+							</VisualState.Setters>
+						</VisualState>
+					</VisualStateGroup>
+				</VisualStateGroupList>
+			</Setter>
+		</Style>
+	</ContentPage.Resources>
 
 	<Shell.TitleView>
 		<Grid ColumnDefinitions="Auto,*">
 
-			<Label Text="{x:Static strings:AppResources.logs}" FontSize="20" FontAttributes="Bold" VerticalTextAlignment="Center" TextColor="White">
+			<Label Text="{extensions:Translate Key=logs}" FontSize="20" FontAttributes="Bold" VerticalTextAlignment="Center" TextColor="White">
 				<Label.Shadow>
 					<Shadow Brush="Black" Opacity=".5" />
 				</Label.Shadow>
 			</Label>
 
-			<Label Grid.Column="1" Margin="0,0,12,0" Text="{Binding DataCount,StringFormat='({0} log)'}" FontSize="20" FontAttributes="Bold" HorizontalTextAlignment="End" VerticalTextAlignment="Center" TextColor="White">
+			<Label Grid.Column="1" Margin="0,0,12,0" Text="{Binding LogCount,StringFormat='({0} log)'}" FontSize="20" FontAttributes="Bold" HorizontalTextAlignment="End" VerticalTextAlignment="Center" TextColor="White">
 				<Label.Shadow>
 					<Shadow Brush="Black" Opacity=".5" />
 				</Label.Shadow>
@@ -29,20 +46,23 @@
 	<Grid RowDefinitions="Auto,*">
 		<Image Grid.RowSpan="2" x:Name="backgroundImage" Source="white_background_vertical" IsVisible="{AppThemeBinding Light=True, Dark=False}" Aspect="Center" />
 
-		<Grid Grid.Row="0" ColumnDefinitions="Auto,*" BackgroundColor="Black">
-			<Label Grid.Column="0" Text="{x:Static strings:AppResources.dateandtime}" Margin="10,0,30,0" FontSize="16" TextColor="White"/>
-			<Label Grid.Column="1" Text="{x:Static strings:AppResources.description}" FontSize="16" TextColor="White" />
-		</Grid>
+		<StackLayout Orientation="Horizontal" Spacing="10" BackgroundColor="Black">
+			<Label Text="{extensions:Translate Key=dateandtime}" Margin="10,0,30,0" FontSize="16" TextColor="White" />
+			<Label Text="{extensions:Translate Key=description}" FontSize="16" TextColor="White" />
+		</StackLayout>
 
-		<CollectionView Grid.Row="1" ItemSizingStrategy="MeasureFirstItem" ItemsSource="{Binding Logs}" SelectionMode="Single" SelectionChanged="CollectionView_SelectionChanged">
+		<CollectionView Loaded="CollectionView_Loaded" Grid.Row="1" Margin="10,0,10,0" ItemSizingStrategy="MeasureFirstItem" ItemsSource="{Binding Logs}" SelectionMode="Single" SelectionChanged="CollectionView_SelectionChanged">
 			<CollectionView.ItemTemplate>
 				<DataTemplate>
-					<Border StrokeShape="Rectangle 0" Padding="0" Margin="-2" Stroke="Gray">
-						<Grid ColumnDefinitions="Auto,*">
-							<Label Grid.Column="0" Margin="10,0,10,0" Text="{Binding CreationDate,StringFormat='{}{0:dd.MM.yyyy HH:mm:ss}'}" />
-							<Label Grid.Column="1" Text="{Binding Description}" />
-						</Grid>
-					</Border>
+					<Grid>
+
+						<StackLayout Orientation="Horizontal" Spacing="5">
+
+							<Label FontAttributes="Bold" Text="{Binding Creation,StringFormat='{}{0:dd.MM.yyyy HH:mm:ss}'}" />
+							<Label FontAttributes="Italic" Text="{Binding Desc}" />
+						</StackLayout>
+
+					</Grid>
 				</DataTemplate>
 			</CollectionView.ItemTemplate>
 		</CollectionView>

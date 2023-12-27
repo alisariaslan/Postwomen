@@ -1,6 +1,8 @@
-﻿using Postwomen.Models;
-using Postwomen.Others;
+﻿using DesenMobileDatabase.Enums;
+using DesenMobileDatabase.Models;
+using Postwomen.Extensions;
 using Postwomen.Resources.Strings;
+using Postwomen.Services;
 
 namespace Postwomen.Views;
 
@@ -18,14 +20,14 @@ public partial class EditCardPage : ContentPage
         {
             RBSelectionValue_ = value;
             OnPropertyChanged(nameof(RBSelectionValue));
-            SelectedCard.TypeOfCall = Convert.ToInt32(value);
+            if (Enum.TryParse<RemoteCallTypes>(value, out var parsedEnum))
+                SelectedCard.TypeOfCall = parsedEnum;
         }
     }
     private int CardState_ { get; set; }
     public int CardState { get { return CardState_; } set { CardState_ = value; OnPropertyChanged(nameof(CardState)); } }
     public Command SaveCommand { get; set; }
     private ServerModel SelectedCard_ { get; set; }
-    private PostwomenDatabase MyPostwomenDatabase { get; set; }
 
     public Action BackAction
     {
@@ -48,37 +50,35 @@ public partial class EditCardPage : ContentPage
         }
     }
 
-    public EditCardPage(PostwomenDatabase postwomenDatabase)
+    private IDbService dbService;
+
+    public EditCardPage(IDbService dbService)
     {
         InitializeComponent();
-        MyPostwomenDatabase = postwomenDatabase;
-        BindingContext = this;
+        this.dbService = dbService;
         SaveCommand = new Command(SaveCard);
-        OnPropertyChanged(nameof(SaveCommand));
+        BindingContext = this;
     }
 
     private void InitCard()
     {
         if (CardState == 0 && SelectedCard == null)
         {
-            Title = AppResources.newcard;
+            Title = Translator.Instance["newcard"];
             SelectedCard_ = new ServerModel();
             return;
         }
         if (CardState == 1)
-            Title = AppResources.copycard;
+            Title = Translator.Instance["copycard"];
         else if (CardState == 2)
-            Title = AppResources.editcard;
+            Title = Translator.Instance["editcard"];
         OnPropertyChanged(nameof(Title));
 
         if (SelectedCard.IsAdvancedSettingsEnabled)
             advancedSwitch.IsToggled = true;
-
         RBSelectionValue = SelectedCard.TypeOfCall.ToString();
-
         if (SelectedCard.Port != 443 && SelectedCard.Port != 80)
             radiobutton_custom.IsChecked = true;
-
         OnPropertyChanged(nameof(SelectedCard));
     }
 
@@ -86,25 +86,28 @@ public partial class EditCardPage : ContentPage
     {
         try
         {
-            if (CardState == 1)
-                SelectedCard.Id = 0;
             if (string.IsNullOrEmpty(SelectedCard.Name.Trim()))
                 throw new Exception(AppResources.youmustspecifyanameforyourcard);
-                       if (string.IsNullOrEmpty(SelectedCard.Url.Trim()))
+            if (string.IsNullOrEmpty(SelectedCard.Url.Trim()))
                 throw new Exception(AppResources.youmustspecifyanurloripforyourcard);
-            await MyPostwomenDatabase.SaveServerCardAsync(SelectedCard);
+            SelectedCard.CurrentState = CheckStates.UNREACHABLE;
+            bool result = false;
+            if (CardState != 2)
+            {
+                SelectedCard.Id = 0;
+                result = dbService.InsertCard(SelectedCard);
+            }
+            else
+                 result = await dbService.UpdateCard(SelectedCard);
+            if (result is false)
+                throw new Exception("Insert/Update card malfunction occured!");
             await Shell.Current.Navigation.PopModalAsync();
             BackAction.Invoke();
         }
-        catch (Exception e)
+        catch (Exception ex)
         {
-            await App.Current.MainPage.DisplayAlert(AppResources.error, e.Message, AppResources.ok);
+            await App.Current.MainPage.DisplayAlert(Translator.Instance["errorOccured"], ex.Message, Translator.Instance["ok"]);
         }
-        finally
-        {
-
-        }
-
     }
 
     private void advancedSwitch_Toggled(object sender, ToggledEventArgs e)

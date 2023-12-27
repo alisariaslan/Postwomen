@@ -1,41 +1,45 @@
-﻿using CommunityToolkit.Mvvm.Messaging;
+﻿using DesenMobileDatabase;
+using DesenMobileDatabase.Enums;
+using DesenMobileDatabase.Models;
+using Postwomen.Extensions;
+using Postwomen.Services;
 using System.Globalization;
 
 namespace Postwomen;
 
 public partial class App : Application
 {
-    public App()
+    public App(MobileDB mobileDB,IDbService dbService)
     {
+
+        #region DB
+        mobileDB.Init();
+        Task.Run(mobileDB.InitAsync);
+
+        dbService.InsertLog(new LogsModel(LogsTypeEnum.AppLaunch,"App started."));
+        #endregion
+
         #region THEME
-        var style = Preferences.Get("Style", Application.Current.PlatformAppTheme.ToString());
-        if (style.Equals(AppTheme.Dark.ToString()))
-            Application.Current.UserAppTheme = AppTheme.Dark;
-        else
-            Application.Current.UserAppTheme = AppTheme.Light;
+        Application.Current.UserAppTheme = AppTheme.Light;
         #endregion
 
         #region LANGUAGE
-        var culture = Preferences.Get("Language", CultureInfo.CurrentCulture.TwoLetterISOLanguageName);
-        if (culture.Equals("tr", StringComparison.OrdinalIgnoreCase))
-            CultureInfo.CurrentUICulture = new CultureInfo("tr-TR");
+        var original = CultureInfo.CurrentCulture.TwoLetterISOLanguageName;
+        var culture = Preferences.Get(nameof(CultureInfo), string.Empty);
+        if (string.IsNullOrEmpty(culture) && original.Equals("tr"))
+        {
+            culture = "tr-TR";
+            Preferences.Set(nameof(CultureInfo), culture);
+        }
+
+        if (culture.Equals("tr-TR", StringComparison.OrdinalIgnoreCase))
+            Translator.Instance.CultureInfo = new CultureInfo("tr-TR");
         else
-            CultureInfo.CurrentUICulture = new CultureInfo("en-US");
+            Translator.Instance.CultureInfo = new CultureInfo("en-US");
         #endregion
 
         InitializeComponent();
         MainPage = new AppShell();
-    }
-
-    protected override void OnStart()
-    {
-        base.OnStart();
-
-//#if ANDROID
-//        if (!Postwomen.Platforms.Android.AndroidServiceManager.IsRunning)
-//			Postwomen.Platforms.Android.AndroidServiceManager.StartMyService();
-//#endif
-
     }
 
 }

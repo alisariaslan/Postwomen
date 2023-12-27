@@ -165,6 +165,9 @@
   <data name="delayafternotification" xml:space="preserve">
     <value>Bildirim sonrası gecikme:</value>
   </data>
+  <data name="deletedCount" xml:space="preserve">
+    <value>Silinen sayısı</value>
+  </data>
   <data name="deletingcard" xml:space="preserve">
     <value>Kart siliniyor</value>
   </data>
@@ -180,8 +183,8 @@
   <data name="empty" xml:space="preserve">
     <value>Boş</value>
   </data>
-  <data name="error" xml:space="preserve">
-    <value>Hata</value>
+  <data name="errorOccured" xml:space="preserve">
+    <value>Hata oluştu</value>
   </data>
   <data name="fail" xml:space="preserve">
     <value>Başarısız</value>
@@ -232,10 +235,10 @@
     <value>Protokol:</value>
   </data>
   <data name="readytocall" xml:space="preserve">
-    <value>Çağırmaya hazır</value>
+    <value>Çağırmaya hazır.</value>
   </data>
   <data name="refreshing" xml:space="preserve">
-    <value>Yenileniyor...</value>
+    <value>Çağırılıyor...</value>
   </data>
   <data name="remoteurlorip" xml:space="preserve">
     <value>*Uzak Url/Ip</value>
@@ -295,7 +298,7 @@
     <value>'Zaman ayarlı kontrol' aktif</value>
   </data>
   <data name="waiting" xml:space="preserve">
-    <value>Bekliyor</value>
+    <value>Çağrılıyor</value>
   </data>
   <data name="warning" xml:space="preserve">
     <value>Uyarı!</value>

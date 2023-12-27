@@ -1,39 +1,51 @@
-﻿using Postwomen.Models;
-using Postwomen.Others;
-using Postwomen.Resources.Strings;
+﻿using DesenMobileDatabase.Models;
+using Postwomen.Extensions;
+using Postwomen.Services;
 using System.Collections.ObjectModel;
 
 namespace Postwomen.Views;
 
 public partial class LogsPage : ContentPage
 {
-    public string DataCount { get; set; } = "0";
+    private int LogCount_ { get; set; }
+    public int LogCount { get { return LogCount_; } set { LogCount_ = value; OnPropertyChanged(nameof(LogCount)); } }
 
-    public ObservableCollection<LogModel> Logs { get; set; } //NULL İKEN DATA ÇAĞIRIR,
+    public ObservableCollection<LogsModel> Logs { get; set; } //NULL İKEN DATA ÇAĞIRIR,
 
-    public LogsPage(PostwomenDatabase postwomenDatabase)
+    private IDbService dbService { get; set; }
+
+    public LogsPage(IDbService dbService)
     {
         InitializeComponent();
-        Logs = new ObservableCollection<LogModel>();
+
+        this.dbService = dbService;
+
+        Logs = new ObservableCollection<LogsModel>();
+
         this.BindingContext = this;
-        Load(postwomenDatabase);
     }
 
-    private async void Load(PostwomenDatabase postwomenDatabase)
+    private async void RefreshLogs()
     {
-        var logs = await postwomenDatabase.GetItemsAsync<LogModel>();
-        foreach (var item in logs.OrderByDescending(u => u.CreationDate))
-            Logs.Add(item);
-        DataCount = logs.Count.ToString();
-        OnPropertyChanged(nameof(Logs));
-        OnPropertyChanged(nameof(DataCount));
+        await Task.Delay(1000);
+        await Task.Run(async () =>
+        {
+            var logs = await dbService.GetLogs();
+            LogCount = logs.Count;
+            logs = logs.OrderByDescending(x => x.Creation).ToList();
+            logs.ForEach(Logs.Add);
+        });
     }
 
     private async void CollectionView_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
-        var log = (LogModel)e.CurrentSelection.FirstOrDefault();
+        var log = (LogsModel)e.CurrentSelection.FirstOrDefault();
+        await App.Current.MainPage.DisplayAlert(log.Creation.ToString("dd.MM.yyyy - HH:mm:ss"), log.Desc, Translator.Instance["ok"]);
+    }
 
-        await App.Current.MainPage.DisplayAlert(log.CreationDate.ToString("dd.MM.yyyy - HH:mm:ss"), log.Description, AppResources.ok);
+    private void CollectionView_Loaded(object sender, EventArgs e)
+    {
+        RefreshLogs();
     }
 }
 

@@ -205,6 +205,15 @@ namespace Postwomen.Resources.Strings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Deleted count.
+        /// </summary>
+        public static string deletedCount {
+            get {
+                return ResourceManager.GetString("deletedCount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Deleting card.
         /// </summary>
         public static string deletingcard {
@@ -250,11 +259,11 @@ namespace Postwomen.Resources.Strings {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Error.
+        ///   Looks up a localized string similar to Error occured.
         /// </summary>
-        public static string error {
+        public static string errorOccured {
             get {
-                return ResourceManager.GetString("error", resourceCulture);
+                return ResourceManager.GetString("errorOccured", resourceCulture);
             }
         }
         
@@ -403,7 +412,7 @@ namespace Postwomen.Resources.Strings {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Ready to Call.
+        ///   Looks up a localized string similar to Ready to call..
         /// </summary>
         public static string readytocall {
             get {
@@ -412,7 +421,7 @@ namespace Postwomen.Resources.Strings {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Refreshing....
+        ///   Looks up a localized string similar to Calling....
         /// </summary>
         public static string refreshing {
             get {
@@ -592,7 +601,7 @@ namespace Postwomen.Resources.Strings {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Waiting.
+        ///   Looks up a localized string similar to Calling.
         /// </summary>
         public static string waiting {
             get {

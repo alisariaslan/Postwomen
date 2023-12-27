@@ -5,6 +5,5 @@
 	<ShellContent Title="Edit card" ContentTemplate="{DataTemplate local:EditCardPage}" Route="EditCardPage" />
 	<ShellContent Title="Settings" ContentTemplate="{DataTemplate local:SettingsPage}" Route="SettingsPage" />
 	<ShellContent Title="Settings" ContentTemplate="{DataTemplate local:LogsPage}" Route="LogsPage" />
-	<ShellContent Title="ServiceTestPage" ContentTemplate="{DataTemplate local:ServiceTestPage}" Route="ServiceTestPage" />
-	
+
 </Shell>

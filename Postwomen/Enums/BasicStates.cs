@@ -31,9 +31,4 @@ public class OperationStatesLangConverter
     }
 }
 
-public enum CheckStates
-{
-	UNREACHABLE,
-	REACHABLE
-}
 

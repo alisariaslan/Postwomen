@@ -165,6 +165,9 @@
   <data name="delayafternotification" xml:space="preserve">
     <value>Delay After Notification:</value>
   </data>
+  <data name="deletedCount" xml:space="preserve">
+    <value>Deleted count</value>
+  </data>
   <data name="deletingcard" xml:space="preserve">
     <value>Deleting card</value>
   </data>
@@ -180,8 +183,8 @@
   <data name="empty" xml:space="preserve">
     <value>Empty</value>
   </data>
-  <data name="error" xml:space="preserve">
-    <value>Error</value>
+  <data name="errorOccured" xml:space="preserve">
+    <value>Error occured</value>
   </data>
   <data name="fail" xml:space="preserve">
     <value>Fail</value>
@@ -232,10 +235,10 @@
     <value>Protocol:</value>
   </data>
   <data name="readytocall" xml:space="preserve">
-    <value>Ready to Call</value>
+    <value>Ready to call.</value>
   </data>
   <data name="refreshing" xml:space="preserve">
-    <value>Refreshing...</value>
+    <value>Calling...</value>
   </data>
   <data name="remoteurlorip" xml:space="preserve">
     <value>*Remote URL/IP</value>
@@ -295,7 +298,7 @@
     <value>'Time scheduled checks' enabled</value>
   </data>
   <data name="waiting" xml:space="preserve">
-    <value>Waiting</value>
+    <value>Calling</value>
   </data>
   <data name="warning" xml:space="preserve">
     <value>Warning!</value>

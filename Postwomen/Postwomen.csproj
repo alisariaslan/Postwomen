@@ -1,8 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFrameworks>net7.0-android;net7.0-ios;net7.0-maccatalyst</TargetFrameworks>
-		<TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net7.0-windows10.0.19041.0</TargetFrameworks>
+		<TargetFrameworks>net8.0-android;net8.0-ios;net8.0-maccatalyst</TargetFrameworks>
+		<TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net8.0-windows10.0.19041.0</TargetFrameworks>
 		<!-- Uncomment to also build the tizen app. You will need to install tizen by following this: https://github.com/Samsung/Tizen.NET -->
 		<!-- <TargetFrameworks>$(TargetFrameworks);net7.0-tizen</TargetFrameworks> -->
 		<OutputType>Exe</OutputType>
@@ -60,18 +60,23 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="CommunityToolkit.Maui" Version="5.2.0" />
-		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.1" />
+		<PackageReference Include="Microsoft.Maui.Controls" Version="8.0.3" />
+		<PackageReference Include="CommunityToolkit.Maui" Version="7.0.1" />
+		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />
 		<PackageReference Include="Microsoft.AspNet.SignalR.Client" Version="2.4.3" />
-		<PackageReference Include="Microsoft.AspNetCore.SignalR.Client.Core" Version="7.0.10" />
-		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="7.0.0" />
+		<PackageReference Include="Microsoft.AspNetCore.SignalR.Client.Core" Version="8.0.0" />
+		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0" />
 		<PackageReference Include="Refit" Version="7.0.0" />
 		<PackageReference Include="Refit.HttpClientFactory" Version="7.0.0" />
 		<PackageReference Include="sqlite-net-pcl" Version="1.8.116" />
-		<PackageReference Include="SQLitePCLRaw.provider.dynamic_cdecl" Version="2.1.6" />
+		<PackageReference Include="SQLitePCLRaw.provider.dynamic_cdecl" Version="2.1.7" />
 		<PackageReference Include="System.Linq" Version="4.3.0" />
 		<PackageReference Include="System.Linq.Expressions" Version="4.3.0" />
 		<PackageReference Include="System.Linq.Queryable" Version="4.3.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\..\DesenMaui\MauiContainer\DesenMobileDatabase\PostwomenDB.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -79,9 +84,6 @@
 	    <DesignTime>True</DesignTime>
 	    <AutoGen>True</AutoGen>
 	    <DependentUpon>AppResources.resx</DependentUpon>
-	  </Compile>
-	  <Compile Update="Views\ServiceTestPage.xaml.cs">
-	    <DependentUpon>ServiceTestPage.xaml</DependentUpon>
 	  </Compile>
 	</ItemGroup>
 
@@ -96,11 +98,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiXaml Update="Views\ServiceTestPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
+	  <Folder Include="Models\" />
 	</ItemGroup>
-
-	<ProjectExtensions><VisualStudio><UserProperties XamarinHotReloadGenericExceptionInfoBarPostwomenHideInfoBar="True" XamarinHotReloadWrongLinkerErrorInfoBarPostwomenHideInfoBar="True" /></VisualStudio></ProjectExtensions>
 
 </Project>

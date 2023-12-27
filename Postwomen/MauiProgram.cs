@@ -1,12 +1,11 @@
 ﻿using CommunityToolkit.Maui;
-using CommunityToolkit.Mvvm.Messaging;
 using Microsoft.Extensions.Logging;
 using Postwomen.Handlers;
 using Postwomen.Interfaces;
-using Postwomen.Others;
-using Postwomen.ViewModels;
 using Postwomen.Views;
 using Refit;
+using DesenMobileDatabase;
+using Postwomen.Services;
 
 namespace Postwomen;
 
@@ -30,19 +29,14 @@ public static class MauiProgram
 #if DEBUG
 		builder.Logging.AddDebug();
 #endif
-        builder.Services.AddSingleton<IMessenger, WeakReferenceMessenger>();
-        builder.Services.AddSingleton<PostwomenDatabase>();
-		builder.Services.AddSingleton<MainPage>();
-		builder.Services.AddSingleton<MainViewModel>();
 
+		builder.Services.AddSingleton<MobileDB>();
+        builder.Services.AddTransient<IDbService,DbService>();
+
+        builder.Services.AddSingleton<MainPage>();
 		builder.Services.AddTransient<EditCardPage>();
-        builder.Services.AddTransient<LogsPage>();
-
         builder.Services.AddTransient<SettingsPage>();
-        builder.Services.AddTransient<SettingsViewModel>();
-
-
-        builder.Services.AddTransient<ServiceTestPage>();
+        builder.Services.AddTransient<LogsPage>();
 
         return builder.Build();
 	}
