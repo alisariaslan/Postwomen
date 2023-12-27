@@ -5,3 +5,4 @@ public enum SettingsTypeEnum
     Language,
     Theme
 }
+

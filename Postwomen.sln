@@ -5,7 +5,7 @@ VisualStudioVersion = 17.0.31611.283
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Postwomen", "Postwomen\Postwomen.csproj", "{3FB83EA3-8D02-4E53-8EDB-763812A2842E}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PostwomenDB", "..\DesenMaui\MauiContainer\DesenMobileDatabase\PostwomenDB.csproj", "{0CA555B6-7D5C-41E7-A426-93FB233CCE24}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PostwomenDB", "DesenMobileDatabase\PostwomenDB.csproj", "{8CF55B98-706E-4D56-85F0-25990EC8E247}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,10 +19,10 @@ Global
 		{3FB83EA3-8D02-4E53-8EDB-763812A2842E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3FB83EA3-8D02-4E53-8EDB-763812A2842E}.Release|Any CPU.Build.0 = Release|Any CPU
 		{3FB83EA3-8D02-4E53-8EDB-763812A2842E}.Release|Any CPU.Deploy.0 = Release|Any CPU
-		{0CA555B6-7D5C-41E7-A426-93FB233CCE24}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0CA555B6-7D5C-41E7-A426-93FB233CCE24}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0CA555B6-7D5C-41E7-A426-93FB233CCE24}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0CA555B6-7D5C-41E7-A426-93FB233CCE24}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8CF55B98-706E-4D56-85F0-25990EC8E247}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8CF55B98-706E-4D56-85F0-25990EC8E247}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8CF55B98-706E-4D56-85F0-25990EC8E247}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8CF55B98-706E-4D56-85F0-25990EC8E247}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

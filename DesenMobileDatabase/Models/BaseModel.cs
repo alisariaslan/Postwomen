@@ -1,8 +1,9 @@
 ﻿using SQLite;
+using System.ComponentModel;
 
 namespace DesenMobileDatabase.Models;
 
-public class BaseModel
+public class BaseModel : INotifyPropertyChanged
 {
     [PrimaryKey, AutoIncrement, Column("_id")]
     public int Id { get; set; }
@@ -14,13 +15,19 @@ public class BaseModel
 
     public DateTime LastUpdate { get; set; }
 
+    public event PropertyChangedEventHandler PropertyChanged;
+
     public BaseModel()
 	{
-        Creation = DateTime.UtcNow;
-        LastUpdate = DateTime.UtcNow;
+        Creation = DateTime.Now;
+        LastUpdate = DateTime.Now;
     }
 
-    public void Update() => LastUpdate = DateTime.UtcNow;
-        
+    public void Updated()
+    {
+        LastUpdate = DateTime.Now;
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(null));
+    }
+
 }
 

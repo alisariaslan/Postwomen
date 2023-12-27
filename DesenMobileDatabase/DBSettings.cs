@@ -2,9 +2,9 @@
 
 public class DBSettings
 {
-    private const int DB_Version = 4;
+    private const int DB_Version = 5;
 
-    private const string DB_Extension = ".yemekpos";
+    private const string DB_Extension = ".desen";
 
     private const string DB_Name = "storage";
 

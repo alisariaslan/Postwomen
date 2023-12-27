@@ -1,5 +1,4 @@
-﻿using System.Globalization;
-using DesenMobileDatabase.Enums;
+﻿using DesenMobileDatabase.Enums;
 using DesenMobileDatabase.Models;
 using SQLite;
 
@@ -12,7 +11,6 @@ public class MobileDB
 
     public MobileDB()
     {
-
     }
 
     public void Init()
@@ -24,12 +22,17 @@ public class MobileDB
 
         var settings_result = sQLiteConnection.CreateTable<SettingsModel>();
         var logs_result = sQLiteConnection.CreateTable<LogsModel>();
-        var users_result = sQLiteConnection.CreateTable<SavedUserModel>();
+        var cards_result = sQLiteConnection.CreateTable<ServerModel>();
 
-        if (settings_result.Equals(CreateTableResult.Created))
+        if (logs_result.Equals(CreateTableResult.Created))
         {
-            InsertItem(new SettingsModel(SettingsTypeEnum.Language, CultureInfo.CurrentCulture.TwoLetterISOLanguageName));
-            InsertItem(new SettingsModel(SettingsTypeEnum.Theme, Application.Current.UserAppTheme.ToString()));
+            InsertItem(new LogsModel(LogsTypeEnum.FirstLaunch,"App launched for first time."));
+        }
+
+        if (cards_result.Equals(CreateTableResult.Created))
+        {
+            InsertItem(new ServerModel("Localhost", "localhost", "Example card", RemoteCallTypes.Ping));
+            InsertItem(new ServerModel("Google", "google.com", "Example card", RemoteCallTypes.Ping));
         }
     }
 
@@ -47,6 +50,11 @@ public class MobileDB
         return await sQLiteAsyncConnection.Table<T>().ToListAsync();
     }
 
+    public async Task<int> GetItemCountAsync<T>() where T : new()
+    {
+        return await sQLiteAsyncConnection.Table<T>().CountAsync();
+    }
+
     public async Task<int> InsertItemAsync<T>(T item) where T : new()
     {
         return await sQLiteAsyncConnection.InsertAsync(item);
@@ -61,12 +69,32 @@ public class MobileDB
     {
         return await sQLiteAsyncConnection.DeleteAsync(item);
     }
+
+    public async Task<int> ClearItemsAsync<T>(T model) where T : new()
+    {
+        return await sQLiteAsyncConnection.DeleteAllAsync<T>();
+    }
     #endregion
 
     #region CRUD - SYNC
+    public T GetFirstItem<T>() where T : new()
+    {
+        return sQLiteConnection.Table<T>().FirstOrDefault();
+    }
+
+    public T GetLastItem<T>() where T : new()
+    {
+        return sQLiteConnection.Table<T>().LastOrDefault();
+    }
+
     public List<T> GetItems<T>() where T : new()
     {
         return sQLiteConnection.Table<T>().ToList();
+    }
+
+    public int GetItemCount<T>() where T : new()
+    {
+        return sQLiteConnection.Table<T>().Count();
     }
 
     public int InsertItem<T>(T item) where T : new()
@@ -82,6 +110,16 @@ public class MobileDB
     public int DeleteItem<T>(T item) where T : new()
     {
         return sQLiteConnection.Delete(item);
+    }
+
+    public int DeleteFirstItem<T>(T item) where T : new()
+    {
+        return sQLiteConnection.Delete(GetFirstItem<T>());
+    }
+
+    public int DeleteLastItem<T>(T item) where T : new()
+    {
+        return sQLiteConnection.Delete(GetLastItem<T>());
     }
     #endregion
 

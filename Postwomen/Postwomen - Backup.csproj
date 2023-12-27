@@ -94,7 +94,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\DesenMobileDatabase\PostwomenDB.csproj" />
+	  <Folder Include="Models\" />
 	</ItemGroup>
 
 </Project>

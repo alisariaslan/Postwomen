@@ -15,10 +15,9 @@ public class LogsModel : BaseModel
 
     }
 
-    public LogsModel(LogsTypeEnum type,object desc)
+    public LogsModel(LogsTypeEnum type, string desc = "")
     {
         this.Type = type;
-        this.Desc = desc?.ToString();
+        this.Desc = desc;
     }
 }
-
