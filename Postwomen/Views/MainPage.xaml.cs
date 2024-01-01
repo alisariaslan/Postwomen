@@ -2,6 +2,7 @@
 using DesenMobileDatabase.Models;
 using Postwomen.Extensions;
 using Postwomen.Helpers;
+using Postwomen.Interfaces;
 using Postwomen.Services;
 using System.Collections.ObjectModel;
 
@@ -24,11 +25,12 @@ public partial class MainPage : ContentPage
     public Command SettingsCommand { get; set; }
     private bool IsRefreshing_ { get; set; }
     public bool IsRefreshing { get => IsRefreshing_; set { IsRefreshing_ = value; OnPropertyChanged(nameof(IsRefreshing)); } }
-
-    public MainPage(IDbService dbService)
+    private IMainApi MainApi { get; set; }
+    public MainPage(IDbService dbService, IMainApi mainApi)
     {
         InitializeComponent();
         this.dbService = dbService;
+        this.MainApi = mainApi;
         ServerCards = new ObservableCollection<ServerModel>();
         RefreshCommand = new Command(execute: RefreshCards);
         RefreshCardCommand = new Command<int>(execute: RefreshCard);
@@ -36,14 +38,28 @@ public partial class MainPage : ContentPage
         CopyCardCommand = new Command<int>(execute: CopyCardFunc);
         DeleteCardCommand = new Command<int>(execute: DeleteCardFunc);
         CreateNewCardCommand = new Command<string>(execute: CreateNewCardFunc);
-        GoToWebCommand = new Command<int>(execute: GoToWebFunc);
+        GoToWebCommand = new Command<string>(execute: GoToWebFunc);
         SettingsCommand = new Command(GoToSettingsFunc);
         LogsCommand = new Command(GoToLogsFunc);
         this.BindingContext = this;
     }
 
+    private async void StartVersionControl()
+    {
+        await Task.Run(async () =>
+        {
+            var response = await MainApi.GetLatestAppVersion(AppInfo.Current.Name, CancellationToken.None);
+            if (AppInfo.Current.Version.Major < response?.Data?.AndroidVersion)
+            {
+
+            }
+        });
+    }
+
     async void CollectionView_Loaded(object sender, EventArgs e)
     {
+        StartVersionControl();
+
         RefreshCards();
         refreshButton.IsEnabled = false;
         while (IsRefreshing)
@@ -117,7 +133,8 @@ public partial class MainPage : ContentPage
                 model.CurrentState = CheckStates.UNREACHABLE;
             }
             model.Updated();
-        } else
+        }
+        else
         {
             dbService.InsertLog(new LogsModel(LogsTypeEnum.General, $"{model.Name}: Card is already refreshing..."));
         }
@@ -135,12 +152,14 @@ public partial class MainPage : ContentPage
     {
         await Shell.Current.GoToAsync($"LogsPage");
     }
-    private async void GoToWebFunc(int param)
+    private async void GoToWebFunc(string param)
     {
-        var card = ServerCards.FirstOrDefault(c => c.Id.Equals(param));
-        var newUri = card.TypeOfCall is RemoteCallTypes.Ping ? "http://"+card.Url : card.Url;
+        string newUri = string.Empty;
+        if (param.Contains("http") is false)
+            newUri = "http://" + param;
+        else newUri = param;
 
-        bool yes = await App.Current.MainPage.DisplayAlert(Translator.Instance["openbrowser"], $"{Translator.Instance["openbrowserask"]} {card.Name} ?", Translator.Instance["yes"], Translator.Instance["no"]);
+        bool yes = await App.Current.MainPage.DisplayAlert(Translator.Instance["openbrowser"], $"{Translator.Instance["openbrowserask"]} {param} ?", Translator.Instance["yes"], Translator.Instance["no"]);
         if (yes)
         {
             try

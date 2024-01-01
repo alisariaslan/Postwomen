@@ -24,13 +24,21 @@ public static class MauiProgram
 				fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
 			});
 
-		builder.Services.AddRefitClient<IApi>().ConfigurePrimaryHttpMessageHandler(() => new HttpLoggingHandler());
-
 #if DEBUG
 		builder.Logging.AddDebug();
 #endif
 
-		builder.Services.AddSingleton<MobileDB>();
+        builder.Services.AddRefitClient<IMainApi>().ConfigureHttpClient(c =>
+        {
+            c.Timeout = TimeSpan.FromSeconds(30);
+#if DEBUG
+            c.BaseAddress = new Uri("http://10.0.2.2:5000");
+#else
+			c.BaseAddress = new Uri("http://asprojects.duckdns.org:5000");
+#endif
+        }).ConfigurePrimaryHttpMessageHandler(() => new HttpLoggingHandler());
+
+        builder.Services.AddSingleton<MobileDB>();
         builder.Services.AddTransient<IDbService,DbService>();
 
         builder.Services.AddSingleton<MainPage>();

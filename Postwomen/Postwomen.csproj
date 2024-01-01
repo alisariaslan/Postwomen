@@ -13,7 +13,7 @@
 		<!-- Display name -->
 		<ApplicationTitle>Postwomen</ApplicationTitle>
 		<!-- App Identifier -->
-		<ApplicationId>com.sarsyazilim.postwomen</ApplicationId>
+		<ApplicationId>com.asprojects.postwomen</ApplicationId>
 		<ApplicationIdGuid>ecda6521-185b-4bc3-8347-3e4d92ce0d54</ApplicationIdGuid>
 		<!-- Versions -->
 		<ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>

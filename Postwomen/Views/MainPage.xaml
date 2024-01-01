@@ -50,6 +50,7 @@
 
 	<Grid>
 		<Image x:Name="backgroundImage" Source="background_vertical_light"  Aspect="Center" />
+		
 		<Grid ColumnDefinitions=".05*,.9*,.05*">
 			<CollectionView Grid.Column="1" Loaded="CollectionView_Loaded" ItemsSource="{Binding ServerCards}" SelectionMode="None" ItemsLayout="{Binding ItemsLayout}">
 				<CollectionView.ItemTemplate>
@@ -76,7 +77,7 @@
 										<Grid ColumnDefinitions=".8*,.2*">
 											<Border Grid.Column="0" StrokeShape="RoundRectangle 6" Stroke="Black" BackgroundColor="Black" WidthRequest="180" HorizontalOptions="Start" Padding="2" Margin="3,0,0,3">
 												<HorizontalStackLayout Spacing="10" HorizontalOptions="Center">
-													<ImageButton Source="browser.png" WidthRequest="25" HeightRequest="25" VerticalOptions="Center" Command="{Binding Source={RelativeSource AncestorType={x:Type views:MainPage}}, Path=GoToWebCommand}" CommandParameter="{Binding Id}" />
+													<ImageButton Source="browser.png" WidthRequest="25" HeightRequest="25" VerticalOptions="Center" Command="{Binding Source={RelativeSource AncestorType={x:Type views:MainPage}}, Path=GoToWebCommand}" CommandParameter="{Binding Url}" />
 													<ImageButton Source="copy.png" WidthRequest="25" HeightRequest="25" VerticalOptions="Center" Command="{Binding Source={RelativeSource AncestorType={x:Type views:MainPage}}, Path=CopyCardCommand}" CommandParameter="{Binding Id}" />
 													<ImageButton Source="wrench.png" WidthRequest="25" HeightRequest="25" VerticalOptions="Center" Command="{Binding Source={RelativeSource AncestorType={x:Type views:MainPage}}, Path=EditCardCommand}" CommandParameter="{Binding Id}" />
 													<ImageButton Source="delete.png" WidthRequest="25" HeightRequest="25" VerticalOptions="Center" Command="{Binding Source={RelativeSource AncestorType={x:Type views:MainPage}}, Path=DeleteCardCommand}" CommandParameter="{Binding Id}" />
@@ -147,5 +148,20 @@
 				</ImageButton.Shadow>
 			</ImageButton>
 		</Border>
+
+		<Grid x:Name="grid_version" IsVisible="False" RowDefinitions=".2*,.6*,.2*" ColumnDefinitions=".2*,.6*,.2*">
+			<Border Grid.Column="1" Grid.Row="1" HorizontalOptions="Center" VerticalOptions="Center" Padding="30" StrokeShape="RoundRectangle 12">
+				<Border.Shadow>
+					<Shadow Brush="Black" />
+				</Border.Shadow>
+				<Grid>
+					<VerticalStackLayout Spacing="20">
+						<Label FontSize="Title" Text="New version found!" />
+						<Button Text="Ok" />
+					</VerticalStackLayout>
+				</Grid>
+			</Border>
+		</Grid>
+		
 	</Grid>
 </ContentPage>
