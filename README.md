@@ -1,5 +1,6 @@
 # Postwomen
-Postwomen is a free and open source api test program.
+Postwomen is a free and open source api test app.
+It has been built with MAUI and has support for cross-platforms.
 
 ![image](https://github.com/alisariaslan/Postwomen/assets/36519570/a143820f-ffda-465a-a1fd-6b54cab685e8)
 ![image](https://github.com/alisariaslan/Postwomen/assets/36519570/c489fc24-8ce3-46d3-b50b-71b518857be1)
