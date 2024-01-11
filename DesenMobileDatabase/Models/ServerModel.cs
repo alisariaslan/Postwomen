@@ -25,6 +25,11 @@ public class ServerModel : BaseModel
 
 	public CheckStates CurrentState { get; set; } = CheckStates.UNREACHABLE;
 
+	public bool AutoCheck { get; set; } = true;
+
+	[Ignore]
+	public Command SaveCardCommand { get; set; }
+
 	public ServerModel()
 	{ }
 

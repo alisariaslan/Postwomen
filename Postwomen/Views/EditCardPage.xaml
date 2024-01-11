@@ -3,20 +3,17 @@
 
 	<Shell.TitleView>
 		<Grid ColumnDefinitions="Auto">
-
-			<Label Text="{Binding Title}" FontSize="20" FontAttributes="Bold" VerticalTextAlignment="Center" TextColor="White">
+			<Label Text="{Binding Title}" FontSize="20" FontAttributes="Bold" VerticalTextAlignment="Center" TextColor="White" Margin="{OnPlatform Android=0,WinUI='15,0,0,0'}">
 				<Label.Shadow>
 					<Shadow Brush="Black" Opacity=".5" />
 				</Label.Shadow>
 			</Label>
-
 			<Grid.Background>
 				<LinearGradientBrush EndPoint="1,0">
 					<GradientStop Color="{StaticResource Gradi1}" Offset="0.1" />
 					<GradientStop Color="{StaticResource Gradi2}" Offset="1.0" />
 				</LinearGradientBrush>
 			</Grid.Background>
-
 		</Grid>
 	</Shell.TitleView>
 
@@ -25,21 +22,21 @@
 		<ScrollView>
 			<VerticalStackLayout Padding="15" Spacing="10">
 
-				<Label Text="{extensions:Translate Key=fieldsarerequired}" FontSize="14" Opacity=".5" Margin="10" HorizontalTextAlignment="Center" />
+				<Label Text="{Binding Translator[fieldsarerequired] }" FontSize="14" Opacity=".5" Margin="10" HorizontalTextAlignment="Center" />
 
 				<VerticalStackLayout Spacing="0">
-					<Label Text="{extensions:Translate Key=cardname}" FontSize="Subtitle" />
-					<Entry Text="{Binding SelectedCard.Name}" Placeholder="{extensions:Translate Key=pleaseenternameforcard}" />
+					<Label Text="{Binding Translator[cardname]}" FontSize="Subtitle" />
+					<Entry Text="{Binding SelectedCard.Name}" Placeholder="{Binding Translator[pleaseenternameforcard]}" />
 				</VerticalStackLayout>
 
 				<VerticalStackLayout Spacing="0">
-					<Label Text="{extensions:Translate Key=remoteurlorip}" FontSize="Subtitle" />
-					<Entry Text="{Binding SelectedCard.Url}" Placeholder="{extensions:Translate Key=pleaseenterurlforcard}" />
+					<Label Text="{Binding Translator[remoteurlorip]}" FontSize="Subtitle" />
+					<Entry Text="{Binding SelectedCard.Url}" Placeholder="{Binding Translator[pleaseenterurlforcard]}" />
 				</VerticalStackLayout>
 
 				<VerticalStackLayout Spacing="0">
-					<Label Text="{extensions:Translate Key=description}" FontSize="Subtitle" />
-					<Editor Text="{Binding SelectedCard.Description}" Placeholder="{extensions:Translate Key=youcanadddescriptionforcard}" HeightRequest="100" />
+					<Label Text="{Binding Translator[description]}" FontSize="Subtitle" />
+					<Editor Text="{Binding SelectedCard.Description}" Placeholder="{Binding Translator[youcanadddescriptionforcard]}" HeightRequest="100" />
 				</VerticalStackLayout>
 
 				<HorizontalStackLayout Spacing="10">
@@ -47,11 +44,11 @@
 					<Label Text="" FontSize="17" VerticalTextAlignment="Center">
 						<Label.Triggers>
 							<DataTrigger TargetType="Label" Binding="{Binding Source={x:Reference advancedSwitch}, Path=IsToggled}" Value="true">
-								<Setter Property="Text" Value="{extensions:Translate Key=advancedsettingsenabled}" />
+								<Setter Property="Text" Value="{Binding Translator[advancedsettingsenabled]}" />
 								<Setter Property="FontAttributes" Value="Bold" />
 							</DataTrigger>
 							<DataTrigger TargetType="Label" Binding="{Binding Source={x:Reference advancedSwitch}, Path=IsToggled}" Value="false">
-								<Setter Property="Text" Value="{extensions:Translate Key=advancedsettingsdisabled}" />
+								<Setter Property="Text" Value="{Binding Translator[advancedsettingsdisabled]}" />
 								<Setter Property="FontAttributes" Value="None" />
 							</DataTrigger>
 						</Label.Triggers>
@@ -62,7 +59,7 @@
 					<VerticalStackLayout>
 
 						<HorizontalStackLayout Spacing="10" RadioButtonGroup.GroupName="methods" RadioButtonGroup.SelectedValue="{Binding RBSelectionValue}">
-							<Label Text="{ extensions:Translate Key=calltype}" FontSize="Subtitle" VerticalTextAlignment="Center" FontAttributes="Bold" />
+							<Label Text="{Binding Translator[calltype]}" FontSize="Subtitle" VerticalTextAlignment="Center" FontAttributes="Bold" />
 							<RadioButton x:Name="rb_ping" GroupName="methods" Content="Ping" IsChecked="True" Value="1" />
 							<RadioButton GroupName="methods" Content="GET" Value="2" IsEnabled="False" />
 							<RadioButton GroupName="methods" Content="POST" Value="3" IsEnabled="False"/>
@@ -71,7 +68,7 @@
 						<Border StrokeShape="RoundRectangle 12" Padding="8">
 							<VerticalStackLayout>
 
-								<Label Text="{ extensions:Translate Key=protocol}" FontSize="Subtitle" VerticalTextAlignment="Center" FontAttributes="Bold" />
+								<Label Text="{Binding Translator[protocol]}" FontSize="Subtitle" VerticalTextAlignment="Center" FontAttributes="Bold" />
 								<HorizontalStackLayout Spacing="10" RadioButtonGroup.GroupName="protocols">
 									<RadioButton x:Name="radiobutton_http" GroupName="protocols" Content="Http">
 										<RadioButton.Triggers>
@@ -93,7 +90,7 @@
 
 								<HorizontalStackLayout Spacing="5">
 									<Label Text="Port:" FontSize="Subtitle" FontAttributes="Bold" VerticalTextAlignment="Center" />
-									<Entry Text="{Binding SelectedCard.Port}" Placeholder="{ extensions:Translate Key=setportforyourcard}" WidthRequest="50">
+									<Entry Text="{Binding SelectedCard.Port}" Placeholder="{Binding Translator[setportforyourcard]}" WidthRequest="50">
 										<Entry.Triggers>
 											<DataTrigger TargetType="Entry" Binding="{Binding Source={x:Reference radiobutton_http}, Path=IsChecked}" Value="true">
 												<Setter Property="Text" Value="80" />
@@ -105,17 +102,17 @@
 									</Entry>
 								</HorizontalStackLayout>
 
-								<Label FontSize="Subtitle" Text="{ extensions:Translate Key=setheaders}" FontAttributes="Bold" />
+								<Label FontSize="Subtitle" Text="{Binding Translator[setheaders]}" FontAttributes="Bold" />
 								<Editor Placeholder="Empty" Text="Content-Type: application/json" HeightRequest="150" />
 
-								<Label FontSize="Subtitle" Text="{ extensions:Translate Key=setbody}" FontAttributes="Bold" />
+								<Label FontSize="Subtitle" Text="{Binding Translator[setbody]}" FontAttributes="Bold" />
 								<Editor Placeholder="Empty" Text="" HeightRequest="150" />
 
 								<HorizontalStackLayout Spacing="10">
 									<Switch x:Name="successSwitch" IsToggled="False" />
-									<Label Text="{ extensions:Translate Key=alertmeifresponseis}" FontSize="Subtitle" VerticalTextAlignment="Center" FontAttributes="Bold" />
+									<Label Text="{Binding Translator[alertmeifresponseis]}" FontSize="Subtitle" VerticalTextAlignment="Center" FontAttributes="Bold" />
 								</HorizontalStackLayout>
-								<Editor Placeholder="{ extensions:Translate Key=empty}" HeightRequest="150" />
+								<Editor Placeholder="{Binding Translator[empty]}" HeightRequest="150" />
 
 							</VerticalStackLayout>
 
@@ -141,7 +138,7 @@
 					</Border.Triggers>
 				</Border>
 
-				<Button Text="{ extensions:Translate Key=save}" Margin="10" FontSize="15" Command="{Binding SaveCommand}"/>
+				<Button Text="{Binding Translator[save]}" Margin="10" FontSize="15" Command="{Binding SaveCommand}"/>
 
 			</VerticalStackLayout>
 		</ScrollView>

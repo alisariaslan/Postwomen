@@ -6,6 +6,7 @@ public enum LogsTypeEnum
     FirstLaunch,
     AppLaunch,
     LastLogin,
-    LastExit
+    LastExit,
+    Error
 }
 

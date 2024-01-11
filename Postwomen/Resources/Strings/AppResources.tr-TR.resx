@@ -129,14 +129,23 @@
   <data name="appclosing" xml:space="preserve">
     <value>Uygulama kapanıyor... Kapandıktan sonra tekrar açın.</value>
   </data>
+  <data name="autocheck" xml:space="preserve">
+    <value>Her zaman bu kartı kontrol et</value>
+  </data>
   <data name="avaibleactions" xml:space="preserve">
     <value>Mevcut İşlemler</value>
   </data>
   <data name="calltype" xml:space="preserve">
     <value>Çağrı Türü:</value>
   </data>
+  <data name="cancel" xml:space="preserve">
+    <value>İptal</value>
+  </data>
   <data name="cardname" xml:space="preserve">
     <value>*Kart İsmi</value>
+  </data>
+  <data name="changed" xml:space="preserve">
+    <value>Değiştirildi</value>
   </data>
   <data name="checkcycle" xml:space="preserve">
     <value>Kontrol Döngüsü (saniye)</value>
@@ -146,6 +155,9 @@
   </data>
   <data name="copycard" xml:space="preserve">
     <value>Kartı Kopyala</value>
+  </data>
+  <data name="current_version" xml:space="preserve">
+    <value>Şimdiki versiyon numaranız</value>
   </data>
   <data name="darkstyle" xml:space="preserve">
     <value>Karanlık Stil</value>
@@ -192,6 +204,9 @@
   <data name="fieldsarerequired" xml:space="preserve">
     <value>( * ile başlayan alanlar zorunludur.)</value>
   </data>
+  <data name="info" xml:space="preserve">
+    <value>Bilgilendirme</value>
+  </data>
   <data name="isnotreachable" xml:space="preserve">
     <value>erişilebilir değil!</value>
   </data>
@@ -207,8 +222,17 @@
   <data name="newcard" xml:space="preserve">
     <value>Yeni Kart</value>
   </data>
+  <data name="new_version" xml:space="preserve">
+    <value>Yeni versiyon numarası</value>
+  </data>
+  <data name="new_version_found" xml:space="preserve">
+    <value>Yeni versiyon bulundu!</value>
+  </data>
   <data name="no" xml:space="preserve">
     <value>Hayır</value>
+  </data>
+  <data name="noautocheck" xml:space="preserve">
+    <value>Bu kartı kontrol etme</value>
   </data>
   <data name="noservercardfound" xml:space="preserve">
     <value>Hiç sunucu kartı bulunamadı.</value>
@@ -296,6 +320,15 @@
   </data>
   <data name="timechecksenabled" xml:space="preserve">
     <value>'Zaman ayarlı kontrol' aktif</value>
+  </data>
+  <data name="update" xml:space="preserve">
+    <value>Güncelle</value>
+  </data>
+  <data name="updated" xml:space="preserve">
+    <value>Zaten en son sürüme sahipsiniz.</value>
+  </data>
+  <data name="versionbutton" xml:space="preserve">
+    <value>Versiyon Kontrol</value>
   </data>
   <data name="waiting" xml:space="preserve">
     <value>Çağrılıyor</value>

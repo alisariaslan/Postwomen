@@ -4,5 +4,8 @@ public enum RemoteCallTypes
 {
     Ping,
 	GET,
-	POST
+	POST,
+	INSERT,
+	UPDATE,
+	DELETE
 }

@@ -11,7 +11,8 @@ namespace Postwomen.Views;
 [QueryProperty(nameof(SelectedCard), "SelectedCard")]
 public partial class EditCardPage : ContentPage
 {
-    private Action BackAction_ { get; set; }
+	public Translator Translator { get; set; } 
+	private Action BackAction_ { get; set; }
     private string RBSelectionValue_ { get; set; }
     public string RBSelectionValue
     {
@@ -52,10 +53,11 @@ public partial class EditCardPage : ContentPage
 
     private IDbService dbService;
 
-    public EditCardPage(IDbService dbService)
+    public EditCardPage(IDbService dbService, Translator translator)
     {
         InitializeComponent();
-        this.dbService = dbService;
+		this.Translator = translator;
+		this.dbService = dbService;
         SaveCommand = new Command(SaveCard);
         BindingContext = this;
     }
@@ -64,14 +66,14 @@ public partial class EditCardPage : ContentPage
     {
         if (CardState == 0 && SelectedCard == null)
         {
-            Title = Translator.Instance["newcard"];
+            Title = Translator["newcard"];
             SelectedCard_ = new ServerModel();
             return;
         }
         if (CardState == 1)
-            Title = Translator.Instance["copycard"];
+            Title = Translator["copycard"];
         else if (CardState == 2)
-            Title = Translator.Instance["editcard"];
+            Title = Translator["editcard"];
         OnPropertyChanged(nameof(Title));
 
         if (SelectedCard.IsAdvancedSettingsEnabled)
@@ -106,7 +108,7 @@ public partial class EditCardPage : ContentPage
         }
         catch (Exception ex)
         {
-            await App.Current.MainPage.DisplayAlert(Translator.Instance["errorOccured"], ex.Message, Translator.Instance["ok"]);
+            await App.Current.MainPage.DisplayAlert(Translator["errorOccured"], ex.Message, Translator["ok"]);
         }
     }
 

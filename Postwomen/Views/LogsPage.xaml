@@ -20,26 +20,22 @@
 
 	<Shell.TitleView>
 		<Grid ColumnDefinitions="Auto,*">
-
-			<Label Text="{extensions:Translate Key=logs}" FontSize="20" FontAttributes="Bold" VerticalTextAlignment="Center" TextColor="White">
+			<Label Text="{Binding Translator[logs]}" FontSize="20" FontAttributes="Bold" VerticalTextAlignment="Center" TextColor="White" Margin="{OnPlatform Android=0,WinUI='15,0,0,0'}">
 				<Label.Shadow>
 					<Shadow Brush="Black" Opacity=".5" />
 				</Label.Shadow>
 			</Label>
-
-			<Label Grid.Column="1" Margin="0,0,12,0" Text="{Binding LogCount,StringFormat='({0} log)'}" FontSize="20" FontAttributes="Bold" HorizontalTextAlignment="End" VerticalTextAlignment="Center" TextColor="White">
+			<Label Grid.Column="1" Margin="0,0,15,0" Text="{Binding LogCount,StringFormat='({0} log)'}" FontSize="20" FontAttributes="Bold" HorizontalTextAlignment="End" VerticalTextAlignment="Center" TextColor="White">
 				<Label.Shadow>
 					<Shadow Brush="Black" Opacity=".5" />
 				</Label.Shadow>
 			</Label>
-
 			<Grid.Background>
 				<LinearGradientBrush EndPoint="1,0">
 					<GradientStop Color="{AppThemeBinding Light={StaticResource Gradi1}, Dark={StaticResource Gray950}}" Offset="0.1" />
 					<GradientStop Color="{AppThemeBinding Light={StaticResource Gradi2}, Dark={StaticResource Gray950}}" Offset="1.0" />
 				</LinearGradientBrush>
 			</Grid.Background>
-
 		</Grid>
 	</Shell.TitleView>
 
@@ -47,8 +43,8 @@
 		<Image Grid.RowSpan="2" x:Name="backgroundImage" Source="white_background_vertical" IsVisible="{AppThemeBinding Light=True, Dark=False}" Aspect="Center" />
 
 		<StackLayout Orientation="Horizontal" Spacing="10" BackgroundColor="Black">
-			<Label Text="{extensions:Translate Key=dateandtime}" Margin="10,0,30,0" FontSize="16" TextColor="White" />
-			<Label Text="{extensions:Translate Key=description}" FontSize="16" TextColor="White" />
+			<Label Text="{Binding Translator[dateandtime]}" Margin="10,0,30,0" FontSize="16" TextColor="White" />
+			<Label Text="{Binding Translator[description]}" FontSize="16" TextColor="White" />
 		</StackLayout>
 
 		<CollectionView Loaded="CollectionView_Loaded" Grid.Row="1" Margin="10,0,10,0" ItemSizingStrategy="MeasureFirstItem" ItemsSource="{Binding Logs}" SelectionMode="Single" SelectionChanged="CollectionView_SelectionChanged">

@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<toolkit:Popup xmlns:extensions="clr-namespace:Postwomen.Extensions" xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit" xmlns:strings="clr-namespace:Postwomen.Resources.Strings" xmlns:views="clr-namespace:Postwomen.Views" xmlns="http://schemas.microsoft.com/dotnet/2021/maui" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="Postwomen.Views.VersionPopup" Color="Transparent">
+
+	
+	<Border HorizontalOptions="Center" VerticalOptions="Center" StrokeShape="RoundRectangle 30">
+		<Border.Shadow>
+			<Shadow Brush="Black" />
+		</Border.Shadow>
+		<Grid>
+			<VerticalStackLayout>
+
+				<Label FontSize="18" Text="{Binding Translator[new_version_found]}" BackgroundColor="Black" TextColor="White" HorizontalTextAlignment="Center" />
+
+				<VerticalStackLayout Spacing="20" Padding="30">
+					<Label FontSize="16" Text="{Binding currentVersion}" />
+
+					<Label FontSize="16" Text="{Binding newVersion}" />
+
+					<Grid ColumnDefinitions="*,10,*">
+						<Button x:Name="btn_download" Grid.Column="0" Text="{Binding Translator[update]}"  Clicked="btn_download_Clicked"/>
+						<Button x:Name="btn_cancel" Grid.Column="2" Text="{Binding Translator[cancel]}" Clicked="btn_cancel_Clicked" />
+					</Grid>
+				</VerticalStackLayout>
+
+			</VerticalStackLayout>
+		</Grid>
+	</Border>
+
+</toolkit:Popup>

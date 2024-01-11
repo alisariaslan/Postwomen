@@ -97,6 +97,15 @@ namespace Postwomen.Resources.Strings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Always check this card.
+        /// </summary>
+        public static string autocheck {
+            get {
+                return ResourceManager.GetString("autocheck", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Avaible Actions.
         /// </summary>
         public static string avaibleactions {
@@ -115,11 +124,29 @@ namespace Postwomen.Resources.Strings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Cancel.
+        /// </summary>
+        public static string cancel {
+            get {
+                return ResourceManager.GetString("cancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to *Card Name.
         /// </summary>
         public static string cardname {
             get {
                 return ResourceManager.GetString("cardname", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Changed.
+        /// </summary>
+        public static string changed {
+            get {
+                return ResourceManager.GetString("changed", resourceCulture);
             }
         }
         
@@ -147,6 +174,15 @@ namespace Postwomen.Resources.Strings {
         public static string copycard {
             get {
                 return ResourceManager.GetString("copycard", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Your current version number is.
+        /// </summary>
+        public static string current_version {
+            get {
+                return ResourceManager.GetString("current_version", resourceCulture);
             }
         }
         
@@ -286,6 +322,15 @@ namespace Postwomen.Resources.Strings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Info.
+        /// </summary>
+        public static string info {
+            get {
+                return ResourceManager.GetString("info", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to is not reachable!.
         /// </summary>
         public static string isnotreachable {
@@ -322,6 +367,24 @@ namespace Postwomen.Resources.Strings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to New version number is.
+        /// </summary>
+        public static string new_version {
+            get {
+                return ResourceManager.GetString("new_version", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to New version found!.
+        /// </summary>
+        public static string new_version_found {
+            get {
+                return ResourceManager.GetString("new_version_found", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to New Card.
         /// </summary>
         public static string newcard {
@@ -336,6 +399,15 @@ namespace Postwomen.Resources.Strings {
         public static string no {
             get {
                 return ResourceManager.GetString("no", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Do not check this card.
+        /// </summary>
+        public static string noautocheck {
+            get {
+                return ResourceManager.GetString("noautocheck", resourceCulture);
             }
         }
         
@@ -597,6 +669,33 @@ namespace Postwomen.Resources.Strings {
         public static string timechecksenabled {
             get {
                 return ResourceManager.GetString("timechecksenabled", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Update.
+        /// </summary>
+        public static string update {
+            get {
+                return ResourceManager.GetString("update", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You already have latest version..
+        /// </summary>
+        public static string updated {
+            get {
+                return ResourceManager.GetString("updated", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Version Control.
+        /// </summary>
+        public static string versionbutton {
+            get {
+                return ResourceManager.GetString("versionbutton", resourceCulture);
             }
         }
         

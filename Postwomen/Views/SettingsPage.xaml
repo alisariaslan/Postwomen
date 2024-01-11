@@ -1,23 +1,19 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns:extensions="clr-namespace:Postwomen.Extensions"  xmlns:strings="clr-namespace:Postwomen.Resources.Strings" xmlns="http://schemas.microsoft.com/dotnet/2021/maui" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="Postwomen.Views.SettingsPage" xmlns:local="clr-namespace:Postwomen.Views" Title="Settings">
-
+<ContentPage xmlns:extensions="clr-namespace:Postwomen.Extensions" xmlns:strings="clr-namespace:Postwomen.Resources.Strings" xmlns="http://schemas.microsoft.com/dotnet/2021/maui" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="Postwomen.Views.SettingsPage" xmlns:local="clr-namespace:Postwomen.Views" Title="Settings">
+	
 	<Shell.TitleView>
 		<Grid ColumnDefinitions="Auto">
-
-			<Label Text="{extensions:Translate Key=settings}" FontSize="20" FontAttributes="Bold" VerticalTextAlignment="Center" TextColor="White">
+			<Label Text="{Binding Translator[settings]}" FontSize="20" FontAttributes="Bold" VerticalTextAlignment="Center" TextColor="White" Margin="{OnPlatform Android=0,WinUI='15,0,0,0'}">
 				<Label.Shadow>
 					<Shadow Brush="Black" Opacity=".5" />
 				</Label.Shadow>
 			</Label>
-
 			<Grid.Background>
 				<LinearGradientBrush EndPoint="1,0">
 					<GradientStop Color="{StaticResource Gradi1}" Offset="0.1" />
 					<GradientStop Color="{StaticResource Gradi2}" Offset="1.0" />
 				</LinearGradientBrush>
 			</Grid.Background>
-			
-			
 		</Grid>
 	</Shell.TitleView>
 
@@ -26,7 +22,7 @@
 		<ScrollView>
 			<VerticalStackLayout Padding="15" Spacing="10">
 
-				<Label Text="{extensions:Translate Key=selectedlanguage}" FontSize="20" HorizontalTextAlignment="Center" />
+				<Label Text="{Binding Translator[selectedlanguage]}" FontSize="20" HorizontalTextAlignment="Center" />
 
 				<Grid ColumnDefinitions="*,*">
 					<Button Grid.Column="0" Text="English" Command="{Binding SelectLanguageCommand}" CommandParameter="0" Padding="10" Margin="5" WidthRequest="180" HorizontalOptions="End">
@@ -51,19 +47,21 @@
 					</Button>
 				</Grid>
 
-				<Label Text="{extensions:Translate Key=avaibleactions}" FontSize="20" HorizontalTextAlignment="Center" />
+				<Label Text="{Binding Translator[avaibleactions]}" FontSize="20" HorizontalTextAlignment="Center" />
 
-				<Button WidthRequest="200" Text="{extensions:Translate Key=resetservercards}" Command="{Binding ResetCardsCommand}" Padding="10" Margin="5" />
+				<Button WidthRequest="250" Text="{Binding Translator[resetservercards]}" Command="{Binding ResetCardsCommand}" Padding="10" Margin="5" />
 
-				<Button WidthRequest="200" Text="{extensions:Translate Key=resetlogs}" Command="{Binding ResetLogsCommand}" Padding="10" Margin="5" />
+				<Button WidthRequest="200" Text="{Binding Translator[resetlogs]}" Command="{Binding ResetLogsCommand}" Padding="10" Margin="5" />
 
-				<Label Text="{extensions:Translate Key=maxlogcount}" FontSize="20" HorizontalTextAlignment="Center" />
-				<Entry WidthRequest="170" Placeholder="{extensions:Translate Key=defaultis5000}" Text="{Binding MaxLogCount}" FontSize="20" HorizontalOptions="Center" HorizontalTextAlignment="Center" />
+				<Button x:Name="btn_version" WidthRequest="150" Text="{Binding Translator[versionbutton]}" Padding="10" Margin="5" Clicked="btn_version_Clicked" />
+
+				<Label Text="{Binding Translator[maxlogcount]}" FontSize="20" HorizontalTextAlignment="Center" />
+				<Entry WidthRequest="170" Placeholder="{Binding Translator[defaultis5000]}" Text="{Binding MaxLogCount}" FontSize="20" HorizontalOptions="Center" HorizontalTextAlignment="Center" />
 
 				<Label Text="{Binding AppVersion}" HorizontalTextAlignment="Center" />
 			</VerticalStackLayout>
 
 		</ScrollView>
 	</Grid>
-	
+
 </ContentPage>

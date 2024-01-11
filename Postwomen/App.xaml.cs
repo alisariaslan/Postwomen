@@ -9,7 +9,7 @@ namespace Postwomen;
 
 public partial class App : Application
 {
-    public App(MobileDB mobileDB,IDbService dbService)
+    public App(MobileDB mobileDB,IDbService dbService, Translator translator)
     {
 
         #region DB
@@ -33,9 +33,9 @@ public partial class App : Application
         }
 
         if (culture.Equals("tr-TR", StringComparison.OrdinalIgnoreCase))
-            Translator.Instance.CultureInfo = new CultureInfo("tr-TR");
+			translator.CultureInfo = new CultureInfo("tr-TR");
         else
-            Translator.Instance.CultureInfo = new CultureInfo("en-US");
+			translator.CultureInfo = new CultureInfo("en-US");
         #endregion
 
         InitializeComponent();

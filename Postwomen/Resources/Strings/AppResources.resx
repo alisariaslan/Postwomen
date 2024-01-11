@@ -129,14 +129,23 @@
   <data name="appclosing" xml:space="preserve">
     <value>Application closing... Please restart after exit.</value>
   </data>
+  <data name="autocheck" xml:space="preserve">
+    <value>Always check this card</value>
+  </data>
   <data name="avaibleactions" xml:space="preserve">
     <value>Avaible Actions</value>
   </data>
   <data name="calltype" xml:space="preserve">
     <value>Call Type:</value>
   </data>
+  <data name="cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
   <data name="cardname" xml:space="preserve">
     <value>*Card Name</value>
+  </data>
+  <data name="changed" xml:space="preserve">
+    <value>Changed</value>
   </data>
   <data name="checkcycle" xml:space="preserve">
     <value>Check Cycle (as seconds)</value>
@@ -146,6 +155,9 @@
   </data>
   <data name="copycard" xml:space="preserve">
     <value>Copy Card</value>
+  </data>
+  <data name="current_version" xml:space="preserve">
+    <value>Your current version number is</value>
   </data>
   <data name="darkstyle" xml:space="preserve">
     <value>Dark Style</value>
@@ -192,6 +204,9 @@
   <data name="fieldsarerequired" xml:space="preserve">
     <value>(Fields with * are required.)</value>
   </data>
+  <data name="info" xml:space="preserve">
+    <value>Info</value>
+  </data>
   <data name="isnotreachable" xml:space="preserve">
     <value>is not reachable!</value>
   </data>
@@ -207,8 +222,17 @@
   <data name="newcard" xml:space="preserve">
     <value>New Card</value>
   </data>
+  <data name="new_version" xml:space="preserve">
+    <value>New version number is</value>
+  </data>
+  <data name="new_version_found" xml:space="preserve">
+    <value>New version found!</value>
+  </data>
   <data name="no" xml:space="preserve">
     <value>No</value>
+  </data>
+  <data name="noautocheck" xml:space="preserve">
+    <value>Do not check this card</value>
   </data>
   <data name="noservercardfound" xml:space="preserve">
     <value>No server card found.</value>
@@ -296,6 +320,15 @@
   </data>
   <data name="timechecksenabled" xml:space="preserve">
     <value>'Time scheduled checks' enabled</value>
+  </data>
+  <data name="update" xml:space="preserve">
+    <value>Update</value>
+  </data>
+  <data name="updated" xml:space="preserve">
+    <value>You already have latest version.</value>
+  </data>
+  <data name="versionbutton" xml:space="preserve">
+    <value>Version Control</value>
   </data>
   <data name="waiting" xml:space="preserve">
     <value>Calling</value>

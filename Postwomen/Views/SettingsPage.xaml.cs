@@ -1,4 +1,5 @@
-﻿using Postwomen.Extensions;
+﻿using CommunityToolkit.Maui.Views;
+using Postwomen.Extensions;
 using Postwomen.Services;
 using System.Globalization;
 
@@ -7,17 +8,21 @@ namespace Postwomen.Views;
 [QueryProperty(nameof(BackAction), "BackAction")]
 public partial class SettingsPage : ContentPage
 {
-    private Action BackAction_ { get; set; }
+	public Translator Translator { get; set; }
+	private Action BackAction_ { get; set; }
     private int SelectedLangValue_ { get; set; }
     public int SelectedLangValue { get { return SelectedLangValue_; } set { SelectedLangValue_ = value; OnPropertyChanged(nameof(SelectedLangValue)); } }
     public Command SelectLanguageCommand { get; set; }
     public Command ResetLogsCommand { get; set; }
     public Command ResetCardsCommand { get; set; }
-    public string AppVersion { get
+    public string AppVersion
+    {
+        get
         {
             return $"{AppInfo.Current.Name}: {AppInfo.Current.VersionString},{Environment.NewLine}" +
                $"{DeviceInfo.Current.Platform}: {DeviceInfo.Current.Version}";
-        } }
+        }
+    }
 
     public int MaxLogCount
     {
@@ -40,11 +45,13 @@ public partial class SettingsPage : ContentPage
     }
 
     private IDbService dbService { get; set; }
-
-    public SettingsPage(IDbService dbService)
+    private IServiceProvider serviceProvider { get; set; }
+    public SettingsPage(IDbService dbService, IServiceProvider serviceProvider, Translator translator)
     {
         InitializeComponent();
-        this.dbService = dbService;
+		this.Translator = translator;
+		this.dbService = dbService;
+        this.serviceProvider = serviceProvider;
         SelectLanguageCommand = new Command<string>(execute: SelectLanguageFunc);
         ResetLogsCommand = new Command<string>(execute: ResetLogs);
         ResetCardsCommand = new Command<string>(execute: ResetCards);
@@ -71,47 +78,58 @@ public partial class SettingsPage : ContentPage
         #region LANGUAGE 
         var culture = Preferences.Get(nameof(CultureInfo), "en - US");
         if (culture.Equals("tr-TR", StringComparison.OrdinalIgnoreCase))
-            Translator.Instance.CultureInfo = new CultureInfo("tr-TR");
+            Translator.CultureInfo = new CultureInfo("tr-TR");
         else
-            Translator.Instance.CultureInfo = new CultureInfo("en-US");
+            Translator.CultureInfo = new CultureInfo("en-US");
         #endregion
-        Translator.Instance.OnPropertyChanged();
+        Translator.OnPropertyChanged();
     }
 
     private async void ResetLogs(string param)
     {
-        bool answer = await App.Current.MainPage.DisplayAlert(Translator.Instance["resetlogs"], Translator.Instance["resetlogsask"], Translator.Instance["yes"], Translator.Instance["no"]);
+        bool answer = await App.Current.MainPage.DisplayAlert(Translator["resetlogs"], Translator["resetlogsask"], Translator["yes"], Translator["no"]);
         if (answer is false)
             return;
         try
         {
             var result = await dbService.ClearLogs();
-            await App.Current.MainPage.DisplayAlert(Translator.Instance["operationresult"], Translator.Instance["deletedCount"] + ": " + result, Translator.Instance["ok"]);
+            await App.Current.MainPage.DisplayAlert(Translator["operationresult"], Translator["deletedCount"] + ": " + result, Translator["ok"]);
         }
         catch (Exception ex)
         {
-            await App.Current.MainPage.DisplayAlert(Translator.Instance["errorOccured"], ex.Message, Translator.Instance["ok"]);
+            await App.Current.MainPage.DisplayAlert(Translator["errorOccured"], ex.Message, Translator["ok"]);
         }
         finally { BackAction.Invoke(); }
     }
 
     private async void ResetCards(string param)
     {
-        bool answer = await App.Current.MainPage.DisplayAlert(Translator.Instance["resetservercards"], Translator.Instance["resetservercardsask"], Translator.Instance["yes"], Translator.Instance["no"]);
+        bool answer = await App.Current.MainPage.DisplayAlert(Translator["resetservercards"], Translator["resetservercardsask"], Translator["yes"], Translator["no"]);
         if (answer is false)
             return;
         try
         {
             var result = await dbService.ClearCards();
-            await App.Current.MainPage.DisplayAlert(Translator.Instance["operationresult"], Translator.Instance["deletedCount"] + ": " + result, Translator.Instance["ok"]);
+            await App.Current.MainPage.DisplayAlert(Translator["operationresult"], Translator["deletedCount"] + ": " + result, Translator["ok"]);
         }
         catch (Exception ex)
         {
-            await App.Current.MainPage.DisplayAlert(Translator.Instance["errorOccured"], ex.Message, Translator.Instance["ok"]);
+            await App.Current.MainPage.DisplayAlert(Translator["errorOccured"], ex.Message, Translator["ok"]);
         }
         finally { BackAction.Invoke(); }
     }
 
-
+    async void btn_version_Clicked(object sender, EventArgs e)
+    {
+        (sender as Button).IsEnabled = false;
+        var popup = serviceProvider.GetService<VersionPopup>();
+        var upgradeAvaible = await popup.CheckVersion();
+        if (upgradeAvaible)
+            await this.ShowPopupAsync(popup);
+        await Task.Delay(10000);
+        (sender as Button).IsEnabled = true;
+        if(upgradeAvaible is false)
+            await App.Current.MainPage.DisplayAlert(Translator["info"], Translator["updated"], Translator["ok"]);
+    }
 }
 

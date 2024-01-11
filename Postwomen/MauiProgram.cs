@@ -6,6 +6,7 @@ using Postwomen.Views;
 using Refit;
 using DesenMobileDatabase;
 using Postwomen.Services;
+using Postwomen.Extensions;
 
 namespace Postwomen;
 
@@ -34,17 +35,21 @@ public static class MauiProgram
 #if DEBUG
             c.BaseAddress = new Uri("http://10.0.2.2:5000");
 #else
-			c.BaseAddress = new Uri("http://asprojects.duckdns.org:5000");
+			c.BaseAddress = new Uri("https://api.alisariaslan.com.tr");
 #endif
         }).ConfigurePrimaryHttpMessageHandler(() => new HttpLoggingHandler());
 
         builder.Services.AddSingleton<MobileDB>();
         builder.Services.AddTransient<IDbService,DbService>();
 
-        builder.Services.AddSingleton<MainPage>();
 		builder.Services.AddTransient<EditCardPage>();
         builder.Services.AddTransient<SettingsPage>();
         builder.Services.AddTransient<LogsPage>();
+        builder.Services.AddTransient<VersionPopup>();
+
+		builder.Services.AddSingleton<Translator>();
+
+		builder.Services.AddSingleton<MainPage>();
 
         return builder.Build();
 	}
