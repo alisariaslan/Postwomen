@@ -130,7 +130,7 @@
     <value>Uygulama kapanıyor... Kapandıktan sonra tekrar açın.</value>
   </data>
   <data name="autocheck" xml:space="preserve">
-    <value>Her zaman bu kartı kontrol et</value>
+    <value>Yenile işleminde kontrol et</value>
   </data>
   <data name="avaibleactions" xml:space="preserve">
     <value>Mevcut İşlemler</value>
@@ -140,6 +140,9 @@
   </data>
   <data name="cancel" xml:space="preserve">
     <value>İptal</value>
+  </data>
+  <data name="cannot_refresh" xml:space="preserve">
+    <value>Başka işlem gerçekleşirken bu işlemi gerçekleştiremezsiniz!</value>
   </data>
   <data name="cardname" xml:space="preserve">
     <value>*Kart İsmi</value>
@@ -232,7 +235,7 @@
     <value>Hayır</value>
   </data>
   <data name="noautocheck" xml:space="preserve">
-    <value>Bu kartı kontrol etme</value>
+    <value>Sadece istenildiğinde kontrol et</value>
   </data>
   <data name="noservercardfound" xml:space="preserve">
     <value>Hiç sunucu kartı bulunamadı.</value>

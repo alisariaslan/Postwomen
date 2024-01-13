@@ -71,26 +71,26 @@ public partial class MainPage : ContentPage
 	private async void RefreshCard(int param)
 	{
 		if (IsRefreshing)
+		{
+			ToastHelper.MakeToastFast(Translator["cannot_refresh"]);
 			return;
+		}
+
 		IsRefreshing = true;
 		var selected = ServerCards.FirstOrDefault(card => card.Id == param);
 		await CheckCard(selected);
 		IsRefreshing = false;
 	}
 
-	private void ForceRefresh()
-	{
-		ServerCards.Clear();
-		IsRefreshing = false;
-		RefreshCards();
-	}
-
 	private async void RefreshCards()
 	{
-		if (IsRefreshing)
+		if(IsRefreshing)
+		{
+			ToastHelper.MakeToastFast(Translator["cannot_refresh"]);
 			return;
+		}
+
 		IsRefreshing = true;
-		dbService.InsertLog(new LogsModel(LogsTypeEnum.General, "Card list refresh toggled."));
 		ServerCards.Clear();
 		var items = await dbService.GetCards();
 		items.ForEach(i =>
@@ -115,12 +115,8 @@ public partial class MainPage : ContentPage
 	{
 		try
 		{
-			if (model.CurrentState != CheckStates.TRYING_TO_REACH)
-			{
-				dbService.InsertLog(new LogsModel(LogsTypeEnum.General, $"{model.Name}: Card is refreshing..."));
 				model.CurrentState = CheckStates.TRYING_TO_REACH;
 				model.Updated();
-				await Task.Delay(1000);
 				if (model.TypeOfCall == RemoteCallTypes.GET)
 				{
 				}
@@ -152,22 +148,17 @@ public partial class MainPage : ContentPage
 					}
 					model.Updated();
 				}
-			}
-			else
-			{
-				dbService.InsertLog(new LogsModel(LogsTypeEnum.General, $"{model.Name}: Card is already refreshing..."));
-			}
+			
 		}
 		catch (Exception ex)
 		{
 			dbService.InsertLog(new LogsModel(LogsTypeEnum.Error, $"'{model.Name}' -> Error occured when refresh. Error message: {ex}"));
 		}
-		
 	}
 
 	private async void GoToSettingsFunc()
 	{
-		var backAction = new Action(() => ForceRefresh());
+		var backAction = new Action(() => RefreshCards());
 		var navigationParameters = new Dictionary<string, object> {
 			{"BackAction", backAction}
 		};
@@ -201,7 +192,7 @@ public partial class MainPage : ContentPage
 
 	private async void CreateNewCardFunc(string param)
 	{
-		var backAction = new Action(() => ForceRefresh());
+		var backAction = new Action(() => RefreshCards());
 		var navigationParameters = new Dictionary<string, object> {
 			{ "BackAction", backAction },
 			{ "SelectedCard", null },
@@ -218,7 +209,7 @@ public partial class MainPage : ContentPage
 	private async void CopyCardFunc(int param)
 	{
 		var card = ServerCards.FirstOrDefault(c => c.Id.Equals(param));
-		var backAction = new Action(() => ForceRefresh());
+		var backAction = new Action(() => RefreshCards());
 		var navigationParameters = new Dictionary<string, object> {
 			{"BackAction", backAction},
 			{"SelectedCard", card},
@@ -230,7 +221,7 @@ public partial class MainPage : ContentPage
 	private async void EditCardFunc(int param)
 	{
 		var card = ServerCards.FirstOrDefault(c => c.Id.Equals(param));
-		var backAction = new Action(() => ForceRefresh());
+		var backAction = new Action(() => RefreshCards());
 		var navigationParameters = new Dictionary<string, object> {
 			{"BackAction", backAction},
 			{"SelectedCard", card},
@@ -253,7 +244,7 @@ public partial class MainPage : ContentPage
 		{
 			await App.Current.MainPage.DisplayAlert(Translator["errorOccured"], ex.Message, Translator["ok"]);
 		}
-		ForceRefresh();
+		RefreshCards();
 	}
 
 	async void ContentPage_Loaded(object sender, EventArgs e)

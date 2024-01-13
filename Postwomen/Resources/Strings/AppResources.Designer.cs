@@ -97,7 +97,7 @@ namespace Postwomen.Resources.Strings {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Always check this card.
+        ///   Looks up a localized string similar to Always check when refresh toggled.
         /// </summary>
         public static string autocheck {
             get {
@@ -129,6 +129,15 @@ namespace Postwomen.Resources.Strings {
         public static string cancel {
             get {
                 return ResourceManager.GetString("cancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You cannot perform this operation while another is active!.
+        /// </summary>
+        public static string cannot_refresh {
+            get {
+                return ResourceManager.GetString("cannot_refresh", resourceCulture);
             }
         }
         
@@ -403,7 +412,7 @@ namespace Postwomen.Resources.Strings {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Do not check this card.
+        ///   Looks up a localized string similar to Check only when requested.
         /// </summary>
         public static string noautocheck {
             get {

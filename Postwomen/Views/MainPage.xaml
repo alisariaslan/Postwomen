@@ -49,14 +49,11 @@
 
 		<Label Text="Beta" FontSize="20" HorizontalOptions="Start" VerticalOptions="End" Padding="20" />
 
-		<CollectionView Loaded="CollectionView_Loaded" ItemsSource="{Binding ServerCards}" SelectionMode="None" ItemsLayout="{Binding ItemsLayout}">
+		<CollectionView Loaded="CollectionView_Loaded" ItemsSource="{Binding ServerCards}" ItemsLayout="{OnPlatform Android='VerticalList',WinUI='VerticalGrid, 3'}" SelectionMode="None">
 			<CollectionView.ItemTemplate>
 				<DataTemplate>
 					<Grid>
 						<Border Margin="8" StrokeShape="RoundRectangle 8,8,8,8" Stroke="Black" HorizontalOptions="Center">
-							<Border.Shadow>
-								<Shadow Brush="Black" Opacity=".5" />
-							</Border.Shadow>
 							<Grid>
 								<FlexLayout Direction="Column" Wrap="Wrap">
 									<Image Source="white_background_horizontal_card" FlexLayout.Basis="100%" Aspect="AspectFill" Opacity="{AppThemeBinding Light=1, Dark=.25}" />
@@ -90,19 +87,19 @@
 										</Label>
 									</HorizontalStackLayout>
 									<Grid ColumnDefinitions=".8*,.2*">
-										<Border Grid.Column="0" StrokeShape="RoundRectangle 6" Stroke="Black" BackgroundColor="Black" WidthRequest="180" HorizontalOptions="Start" Padding="2" Margin="3,0,0,3">
+										<Border Grid.Column="0" StrokeShape="RoundRectangle 6" Stroke="Black" BackgroundColor="Black" HorizontalOptions="Start" Padding="2" Margin="3,0,0,3">
 											<HorizontalStackLayout Spacing="10" HorizontalOptions="Center">
-												<ImageButton Source="browser.png" WidthRequest="25" HeightRequest="25" VerticalOptions="Center" Command="{Binding Source={RelativeSource AncestorType={x:Type views:MainPage}}, Path=GoToWebCommand}" CommandParameter="{Binding Url}" />
-												<ImageButton Source="copy.png" WidthRequest="25" HeightRequest="25" VerticalOptions="Center" Command="{Binding Source={RelativeSource AncestorType={x:Type views:MainPage}}, Path=CopyCardCommand}" CommandParameter="{Binding Id}" />
-												<ImageButton Source="wrench.png" WidthRequest="25" HeightRequest="25" VerticalOptions="Center" Command="{Binding Source={RelativeSource AncestorType={x:Type views:MainPage}}, Path=EditCardCommand}" CommandParameter="{Binding Id}" />
-												<ImageButton Source="delete.png" WidthRequest="25" HeightRequest="25" VerticalOptions="Center" Command="{Binding Source={RelativeSource AncestorType={x:Type views:MainPage}}, Path=DeleteCardCommand}" CommandParameter="{Binding Id}" />
-												<ImageButton Source="refresh.png" Clicked="ImageButton_Clicked" WidthRequest="25" HeightRequest="25" VerticalOptions="Center" Command="{Binding Source={RelativeSource AncestorType={x:Type views:MainPage}}, Path=RefreshCardCommand}" CommandParameter="{Binding Id}" />
+												<ImageButton Source="browser.png" Padding="8" WidthRequest="25" HeightRequest="25" VerticalOptions="Center" Command="{Binding Source={RelativeSource AncestorType={x:Type views:MainPage}}, Path=GoToWebCommand}" CommandParameter="{Binding Url}" />
+												<ImageButton Source="copy.png" Padding="8" WidthRequest="25" HeightRequest="25" VerticalOptions="Center" Command="{Binding Source={RelativeSource AncestorType={x:Type views:MainPage}}, Path=CopyCardCommand}" CommandParameter="{Binding Id}" />
+												<ImageButton Source="wrench.png" Padding="8"  WidthRequest="25" HeightRequest="25" VerticalOptions="Center" Command="{Binding Source={RelativeSource AncestorType={x:Type views:MainPage}}, Path=EditCardCommand}" CommandParameter="{Binding Id}" />
+												<ImageButton Source="delete.png" Padding="8"  WidthRequest="25" HeightRequest="25" VerticalOptions="Center" Command="{Binding Source={RelativeSource AncestorType={x:Type views:MainPage}}, Path=DeleteCardCommand}" CommandParameter="{Binding Id}" />
+												<ImageButton Source="refresh.png" Padding="8"  Clicked="ImageButton_Clicked" WidthRequest="25" HeightRequest="25" VerticalOptions="Center" Command="{Binding Source={RelativeSource AncestorType={x:Type views:MainPage}}, Path=RefreshCardCommand}" CommandParameter="{Binding Id}" />
 											</HorizontalStackLayout>
 										</Border>
 										<Label Grid.Column="1" Text="{Binding Id,StringFormat='{0}'}" FontSize="14" HorizontalTextAlignment="End" VerticalTextAlignment="Center" Margin="0,0,10,0" />
 									</Grid>
 								</VerticalStackLayout>
-								<Grid WidthRequest="50" HeightRequest="50" HorizontalOptions="End" VerticalOptions="Center" Margin="0,0,5,0">
+								<Grid WidthRequest="75" HeightRequest="75" HorizontalOptions="End" VerticalOptions="Center" Margin="0,0,5,0">
 									<Ellipse Fill="Red" Opacity=".8">
 										<Ellipse.Triggers>
 											<DataTrigger TargetType="Ellipse" Binding="{Binding CurrentState}" Value="0">
@@ -116,7 +113,7 @@
 											</DataTrigger>
 										</Ellipse.Triggers>
 									</Ellipse>
-									<Label FontSize="10" TextColor="White" HorizontalTextAlignment="Center" VerticalTextAlignment="Center">
+									<Label FontSize="12" TextColor="White" HorizontalTextAlignment="Center" VerticalTextAlignment="Center">
 										<Label.Triggers>
 											<DataTrigger TargetType="Label" Binding="{Binding CurrentState}" Value="0">
 												<Setter Property="Text" Value="{Binding Source={RelativeSource AncestorType={x:Type views:MainPage}}, Path=Translator[fail]}" />
@@ -157,7 +154,7 @@
 			</Border.GestureRecognizers>
 		</Border>
 		<Border HorizontalOptions="End" VerticalOptions="End" WidthRequest="64" HeightRequest="64" StrokeShape="RoundRectangle 16,16,16,16" Stroke="Transparent" Margin="10">
-			<ImageButton x:Name="sars_icon" Source="sars_icon" Command="{Binding Path=GoToWebCommand}" CommandParameter="https://alisariaslan.com.tr">
+			<ImageButton x:Name="sars_icon" Source="sars_icon.png" Command="{Binding Path=GoToWebCommand}" CommandParameter="https://alisariaslan.com.tr">
 				<ImageButton.Shadow>
 					<Shadow Brush="Black" />
 				</ImageButton.Shadow>

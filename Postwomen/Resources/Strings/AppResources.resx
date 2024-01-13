@@ -130,7 +130,7 @@
     <value>Application closing... Please restart after exit.</value>
   </data>
   <data name="autocheck" xml:space="preserve">
-    <value>Always check this card</value>
+    <value>Always check when refresh toggled</value>
   </data>
   <data name="avaibleactions" xml:space="preserve">
     <value>Avaible Actions</value>
@@ -140,6 +140,9 @@
   </data>
   <data name="cancel" xml:space="preserve">
     <value>Cancel</value>
+  </data>
+  <data name="cannot_refresh" xml:space="preserve">
+    <value>You cannot perform this operation while another is active!</value>
   </data>
   <data name="cardname" xml:space="preserve">
     <value>*Card Name</value>
@@ -232,7 +235,7 @@
     <value>No</value>
   </data>
   <data name="noautocheck" xml:space="preserve">
-    <value>Do not check this card</value>
+    <value>Check only when requested</value>
   </data>
   <data name="noservercardfound" xml:space="preserve">
     <value>No server card found.</value>
