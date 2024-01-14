@@ -1,5 +1,4 @@
-﻿using Android.Icu.Util;
-using DesenMobileDatabase.Enums;
+﻿using DesenMobileDatabase.Enums;
 using DesenMobileDatabase.Models;
 using Postwomen.Services;
 
@@ -36,10 +35,11 @@ public class PingHelper
 				process.StartInfo.CreateNoWindow = true;
 				process.Start();
 				string output = await process.StandardOutput.ReadToEndAsync();
-				process.WaitForExit();
-				if (process.ExitCode == 0)
+                process.WaitForExit();
+
+                if (process.ExitCode == 0)
 				{
-					if (output.Contains("1 packets transmitted, 1 received"))
+					if (output.Contains("1 packets transmitted, 1 received",StringComparison.InvariantCultureIgnoreCase))
 						result = true;
 				}
 			}
