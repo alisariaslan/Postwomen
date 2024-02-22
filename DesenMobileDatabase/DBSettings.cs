@@ -2,11 +2,11 @@
 
 public class DBSettings
 {
-    private const int DB_Version = 5;
+    private const int DB_Version = 1;
 
-    private const string DB_Extension = ".desen";
+    private const string DB_Extension = ".sqlitedb";
 
-    private const string DB_Name = "storage";
+    private const string DB_Name = "postwomen";
 
     private const SQLite.SQLiteOpenFlags DB_Flags =
         // open the database in read/write mode

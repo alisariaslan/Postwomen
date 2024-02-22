@@ -33,6 +33,7 @@ public class MobileDB
         {
             InsertItem(new ServerModel("Localhost", "localhost", "Example card", RemoteCallTypes.Ping));
             InsertItem(new ServerModel("Google", "google.com", "Example card", RemoteCallTypes.Ping));
+            InsertItem(new ServerModel("Aliweb", "alisariaslan.com.tr", "Example card", RemoteCallTypes.GET));
         }
     }
 

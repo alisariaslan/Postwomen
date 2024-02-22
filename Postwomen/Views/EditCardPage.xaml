@@ -58,33 +58,34 @@
 				<Border StrokeShape="RoundRectangle 12" Padding="8">
 					<VerticalStackLayout>
 
-						<HorizontalStackLayout Spacing="10" RadioButtonGroup.GroupName="methods" RadioButtonGroup.SelectedValue="{Binding RBSelectionValue}">
-							<Label Text="{Binding Translator[calltype]}" FontSize="Subtitle" VerticalTextAlignment="Center" FontAttributes="Bold" />
-							<RadioButton x:Name="rb_ping" GroupName="methods" Content="Ping" IsChecked="True" Value="1" />
-							<RadioButton GroupName="methods" Content="GET" Value="2" IsEnabled="False" />
-							<RadioButton GroupName="methods" Content="POST" Value="3" IsEnabled="False"/>
-						</HorizontalStackLayout>
+						<FlexLayout Wrap="Wrap" JustifyContent="SpaceEvenly" RadioButtonGroup.GroupName="methods" RadioButtonGroup.SelectedValue="{Binding RBSelectionValue}">
+							<RadioButton  x:Name="rb_ping" GroupName="methods" Content="Ping" IsChecked="True" Value="Ping" />
+							<RadioButton GroupName="methods" Content="GET" Value="GET"  />
+							<RadioButton GroupName="methods" Content="POST" Value="POST" />
+							<RadioButton GroupName="methods" Content="PUT" Value="PUT" />
+							<RadioButton GroupName="methods" Content="DELETE" Value="DELETE" />
+						</FlexLayout>
 
 						<Border StrokeShape="RoundRectangle 12" Padding="8">
 							<VerticalStackLayout>
 
 								<Label Text="{Binding Translator[protocol]}" FontSize="Subtitle" VerticalTextAlignment="Center" FontAttributes="Bold" />
-								<HorizontalStackLayout Spacing="10" RadioButtonGroup.GroupName="protocols">
-									<RadioButton x:Name="radiobutton_http" GroupName="protocols" Content="Http">
+								<HorizontalStackLayout Spacing="10" RadioButtonGroup.GroupName="protocols" RadioButtonGroup.SelectedValue="{Binding ProtocolValue}">
+									<RadioButton x:Name="radiobutton_http" GroupName="protocols" Content="Http" Value="Http">
 										<RadioButton.Triggers>
 											<DataTrigger TargetType="RadioButton" Binding="{Binding SelectedCard.Port}" Value="80">
 												<Setter Property="IsChecked" Value="True" />
 											</DataTrigger>
 										</RadioButton.Triggers>
 									</RadioButton>
-									<RadioButton x:Name="radiobutton_https" GroupName="protocols" Content="Https" IsChecked="True">
+									<RadioButton x:Name="radiobutton_https" GroupName="protocols" Content="Https" Value="Https">
 										<RadioButton.Triggers>
 											<DataTrigger TargetType="RadioButton" Binding="{Binding SelectedCard.Port}" Value="443">
 												<Setter Property="IsChecked" Value="True" />
 											</DataTrigger>
 										</RadioButton.Triggers>
 									</RadioButton>
-									<RadioButton x:Name="radiobutton_custom" GroupName="protocols" Content="Custom" />
+									<RadioButton  GroupName="protocols" Content="Custom" Value="Custom" />
 
 								</HorizontalStackLayout>
 

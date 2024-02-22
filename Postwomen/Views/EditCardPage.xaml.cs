@@ -13,6 +13,7 @@ public partial class EditCardPage : ContentPage
 {
 	public Translator Translator { get; set; } 
 	private Action BackAction_ { get; set; }
+
     private string RBSelectionValue_ { get; set; }
     public string RBSelectionValue
     {
@@ -25,6 +26,20 @@ public partial class EditCardPage : ContentPage
                 SelectedCard.TypeOfCall = parsedEnum;
         }
     }
+
+    private string ProtocolValue_ { get; set; }
+    public string ProtocolValue
+    {
+        get { return ProtocolValue_; }
+        set
+        {
+            ProtocolValue_ = value;
+            OnPropertyChanged(nameof(ProtocolValue));
+            if (Enum.TryParse<ProtocolTypes>(value, out var parsedEnum))
+                SelectedCard.TypeOfProtocol = parsedEnum;
+        }
+    }
+
     private int CardState_ { get; set; }
     public int CardState { get { return CardState_; } set { CardState_ = value; OnPropertyChanged(nameof(CardState)); } }
     public Command SaveCommand { get; set; }
@@ -79,8 +94,8 @@ public partial class EditCardPage : ContentPage
         if (SelectedCard.IsAdvancedSettingsEnabled)
             advancedSwitch.IsToggled = true;
         RBSelectionValue = SelectedCard.TypeOfCall.ToString();
-        if (SelectedCard.Port != 443 && SelectedCard.Port != 80)
-            radiobutton_custom.IsChecked = true;
+        ProtocolValue = SelectedCard.TypeOfProtocol.ToString();
+
         OnPropertyChanged(nameof(SelectedCard));
     }
 

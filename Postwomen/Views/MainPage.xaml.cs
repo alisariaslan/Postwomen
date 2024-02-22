@@ -54,8 +54,7 @@ public partial class MainPage : ContentPage
     {
         RefreshCards();
         refreshButton.IsEnabled = false;
-        while (IsRefreshing)
-            await refreshButton.RelRotateTo(360, 1000);
+        await refreshButton.RelRotateTo(360, 1000);
         refreshButton.IsEnabled = true;
     }
 
@@ -63,33 +62,18 @@ public partial class MainPage : ContentPage
     {
         var obj = sender as VisualElement;
         obj.IsEnabled = false;
-        while (IsRefreshing)
-            await obj.RelRotateTo(360, 1000);
+        await obj.RelRotateTo(360, 1000);
         obj.IsEnabled = true;
     }
 
     private async void RefreshCard(int param)
     {
-        if (IsRefreshing)
-        {
-            ToastHelper.MakeToastFast(Translator["cannot_refresh"]);
-            return;
-        }
-
-        IsRefreshing = true;
         var selected = ServerCards.FirstOrDefault(card => card.Id == param);
         await CheckCard(selected);
-        IsRefreshing = false;
     }
 
     private async void RefreshCards()
     {
-        if (IsRefreshing)
-        {
-            ToastHelper.MakeToastFast(Translator["cannot_refresh"]);
-            return;
-        }
-
         IsRefreshing = true;
         ServerCards.Clear();
         var items = await dbService.GetCards();
@@ -123,10 +107,7 @@ public partial class MainPage : ContentPage
             else if (model.TypeOfCall == RemoteCallTypes.POST)
             {
             }
-            else if (model.TypeOfCall == RemoteCallTypes.INSERT)
-            {
-            }
-            else if (model.TypeOfCall == RemoteCallTypes.UPDATE)
+            else if (model.TypeOfCall == RemoteCallTypes.PUT)
             {
             }
             else if (model.TypeOfCall == RemoteCallTypes.DELETE)

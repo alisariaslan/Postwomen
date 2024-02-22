@@ -21,7 +21,9 @@ public class ServerModel : BaseModel
 
 	public RemoteCallTypes TypeOfCall { get; set; } = RemoteCallTypes.Ping;
 
-	public int Port { get; set; } = 443;
+    public ProtocolTypes TypeOfProtocol { get; set; } = ProtocolTypes.Https;
+
+    public int Port { get; set; } = 443;
 
 	public CheckStates CurrentState { get; set; } = CheckStates.UNREACHABLE;
 
@@ -41,5 +43,7 @@ public class ServerModel : BaseModel
 		this.TypeOfCall = type;
 		this.Port = port;
 	}
+
+	public bool HasDescription => !string.IsNullOrEmpty(Description);
 }
 
